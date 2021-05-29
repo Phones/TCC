@@ -35,7 +35,7 @@ os cliente, e a segunda posição possui, o número da facilidade que está aber
 int vetor_facilidades_abertas[TAM_MAX];
 
 // Vetor que armazena os tipos de facilidades, ou seja o delta
-int vet_tipos_facilidadesL[TAM_MAX];
+vi vet_tipos_facilidadesL;
 
 /* Nessa matriz, cada linha representa um instante de tempo, e em cada linha ira conter o custo de cada facilidade anteder
 todas os clientes desse instante, ordenado em ordem crescente, dessa maneira as que ocupam menos as primeiras posições, 
@@ -634,6 +634,48 @@ viiF testa_combinacoes_tempo_facilidade(vector <vi> &matriz_leasing)
 	return solucao_final_leasing;
 }
 
+/*
+Ideias para a busca local:
+	-> Mudar a duração
+	-> Reduzir a duração + Estrutura
+	-> Função que abre uma facilidade
+*/
+
+void busca_local_leasing()
+{
+
+}
+
+bool troco(int valor, int pos)
+{
+    if(!valor)
+        return true;
+    
+    if(pos >= quant_tipos_facilidades)
+        return false;
+
+    if(valor >= vet_tipos_facilidadesL[pos])
+        return (troco(valor - vet_tipos_facilidadesL[pos], pos) || troco(valor, pos + 1));
+
+    return troco(valor, pos + 1);
+}
+
+
+// Remove as facilidades que podem ser substituidas, por combianções de outras facilidades
+vi remove_facilidades_substituiveis()
+{
+	vi novo_vetor_facilidades;
+
+	// Para por todas facilidades, da maior para a menor
+	for(int l = 0;l < quant_tipos_facilidades;l++)
+		if(!troco(vet_tipos_facilidadesL[l], l + 1))
+			novo_vetor_facilidades.push_back(vet_tipos_facilidadesL[l]);
+	
+	// Retorna o novo vetor de facilidades
+	sort(novo_vetor_facilidades.begin(), novo_vetor_facilidades.end());
+	return novo_vetor_facilidades;
+}
+
 int main()
 {
 
@@ -653,7 +695,11 @@ int main()
 
     // Faz a leitura de todos os tipos de facilidades
     for (int i = 0;i < quant_tipos_facilidades;i++)
-        scanf("%d",&vet_tipos_facilidadesL[i]);
+    {
+    	int l;
+    	scanf("%d",&l);
+    	vet_tipos_facilidadesL.push_back(l);
+    }
 
     int quant_clientes_instante_atual, aux;
     // Percorre todos os instantes de tempo
@@ -670,6 +716,21 @@ int main()
     }
 
     puts("!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!");
+
+    /* Pré processa as informações do tipo de facilidade, para remover facilidades
+	 que podem ser subistituiveis, combinando outros tipos de facilidades*/
+
+    linha();
+    puts("INICIA TRATAMENTO FACILIDADES");
+    sort(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
+  	reverse(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
+  	puts("TIPOS DE FACILIDADES ORDENADOS");
+  	puts("ANTES:");
+  	imprime_vector_int(vet_tipos_facilidadesL);
+  	vet_tipos_facilidadesL = remove_facilidades_substituiveis();
+  	puts("DEPOIS: ");
+  	imprime_vector_int(vet_tipos_facilidadesL);
+  	linha();
 
     matriz_gulosa = cria_matriz_gulosa();
 
