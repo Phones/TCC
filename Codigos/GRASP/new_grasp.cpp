@@ -634,18 +634,6 @@ viiF testa_combinacoes_tempo_facilidade(vector <vi> &matriz_leasing)
 	return solucao_final_leasing;
 }
 
-/*
-Ideias para a busca local:
-	-> Mudar a duração
-	-> Reduzir a duração + Estrutura
-	-> Função que abre uma facilidade
-*/
-
-void busca_local_leasing()
-{
-
-}
-
 bool troco(int valor, int pos)
 {
     if(!valor)
@@ -674,6 +662,20 @@ vi remove_facilidades_substituiveis()
 	// Retorna o novo vetor de facilidades
 	sort(novo_vetor_facilidades.begin(), novo_vetor_facilidades.end());
 	return novo_vetor_facilidades;
+}
+
+/*
+Ideias para a busca local:
+	-> Mudar a duração
+	-> Reduzir a duração + Estrutura
+	-> Função que abre uma facilidade
+*/
+
+void busca_local_leasing()
+{
+	// Troca de facilidades
+
+	
 }
 
 int main()
@@ -773,12 +775,16 @@ int main()
     for(int t = 0;t < quant_intancias_tempo;t++)
     	soma += calcula_custo_solucao(t, matriz_leasing_atual[t]);
     
+    cout << "SOLUÇÃO INICIAL GERADA" << endl;
    	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << soma << endl;
 
 
-
+   	puts("INICIANDO GRASP");
    	// GRASP
-   	 
+   	while(1)
+   	{
 
+   	}
+   	
 
 }
