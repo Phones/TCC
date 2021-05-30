@@ -786,11 +786,14 @@ int main()
    	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
 
+
+   	int cont_it = 0;
    	puts("INICIANDO GRASP");
    	// GRASP
-   	while(1)
+   	while(cont_it < 1000)
    	{
-
+   		printf("ITERAÇÃO NÚMERO -> %d", cont_it);
+   		cont_it ++;
    	}
    	
 
