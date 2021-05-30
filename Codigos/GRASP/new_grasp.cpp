@@ -4,6 +4,7 @@ using namespace std;
 #define TAM_MAX 510
 #define INF 123456789
 typedef vector <int> vi;
+typedef vector <vi> vvi;
 typedef pair <int, int> ii;
 typedef pair <int, ii> iii;
 typedef vector <pair<int, int> > vii;
@@ -60,7 +61,7 @@ vii armazena_facilidade_escolhida;
 //Vetor para armazenar os valores da DP
 vi DP;
 
-// Matriz que ra armazenar a solucao inicial do leasing k-median
+// Matriz que ira armazenar a solucao inicial do leasing k-median
 vector <vi> matriz_leasing_atual;
 
 
@@ -678,6 +679,17 @@ void busca_local_leasing()
 	
 }
 
+// Calcula o custo de uma solução de leasing k-median
+int calcula_custo_solucao_leasing(vvi solucao)
+{
+    int soma = 0;
+
+    for(int t = 0;t < quant_intancias_tempo;t++)
+    	soma += calcula_custo_solucao(t, solucao[t]);
+
+    return soma;
+}
+
 int main()
 {
 
@@ -770,13 +782,8 @@ int main()
     puts("SOLUÇÃO DO PROBLEMA EM MATRIZ DE VECTOR DE INT, INT:");
     imprime_vector_vector_int(matriz_leasing_atual, "t");
 
-    // Calcula o custo total dessa solução de leasing k-median
-    int soma = 0;
-    for(int t = 0;t < quant_intancias_tempo;t++)
-    	soma += calcula_custo_solucao(t, matriz_leasing_atual[t]);
-    
     cout << "SOLUÇÃO INICIAL GERADA" << endl;
-   	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << soma << endl;
+   	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
 
    	puts("INICIANDO GRASP");
