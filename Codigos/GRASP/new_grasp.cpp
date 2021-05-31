@@ -567,13 +567,13 @@ void limpa_pd()
 	for(int t = 0;t < quant_intancias_tempo;t++) DP[t] = -1;
 }
 
-void marca_intervalo_facilidade(int ini, int fim, int facilidade)
+void marca_intervalo_facilidade(int ini, int fim, int facilidade, int l)
 {
 	/*Marca na matriz, posição da linha representa a faciliade, e na linha 
 	vai conter um vetor, em que representa, os instantes, pelo qual essa faciliade
 	ficou aberta*/
 	//cout << "FACILIDADE: " << facilidade << " INI: " << ini << " FIM: " << fim << endl;
-	for(int i = ini;i < fim;i++) matriz_leasing_atual[i][facilidade] = 1;
+	for(int i = ini;i < fim;i++) matriz_leasing_atual[i][facilidade] = l;
 	//{
 		//cout << "### Marcando posição: " << i << " " << facilidade << endl, 
 		//matriz_leasing_atual[i][facilidade] = 1;
@@ -600,7 +600,7 @@ vector <facilidade_aberta> remove_cont()
 		// Marca a solução que foi encontrada, em uma matriz de int com int, para ficar mais facil de calcular a solução
 		//puts("MARCAR NO INTERVALO");
 		//sleep(6000);
-		marca_intervalo_facilidade(index, fim, facilidade);
+		marca_intervalo_facilidade(index, fim, facilidade, armazena_facilidade_escolhida[index].second);
 		//cout << "DEPOIS DE MARCAR NO INTERVALO" << endl;
 		solucao_para_k.push_back(aux);
 		index = fim;
@@ -682,7 +682,45 @@ vvi marca_intervalo_facilidade2(int ini, int fim, int facilidade,vvi solucao)
 }
 // -----------------------------------------------------------------------------------------------
 
-vvi gera_vizinhos(vvi solucao, vvF solucao_em_struct)
+vvF converte_vvi_em_vvF(vvi solucao)
+{
+	vvF final(K_original);
+
+	for(int t = 0;t < quant_intancias_tempo;t++)
+	{
+		int k_k = 0;
+		for(int i = 0;i < quant_clientes;i++)
+		{
+			if(solucao[t][i])
+			{
+				// Achou onde a facilidade foi aberta, coleta informações
+				int i_ = i, t_ = t,l = t, l_ = solucao[t][i];
+				for(;solucao[l][i] && l < min(quant_intancias_tempo, l_ + t_);l++);
+				solucao = remove_da_solucao2(t_,l,i_,solucao);	
+				
+				facilidade_aberta auxx(i_, t_, l);
+				final[k_k].push_back(auxx);
+
+				k_k ++;
+			}
+		}
+	}
+
+	return final;
+}
+ 
+// Calcula o custo de uma solução de leasing k-median
+int calcula_custo_solucao_leasing(vvi solucao)
+{
+    int soma = 0;
+
+    for(int t = 0;t < quant_intancias_tempo;t++)
+    	soma += calcula_custo_solucao(t, solucao[t]);
+
+    return soma;
+}
+
+vvi gera_vizinhos_por_troca_de_facilidades(vvi solucao, vvF solucao_em_struct)
 {
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
 	for(int k_ = 0;k_ < K_original;k_++)
@@ -713,32 +751,22 @@ Ideias para a busca local:
 */
 
 /* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
-void busca_local_VND_leasing(vvi solucao)
+vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
 {
-	/*int limite = 4, cont = 0;
+	int limite = 4, cont = 0;
 	
 	while(cont < limite)
 	{
 		//Encontra o melhor vizinho
-		vvi soluzao_vizinha = ;
+		vvi solucao_vizinha = gera_vizinhos_por_troca_de_facilidades(solucao, solucao_em_struct);
 		if(calcula_custo_solucao_leasing(solucao_vizinha) < calcula_custo_solucao_leasing(solucao))
-			solucao = solucao_vizinha, cont = 1;
+			solucao = solucao_vizinha, cont = 0;
 		else cont ++;
 	}
 
-	return solucao;*/
+	return solucao;
 }
 
-// Calcula o custo de uma solução de leasing k-median
-int calcula_custo_solucao_leasing(vvi solucao)
-{
-    int soma = 0;
-
-    for(int t = 0;t < quant_intancias_tempo;t++)
-    	soma += calcula_custo_solucao(t, solucao[t]);
-
-    return soma;
-}
 
 int main()
 {
@@ -837,12 +865,20 @@ int main()
     puts("SOLUÇÃO DO PROBLEMA EM MATRIZ DE VECTOR DE INT, INT:");
     imprime_vector_vector_int(matriz_leasing_atual, "t");
 
+    converte_vvi_em_vvF(matriz_leasing_atual);
+
     cout << "SOLUÇÃO INICIAL GERADA" << endl;
    	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
-   	vvi vizin = gera_vizinhos(matriz_leasing_atual, solucao_em_struct);
-   	cout << "Vizin: " << endl;
-   	imprime_vector_vector_int(vizin, "t");
+
+   	busca_local_VND_leasing(matriz_leasing_atual, solucao_em_struct);
+
+   	// vvi vizin = gera_vizinhos(matriz_leasing_atual, solucao_em_struct);
+   	// cout << "Vizin: " << endl;
+   	// imprime_vector_vector_int(vizin, "t");
+
+   	//cout << "CUSTO DA SOLUÇÃO VIZINHA: " << calcula_custo_solucao_leasing(vizin) << endl;
+
    	/*
    	int cont_it = 0;
    	puts("INICIANDO GRASP");
