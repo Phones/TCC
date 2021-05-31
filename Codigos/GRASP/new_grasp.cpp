@@ -23,6 +23,8 @@ struct facilidade_aberta
 	}
 };
 
+typedef vector<vector<facilidade_aberta> > vvF;
+
 int K_original = 0, K;
 
 // Matriz de tamanho V X V, onde cada posição contém a distancia de i a j.
@@ -76,7 +78,7 @@ vector <vi> matriz_leasing_atual;
 
 // ----------------------------------- FUNÇÕES PARA TESTE -------------------------------------------
 
-typedef vector<vector<facilidade_aberta> > viiF;
+
 
 void imprime_vector_int(vi teste)
 {
@@ -159,7 +161,7 @@ void linha()
 	cout << "----------------------------------------------------" << endl;
 }
 
-void imprime_vector_vector_facilidade_aberta(viiF teste)
+void imprime_vector_vector_facilidade_aberta(vvF teste)
 {
 	for(int k = 0;k < (int)teste.size();k++)
 	{
@@ -607,7 +609,7 @@ vector <facilidade_aberta> remove_cont()
 }
 
 
-viiF testa_combinacoes_tempo_facilidade(vector <vi> &matriz_leasing)
+vvF testa_combinacoes_tempo_facilidade(vector <vi> &matriz_leasing)
 {
 	vector <vector<facilidade_aberta> > solucao_final_leasing;
 
@@ -664,6 +666,44 @@ vi remove_facilidades_substituiveis()
 	sort(novo_vetor_facilidades.begin(), novo_vetor_facilidades.end());
 	return novo_vetor_facilidades;
 }
+// --------------------------------------- TEMPORARIO --------------------------------------------
+vvi remove_da_solucao2(int ini, int fim, int i, vvi solucao)
+{
+	for(int t = ini; t < fim;t++) solucao[t][i] = 0;
+
+	return solucao;
+}
+
+vvi marca_intervalo_facilidade2(int ini, int fim, int facilidade,vvi solucao)
+{
+	for(int i = ini;i < fim;i++) solucao[i][facilidade] = 1;
+
+	return solucao;
+}
+// -----------------------------------------------------------------------------------------------
+
+vvi gera_vizinhos(vvi solucao, vvF solucao_em_struct)
+{
+	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
+	for(int k_ = 0;k_ < K_original;k_++)
+	{
+		int num_random = rand() % (int)solucao_em_struct[k_].size();
+		// Faz a escolha randomica de uma facilidade, para ser alterada
+		facilidade_aberta aux = solucao_em_struct[k_][num_random];
+		int facilidade_aleatoria = gera_facilidade_aleatoria(solucao[aux.t]);
+		//cout << "intervalo: " << aux.t << " " << aux.l << endl;
+		//cout << "FACILIDADE GERADA: " << facilidade_aleatoria << " FACILIDADE ANTERIOR: " << aux.i << endl;
+		// Remove a marcação da facilidade antiga
+		//cout << " ** ANTES: " << endl;
+		//imprime_vector_vector_int(solucao, "t ");
+		solucao = remove_da_solucao2(aux.t, min(quant_intancias_tempo, aux.l), aux.i, solucao);
+		// Faz a marcação da nova facilidade que foi aberta
+		//cout << " ** DEPOIS: " << endl;
+		solucao = marca_intervalo_facilidade2(aux.t, min(quant_intancias_tempo, aux.l), facilidade_aleatoria, solucao);
+		//imprime_vector_vector_int(solucao, "t ");
+	}
+	return solucao;
+}
 
 /*
 Ideias para a busca local:
@@ -672,11 +712,21 @@ Ideias para a busca local:
 	-> Função que abre uma facilidade
 */
 
-void busca_local_leasing()
+/* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
+void busca_local_VND_leasing(vvi solucao)
 {
-	// Troca de facilidades
-
+	/*int limite = 4, cont = 0;
 	
+	while(cont < limite)
+	{
+		//Encontra o melhor vizinho
+		vvi soluzao_vizinha = ;
+		if(calcula_custo_solucao_leasing(solucao_vizinha) < calcula_custo_solucao_leasing(solucao))
+			solucao = solucao_vizinha, cont = 1;
+		else cont ++;
+	}
+
+	return solucao;*/
 }
 
 // Calcula o custo de uma solução de leasing k-median
@@ -692,6 +742,8 @@ int calcula_custo_solucao_leasing(vvi solucao)
 
 int main()
 {
+	// Inicia a seed para a função de gerar numeros aleatorios
+	srand(time(0));
 
 	scanf("%d %d %d %d",&quant_clientes,&quant_intancias_tempo,&quant_tipos_facilidades,&K);
 
@@ -777,7 +829,10 @@ int main()
     matriz_leasing_atual = inicia_matriz_int_vector_zerada(quant_intancias_tempo, quant_clientes);
 
     puts("TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES");
-    testa_combinacoes_tempo_facilidade(matriz_leasing);
+    vvF solucao_em_struct = testa_combinacoes_tempo_facilidade(matriz_leasing);
+
+    cout << "SOLUÇÃO EM STRUCT: " << endl;
+    imprime_vector_vector_facilidade_aberta(solucao_em_struct);
 
     puts("SOLUÇÃO DO PROBLEMA EM MATRIZ DE VECTOR DE INT, INT:");
     imprime_vector_vector_int(matriz_leasing_atual, "t");
@@ -785,8 +840,10 @@ int main()
     cout << "SOLUÇÃO INICIAL GERADA" << endl;
    	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
-
-
+   	vvi vizin = gera_vizinhos(matriz_leasing_atual, solucao_em_struct);
+   	cout << "Vizin: " << endl;
+   	imprime_vector_vector_int(vizin, "t");
+   	/*
    	int cont_it = 0;
    	puts("INICIANDO GRASP");
    	// GRASP
@@ -795,6 +852,6 @@ int main()
    		printf("ITERAÇÃO NÚMERO -> %d", cont_it);
    		cont_it ++;
    	}
-   	
+   	*/
 
 }
