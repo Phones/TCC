@@ -767,6 +767,12 @@ vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
 	return solucao;
 }
 
+vvi gera_solucao()
+{
+	
+}
+
+
 
 int main()
 {
@@ -859,13 +865,13 @@ int main()
     puts("TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES");
     vvF solucao_em_struct = testa_combinacoes_tempo_facilidade(matriz_leasing);
 
-    cout << "SOLUÇÃO EM STRUCT: " << endl;
-    imprime_vector_vector_facilidade_aberta(solucao_em_struct);
+    //cout << "SOLUÇÃO EM STRUCT: " << endl;
+    //imprime_vector_vector_facilidade_aberta(solucao_em_struct);
 
     puts("SOLUÇÃO DO PROBLEMA EM MATRIZ DE VECTOR DE INT, INT:");
     imprime_vector_vector_int(matriz_leasing_atual, "t");
 
-    converte_vvi_em_vvF(matriz_leasing_atual);
+    imprime_vector_vector_facilidade_aberta(converte_vvi_em_vvF(matriz_leasing_atual));
 
     cout << "SOLUÇÃO INICIAL GERADA" << endl;
    	cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
@@ -879,6 +885,7 @@ int main()
 
    	//cout << "CUSTO DA SOLUÇÃO VIZINHA: " << calcula_custo_solucao_leasing(vizin) << endl;
 
+   	float alfa = 0.7;
    	/*
    	int cont_it = 0;
    	puts("INICIANDO GRASP");
