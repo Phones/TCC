@@ -90,16 +90,6 @@ pair <int, int> menor_valor(int num_cliente, vi facilidades_abertas)
 	return facilidade_custo;
 }
 
-void gera_solucao(vii facilidades_candidatas)
-{
-	
-}
-
-void busca_local()
-{
-
-}
-
 // PEGA AS FACILIDADADES COM MENOR CUSTO, E ABRE ELAS
 void abre_facilidades(int &k, vii auxiliar)
 {
