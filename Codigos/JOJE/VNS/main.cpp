@@ -77,9 +77,9 @@ int main()
     melhorSol = solInicial;
     custoMelhor = buscaLocal(melhorSol);
     printf("Solucao inicial: %d\n", custoMelhor);
-    return 0;
+
     solucao = solAtual;
-	
+    
 
     while(difftime(time(NULL), tempoIni) < 600)
     {
@@ -100,7 +100,7 @@ int main()
             }
             else
                 numV++;
-			printf("Melhor custo: %d\n\n", custoMelhor);
+            printf("Melhor custo: %d\n\n", custoMelhor);
         }
     }
     printf("Melhor custo: %d\n\n", custoMelhor);
@@ -288,39 +288,25 @@ void solucaoInicial()
     for(i=0; i<T; i++)
     {
         buscaLocalArya(D[i], solArya);
-        //for(int j = 0;j < k;j++)
-          //  cout << solArya[j] << " " ;
-
-        //return ;
         for(j=0; j<k; j++)
             somaPrefixos[solArya[j]][i+1]++;
     }
     
     for(int i = 0;i <= V;i++)
     {
-		cout << "teste "<< i << ": ";
-		for(int j = 1;j <= T;j++)
-		{
-			cout << somaPrefixos[i][j] << " ";
-		}
-		cout << endl;
-	}
+        cout << "teste: ";
+        for(int j = 0;j <= T;j++)
+        {
+            cout << somaPrefixos[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     //Pre-processa os resultados da busca local
     for(i=0; i<V; i++)
         for(j=1; j<=T; j++)
             somaPrefixos[i][j]+=somaPrefixos[i][j-1];
 
-    for(int i = 0;i <= V;i++)
-    {
-        cout << "Depois "<< i << ": ";
-        for(int j = 1;j <= T;j++)
-        {
-            cout << somaPrefixos[i][j] << " ";
-        }
-        cout << endl;
-    }
-    return ;
     for(iSlot=0; iSlot<k; iSlot++)
     {
         //Programacao dinamica para selecionar as facilidades e as duracoes
@@ -443,7 +429,7 @@ int buscaLocal(vector<facilidade> *solucao)
                         aux = solucao[i][j].i;
                     }
                 }
-				solucao[i][j].i = aux;
+                solucao[i][j].i = aux;
             }
         }
     }
