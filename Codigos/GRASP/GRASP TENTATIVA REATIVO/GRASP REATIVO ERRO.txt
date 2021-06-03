@@ -67,6 +67,10 @@ vi DP;
 // Matriz que ira armazenar a solucao inicial do leasing k-median
 vector <vi> matriz_leasing_atual;
 
+// UTILIZADO PARA GERAR NUMERO ALEATORIO ENTRE 0 E 1
+random_device rd;
+default_random_engine eng(rd());
+uniform_real_distribution<float> distr(0, 1);
 
 /*
 	GRASP APLICADO AO LEASING K-MEDIAN 
@@ -90,6 +94,13 @@ void imprime_vector_int(vi teste)
 }
 
 void imprime_vector_int_um_linha(vi teste)
+{
+	cout << endl;
+	for(int i = 0;i < (int)teste.size();i++)
+		cout <<  teste[i] << " ";
+	cout << endl;
+}
+void imprime_vector_float_um_linha(vf teste)
 {
 	cout << endl;
 	for(int i = 0;i < (int)teste.size();i++)
@@ -309,11 +320,6 @@ int calcula_custo_solucao(int t, vi solucao)
 /* Monta uma solução, abrindo os k melhores candidatos para aquele instante de tempo*/
 vi monta_solucao_gulosa(int t, float alfa)
 {
-	// UTILIZADO PARA GERAR NUMERO ALEATORIO ENTRE 0 E 1
-	random_device rd;
-	default_random_engine eng(rd());
-    uniform_real_distribution<float> distr(0, 1);
-
 	vi vet_solucao;
 	// Pega o vector que possui os canditatos desse instante de tempo
 	vii candidatos = matriz_canditos_por_instante[t];
@@ -791,31 +797,7 @@ int calcula_custo_solucao_leasing(vvi solucao)
     return soma;
 }
 
-vi get_facilidades_fechadas(vvi solucao)
-{
-
-}
-
-// Gera vizinho testando todas as possiveis trocas para uma facilidade
-vvi gera_vizinho_baseado_2opt(vvi solucao, vvf solucao_em_struct)
-{
-	/* Essa função seleciona um k por vez, e testa todas as possiveis trocas trocas para esse k,
-	e então retorna a melhor encontrada*/
-	for(int k_ = 0;k_ < K_original;k_++)
-	{
-		// Faz a escolha randomica de uma facilidade, para ser alterada
-		int num_random = rand() % (int)solucao_em_struct[k_].size();
-		facilidade_aberta aux = solucao_em_struct[k_][num_random];
-
-		solucao = remove_da_solucao2(aux.t, min(quant_intancias_tempo, aux.l), aux.i, solucao);
-
-		// Faz a marcação da nova facilidade que foi aberta
-		solucao = marca_intervalo_facilidade2(aux.t, min(quant_intancias_tempo, aux.l), facilidade_aleatoria, solucao,aux.l - aux.t);
-
-	}
-}
-
-vvi gera_vizinhos_por_troca_de_facilidades_aleatorias(vvi solucao, vvF solucao_em_struct)
+vvi gera_vizinhos_por_troca_de_facilidades(vvi solucao, vvF solucao_em_struct)
 {
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
 	for(int k_ = 0;k_ < K_original;k_++)
@@ -858,7 +840,7 @@ vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
 		//linha();
 		//cout << "CONT DENTRO DO VND: " << cont << endl;
 		//Encontra o melhor vizinho
-		vvi solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao, solucao_em_struct);
+		vvi solucao_vizinha = gera_vizinhos_por_troca_de_facilidades(solucao, solucao_em_struct);
 		//cout << "VIZINHO GERADO"  <<endl;
 		if(calcula_custo_solucao_leasing(solucao_vizinha) < calcula_custo_solucao_leasing(solucao))
 			solucao = solucao_vizinha, cont = 0, solucao_em_struct = converte_vvi_em_vvF(solucao_vizinha);
@@ -870,6 +852,7 @@ vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
 
 vvi gera_solucao(float alfa)
 {
+
 	vvi matriz_resultados_Kmedian = inicia_matriz_int_vector_zerada(quant_intancias_tempo, quant_clientes);
 
 	//imprime_vector_vector_int(matriz_resultados_Kmedian,"U ");
@@ -903,16 +886,30 @@ vvi gera_solucao(float alfa)
    	return matriz_leasing_atual;
 }
 
+int seleciona_um_alfa(vf vetor_probabilidade)
+{
+	cout << "Vetor de probabilidade dentro da função: " << endl;
+	imprime_vector_float_um_linha(vetor_probabilidade);
+	cout << "+-*+-*+-*+-*+-*+-*+-*+-*+-*+-*+-*+-*+-*+-" << endl;
+	float probabilidade_total = 0;
+	for(int i = 0;i < (int)vetor_probabilidade.size();i++)
+		probabilidade_total += vetor_probabilidade[i];
 
-// float calcula_media(vf vet_Q)
-// {
-// 	//float media = ;    
-// }
+	random_device rd2;
+	default_random_engine eng2(rd2());
+	uniform_real_distribution<float> distr(0, probabilidade_total);
 
-// float selecionaum_alfa(vf vetor_alfas)
-// {
+	float probabilidade_random = distr(eng2);
 
-// }
+	float soma = 0;
+	for(int i = 0;i < (int)vetor_probabilidade.size();i++)
+	{
+		soma += vetor_probabilidade[i];
+		if(soma > probabilidade_random)
+			return i;
+	}
+	return vetor_probabilidade.size() - 1;
+}
 
 
 int main()
@@ -983,30 +980,36 @@ int main()
 
     // -------------------------------------------- GRASP --------------------------------------------
    	
-   	float alfa = 0.72;
-   	int cont_it = 0;
+   	float alfa = 0.65;
+   	int cont_it = 1;
    	int custo_melhor_solucao = INF;
    	vvi melhor_solucao;
 
    	/*/ Mecanismos para fazer o GRASP reativo
-   	int m = 10;
+   	float m = 10;
    	float conjunto_alfas[] = {0.2,0.5,0.6,0.9,0.55,0.82,0.44,0.7,0.33,0.15};
 
-   	vector <float> vetor_probabilidadesP, Ms;
+   	vector <float> vetor_probabilidades;
+   	vector <pair<float, int> > Ms;
    	for(int i = 0;i < m;i++)
-   		vetor_probabilidadesP.push_back((1/m)),
-   		Ms.push_back(0);
+   		vetor_probabilidades.push_back((float)(1.0/m)),
+   		Ms.push_back({0,0});
 
-   	int Mi = , iterator_atualizacao = 0;
+   	int delta = 10;
+   	int Mi = 0, iterator_atualizacao = 0;
    	//*/
 
-
    	long int tempoIni = time(NULL);
+
    	puts("INICIANDO GRASP");
-   	while(/*cont_it < 500 && */(time(NULL) - tempoIni) < 600)
+   	while(/*cont_it < 500 && */(tempoIni - time(NULL)) > 600)
    	{
-   		//cout << " aaaa" << (time(NULL) - tempoIni) << endl;
    		printf("------------------------------ ITERAÇÃO NÚMERO -> %d ------------------------------\n", cont_it);
+   		/*int indice_alfa = seleciona_um_alfa(vetor_probabilidades);
+   		alfa = conjunto_alfas[indice_alfa];
+   		cout << " --------> ALFA QUE FOI ESCOLHIDO: " << indice_alfa << endl;
+   		cout << "vetor de probabilidades>: " <<endl;
+   		imprime_vector_float_um_linha(vetor_probabilidades);*/
 
    		// Gera uma solução para o leasing k-median
    		vvi solucao_gerada = gera_solucao(alfa);
@@ -1023,6 +1026,33 @@ int main()
    		int custo_solucao_gerada = calcula_custo_solucao_leasing(solucao_gerada);
    		if(custo_solucao_gerada < custo_melhor_solucao)
    			melhor_solucao = solucao_gerada, custo_melhor_solucao = custo_solucao_gerada;
+
+   		/*/ Atualiza o vetor de MS
+   		Ms[indice_alfa].first += 1;
+   		Ms[indice_alfa].second += custo_solucao_gerada;
+
+   		cout << "valor de cont_it: " << cont_it << " resto: " << cont_it % 3 << endl;
+   		if(!(cont_it % 2))
+   		{
+   			cout << " ////INICIO DA ATUALIZAÇÃO DE VETORES" << endl;
+   			vf Qis;
+   			float media_Qs = 0;
+
+   			for(int i = 0;i < m;i++)
+   			{
+   				float Ms_medio = Ms[i].second / (float)Ms[i].first;
+
+   				if(!Ms[i].second && !Ms[i].first)
+   					Ms_medio = INF;
+
+   				float Qi = pow((custo_melhor_solucao / Ms_medio), delta);
+   				Qis.push_back(Qi);
+   				media_Qs += Qi;
+   			}
+
+   			for(int i = 0;i < m;i++)
+   				vetor_probabilidades[i] = Qis[i] / media_Qs;
+   		}*/
 
    		cont_it ++;
   
