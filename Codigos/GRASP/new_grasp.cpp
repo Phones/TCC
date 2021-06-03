@@ -110,7 +110,7 @@ void imprime_vector_vector_int(vector <vi> teste, string texto)
 	{
 		cout << texto <<": " << i << " -> ";
 		for(int j = 0;j < (int)teste[i].size();j++)
-			cout << teste[i][j] << " ";
+			cout << teste[i][j] ;//<< " ";
 
 		cout << endl;
 	}
@@ -173,6 +173,15 @@ vector <vi> inicia_matriz_int_vector_zerada(int ini, int fim)
 	}
 
 	return aux_f;
+}
+
+vi inicia_vector_int_zerado(int tam)
+{
+	vi aux;
+	for(int i = 0;i < tam;i++)
+		aux.push_back(0);
+
+	return aux;
 }
 
 void linha()
@@ -791,14 +800,33 @@ int calcula_custo_solucao_leasing(vvi solucao)
     return soma;
 }
 
-vi get_facilidades_fechadas(vvi solucao)
+vi get_facilidades_fechadas_intervalo(vvi solucao, int ini, int fim)
 {
+	int aux[quant_clientes] = {};
+	// Armazena o número das facilidades fechadas nesse intervalo de tempo
+	vi facilidades_fechadas;//= inicia_vector_int_zerado(quant_clientes);
 
+	for(int t = ini;t < fim;t++)
+		for(int i = 0;i < quant_clientes;i++)
+			if(solucao[t][i])
+				aux[i] ++;
+
+	for(int i = 0;i < quant_clientes;i++)
+		if(!aux[i])
+			facilidades_fechadas.push_back(i);
+
+	//imprime_vetor_int_uma_linha(aux, quant_clientes);
+	//cout << " FACILIDADES FECHADAS NO INTERVALO: " << ini << " " << fim << endl;
+	//imprime_vector_int_um_linha(facilidades_fechadas);
+	return facilidades_fechadas;
 }
 
 // Gera vizinho testando todas as possiveis trocas para uma facilidade
-vvi gera_vizinho_baseado_2opt(vvi solucao, vvf solucao_em_struct)
+vvi gera_vizinho_baseado_2opt(vvi solucao, vvF solucao_em_struct)
 {
+	// Calcula o custo da solução que será usada para gerar os vizinhos
+	int custo_solucao_inicial = calcula_custo_solucao_leasing(solucao);
+
 	/* Essa função seleciona um k por vez, e testa todas as possiveis trocas trocas para esse k,
 	e então retorna a melhor encontrada*/
 	for(int k_ = 0;k_ < K_original;k_++)
@@ -807,12 +835,32 @@ vvi gera_vizinho_baseado_2opt(vvi solucao, vvf solucao_em_struct)
 		int num_random = rand() % (int)solucao_em_struct[k_].size();
 		facilidade_aberta aux = solucao_em_struct[k_][num_random];
 
-		solucao = remove_da_solucao2(aux.t, min(quant_intancias_tempo, aux.l), aux.i, solucao);
+		int fim_intervalo = min(quant_intancias_tempo, aux.l);
+		//cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
+		// Coleta as opções de facilidades que podem ser abertas no intervalo, da facilidade atual que vai ser fechada
+		vi facilidades_fechadas = get_facilidades_fechadas_intervalo(solucao, aux.t, fim_intervalo);
+		
+		//Fecha a facilidade que foi escolhida
+		int melhor_facilidade = aux.i;
+		solucao = remove_da_solucao2(aux.t, fim_intervalo, aux.i, solucao);
 
-		// Faz a marcação da nova facilidade que foi aberta
-		solucao = marca_intervalo_facilidade2(aux.t, min(quant_intancias_tempo, aux.l), facilidade_aleatoria, solucao,aux.l - aux.t);
+		int _t_ = aux.t;
+		// Percorre todas as facilidades que está fechada
+		for(int i = 0;i < (int)facilidades_fechadas.size();i++)
+		{
+			int nova_facilidade = facilidades_fechadas[i];
+			// Abre a nova facilidade que será testada
+			solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, nova_facilidade, solucao,aux.l - aux.t);
+			if(custo_solucao_inicial > calcula_custo_solucao_leasing(solucao))
+				melhor_facilidade = nova_facilidade;
 
+			// Fecha facilidade, para testar outras facilidades
+			solucao = remove_da_solucao2(aux.t, fim_intervalo, nova_facilidade, solucao);
+		}
+		// Abre a facilidade que obteve melhor desempenho
+		solucao = solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, solucao,aux.l - aux.t);
 	}
+	return solucao;
 }
 
 vvi gera_vizinhos_por_troca_de_facilidades_aleatorias(vvi solucao, vvF solucao_em_struct)
@@ -852,13 +900,20 @@ Ideias para a busca local:
 vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
 {
 	int limite = 5, cont = 0;
-	
+	vvi solucao_vizinha;
 	while(cont < limite)
 	{
-		//linha();
 		//cout << "CONT DENTRO DO VND: " << cont << endl;
 		//Encontra o melhor vizinho
-		vvi solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao, solucao_em_struct);
+		if(cont == 1)
+		{
+			//vvi vizinho_2opt 
+			solucao_vizinha = gera_vizinho_baseado_2opt(solucao, solucao_em_struct);
+		}
+		else
+		{
+			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao, solucao_em_struct);
+		}
 		//cout << "VIZINHO GERADO"  <<endl;
 		if(calcula_custo_solucao_leasing(solucao_vizinha) < calcula_custo_solucao_leasing(solucao))
 			solucao = solucao_vizinha, cont = 0, solucao_em_struct = converte_vvi_em_vvF(solucao_vizinha);
@@ -1010,19 +1065,21 @@ int main()
 
    		// Gera uma solução para o leasing k-median
    		vvi solucao_gerada = gera_solucao(alfa);
-   		cout << "SOLUÇÃO GERADA" << endl;
+   		//cout << "SOLUÇÃO GERADA" << endl;
    		//imprime_vector_vector_int(solucao_gerada, "t ");
    		// Aplica a busca local na solução gerada
    		vvF solucao_em_vvF = converte_vvi_em_vvF(solucao_gerada);
-   		cout << "SOLUÇÃO CONVERTIDA EM VVF" << endl;
+   		//cout << "SOLUÇÃO CONVERTIDA EM VVF" << endl;
    		//imprime_vector_vector_facilidade_aberta(solucao_em_vvF);
    		//linha();
    		vvi solucao_busca = busca_local_VND_leasing(solucao_gerada, solucao_em_vvF);
-   		cout << "BUSCA LOCAL VND FINALIZADA" << endl;
+   		//cout << "BUSCA LOCAL VND FINALIZADA" << endl;
    		// Calcula o custo da solução retornada pela busca
    		int custo_solucao_gerada = calcula_custo_solucao_leasing(solucao_gerada);
    		if(custo_solucao_gerada < custo_melhor_solucao)
    			melhor_solucao = solucao_gerada, custo_melhor_solucao = custo_solucao_gerada;
+
+   		printf("Custo melhor solução --> [%d]\n", custo_melhor_solucao);
 
    		cont_it ++;
   
