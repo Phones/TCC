@@ -980,7 +980,7 @@ vvF busca_local_VND_leasing(vvF solucao_em_struct)
 	{
 		//cout << "CONT DENTRO DO VND: " << cont << endl;
 		//Encontra o melhor vizinho
-		if(!cont)
+		if(cont < 3)
 			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
 		else
 			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
