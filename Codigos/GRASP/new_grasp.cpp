@@ -969,6 +969,39 @@ vvi gera_solucao(float alfa)
 
 // }
 
+int calcula_custo_solucao_leasing_vvF(vvF teste)
+{
+	// Nessa matriz cada linha, representa um instante de tempo
+	vvi auxiliar(quant_intancias_tempo);
+
+	for(int kk = 0;kk < K_original;kk++)
+		for(int i = 0;i < (int)teste[kk].size();i++)
+		{
+			int ini = teste[kk][i].t, fim = teste[kk][i].l;
+			for(int t = ini;t < fim;t++)
+				auxiliar[t].push_back(teste[kk][i].i);
+		}
+
+	int soma = 0;
+	for(int t = 0;t < quant_intancias_tempo;t++)
+	{
+		for(int j = 0;j < (int)Dt[t].size();j++)
+		{
+			int cliente = Dt[t][j];
+			int menor_custo = INF;
+			for(int i = 0;i < (int)auxiliar[t].size();i++)
+			{
+				int facilidade_aberta = auxiliar[t][i];
+				if(menor_custo > matriz[cliente][facilidade_aberta])
+					menor_custo = matriz[cliente][facilidade_aberta];
+			}
+			soma += menor_custo;
+		}
+	}
+
+	return soma;
+}
+
 
 int main()
 {
@@ -1054,8 +1087,7 @@ int main()
 
    	int Mi = , iterator_atualizacao = 0;
    	//*/
-
-
+   	
    	long int tempoIni = time(NULL);
    	puts("INICIANDO GRASP");
    	while(/*cont_it < 500 && */(time(NULL) - tempoIni) < 600)
@@ -1065,6 +1097,8 @@ int main()
 
    		// Gera uma solução para o leasing k-median
    		vvi solucao_gerada = gera_solucao(alfa);
+
+   		return 0;
    		//cout << "SOLUÇÃO GERADA" << endl;
    		//imprime_vector_vector_int(solucao_gerada, "t ");
    		// Aplica a busca local na solução gerada
