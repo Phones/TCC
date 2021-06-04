@@ -960,7 +960,7 @@ vvF gera_vizinhos_por_troca_de_facilidades_aleatorias(vvF solucao_em_struct)
 
 vvF gera_vizinho_por_troca_tipo_facilidade(vvF solucao_em_struct)
 {
-	
+
 }
 
 /*
@@ -1139,11 +1139,12 @@ int main()
 
    		// Gera uma solução para o leasing k-median
    		vvF solucao_gerada = gera_solucao(alfa);
-
+   		//imprime_vector_vector_int(matriz_leasing_atual, "t ");
+   		//return 0;
    		puts("INICIO VND");
    		// Aplica a busca local na solução gerada
    		vvF solucao_busca = busca_local_VND_leasing(solucao_gerada);
-   		puts("FIM VND, CALCULANDO CUSTO");
+   		puts("CALCULANDO CUSTO");
    		// Calcula o custo da solução retornada pela busca
    		int custo_solucao_gerada = calcula_custo_solucao_leasing_vvF(solucao_busca);
    		if(custo_solucao_gerada < custo_melhor_solucao)
