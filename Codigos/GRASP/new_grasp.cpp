@@ -635,6 +635,39 @@ int pd_escolha_tempo_facilidade(int t, vvi &matriz_resultados_Kmedian)
 	return ans;
 }
 
+int calcula_custo_solucao_leasing_vvF(vvF teste)
+{
+	// Nessa matriz cada linha, representa um instante de tempo
+	vvi auxiliar(quant_intancias_tempo);
+
+	for(int kk = 0;kk < K_original;kk++)
+		for(int i = 0;i < (int)teste[kk].size();i++)
+		{
+			int ini = teste[kk][i].t, fim = teste[kk][i].l;
+			for(int t = ini;t < fim;t++)
+				auxiliar[t].push_back(teste[kk][i].i);
+		}
+
+	int soma = 0;
+	for(int t = 0;t < quant_intancias_tempo;t++)
+	{
+		for(int j = 0;j < (int)Dt[t].size();j++)
+		{
+			int cliente = Dt[t][j];
+			int menor_custo = INF;
+			for(int i = 0;i < (int)auxiliar[t].size();i++)
+			{
+				int facilidade_aberta = auxiliar[t][i];
+				if(menor_custo > matriz[cliente][facilidade_aberta])
+					menor_custo = matriz[cliente][facilidade_aberta];
+			}
+			soma += menor_custo;
+		}
+	}
+
+	return soma;
+}
+
 void limpa_pd()
 {
 	for(int t = 0;t < quant_intancias_tempo;t++) DP[t] = -1;
@@ -822,7 +855,7 @@ vi get_facilidades_fechadas_intervalo(vvi solucao, int ini, int fim)
 }
 
 // Gera vizinho testando todas as possiveis trocas para uma facilidade
-vvi gera_vizinho_baseado_2opt(vvi solucao, vvF solucao_em_struct)
+vvi gera_vizinho_baseado_2op(vvi solucao, vvF solucao_em_struct)
 {
 	// Calcula o custo da solução que será usada para gerar os vizinhos
 	int custo_solucao_inicial = calcula_custo_solucao_leasing(solucao);
@@ -863,30 +896,67 @@ vvi gera_vizinho_baseado_2opt(vvi solucao, vvF solucao_em_struct)
 	return solucao;
 }
 
-vvi gera_vizinhos_por_troca_de_facilidades_aleatorias(vvi solucao, vvF solucao_em_struct)
+//****************************************************************
+// Gera vizinho testando todas as possiveis trocas para uma facilidade
+vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
+{
+	// Calcula o custo da solução que será usada para gerar os vizinhos
+	int custo_solucao_inicial = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
+
+	/* Essa função seleciona um k por vez, e testa todas as possiveis trocas trocas para esse k,
+	e então retorna a melhor encontrada*/
+	for(int k_ = 0;k_ < K_original;k_++)
+	{
+		// Faz a escolha randomica de uma facilidade, para ser alterada
+		int num_random = rand() % (int)solucao_em_struct[k_].size();
+		facilidade_aberta aux = solucao_em_struct[k_][num_random];
+
+		int fim_intervalo = min(quant_intancias_tempo, aux.l);
+		//cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
+		// Coleta as opções de facilidades que podem ser abertas no intervalo, da facilidade atual que vai ser fechada
+		vi facilidades_fechadas = get_facilidades_fechadas_intervalo(matriz_leasing_atual, aux.t, fim_intervalo);
+		
+		//Fecha a facilidade que foi escolhida
+		int melhor_facilidade = aux.i;
+		matriz_leasing_atual = remove_da_solucao2(aux.t, fim_intervalo, aux.i, matriz_leasing_atual);
+
+		int _t_ = aux.t;
+		// Percorre todas as facilidades que está fechada
+		for(int i = 0;i < (int)facilidades_fechadas.size();i++)
+		{
+			int nova_facilidade = facilidades_fechadas[i];
+			// Abre a nova facilidade que será testada
+			//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, nova_facilidade, solucao,aux.l - aux.t);
+			solucao_em_struct[k_][num_random].i = nova_facilidade;
+			if(custo_solucao_inicial > calcula_custo_solucao_leasing_vvF(solucao_em_struct))
+				melhor_facilidade = nova_facilidade;
+
+			// Fecha facilidade, para testar outras facilidades
+			//solucao = remove_da_solucao2(aux.t, fim_intervalo, nova_facilidade, solucao);
+		}
+		// Abre a facilidade que obteve melhor desempenho
+		//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, solucao,aux.l - aux.t);
+		solucao_em_struct[k_][num_random].i = melhor_facilidade;
+		matriz_leasing_atual = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, matriz_leasing_atual,aux.l - aux.t);
+	}
+	return solucao_em_struct;
+}
+
+vvF gera_vizinhos_por_troca_de_facilidades_aleatorias(vvF solucao_em_struct)
 {
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
 	for(int k_ = 0;k_ < K_original;k_++)
 	{
-		//cout << "k_ " << k_ << endl;
 		int num_random = rand() % (int)solucao_em_struct[k_].size();
-		//cout << "NUMERO RANDOM GERADO: " << num_random << endl;
+
 		// Faz a escolha randomica de uma facilidade, para ser alterada
 		facilidade_aberta aux = solucao_em_struct[k_][num_random];
-		int facilidade_aleatoria = gera_facilidade_aleatoria(solucao[aux.t]);
+		int facilidade_aleatoria = gera_facilidade_aleatoria(matriz_leasing_atual[aux.t]);
 
-		//cout << "intervalo: " << aux.t << " " << aux.l << endl;
-		//cout << "FACILIDADE GERADA: " << facilidade_aleatoria << " FACILIDADE ANTERIOR: " << aux.i << endl;
-		// Remove a marcação da facilidade antiga
-		//cout << " ** ANTES: " << endl;
-		//imprime_vector_vector_int(solucao, "t ");
-		solucao = remove_da_solucao2(aux.t, min(quant_intancias_tempo, aux.l), aux.i, solucao);
-		// Faz a marcação da nova facilidade que foi aberta
-		//cout << " ** DEPOIS: " << endl;
-		solucao = marca_intervalo_facilidade2(aux.t, min(quant_intancias_tempo, aux.l), facilidade_aleatoria, solucao,aux.l - aux.t);
-		//imprime_vector_vector_int(solucao, "t ");
+		solucao_em_struct[k_][num_random].i = facilidade_aleatoria;
 	}
-	return solucao;
+
+	return solucao_em_struct;
 }
 
 /*
@@ -897,33 +967,30 @@ Ideias para a busca local:
 */
 
 /* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
-vvi busca_local_VND_leasing(vvi solucao, vvF solucao_em_struct)
+vvF busca_local_VND_leasing(vvF solucao_em_struct)
 {
 	int limite = 5, cont = 0;
-	vvi solucao_vizinha;
+	vvF solucao_vizinha;
+
 	while(cont < limite)
 	{
 		//cout << "CONT DENTRO DO VND: " << cont << endl;
 		//Encontra o melhor vizinho
-		if(cont == 1)
-		{
-			//vvi vizinho_2opt 
-			solucao_vizinha = gera_vizinho_baseado_2opt(solucao, solucao_em_struct);
-		}
+		if(cont != 1)
+			 solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
 		else
-		{
-			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao, solucao_em_struct);
-		}
+			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
+		
 		//cout << "VIZINHO GERADO"  <<endl;
-		if(calcula_custo_solucao_leasing(solucao_vizinha) < calcula_custo_solucao_leasing(solucao))
-			solucao = solucao_vizinha, cont = 0, solucao_em_struct = converte_vvi_em_vvF(solucao_vizinha);
+		if(calcula_custo_solucao_leasing_vvF(solucao_vizinha) < calcula_custo_solucao_leasing_vvF(solucao_em_struct))
+			solucao_em_struct = solucao_vizinha, cont = 0;
 		else cont ++;
 	}
 	cout << "FIM VND" << endl;
-	return solucao;
+	return solucao_em_struct;
 }
 
-vvi gera_solucao(float alfa)
+vvF gera_solucao(float alfa)
 {
 	vvi matriz_resultados_Kmedian = inicia_matriz_int_vector_zerada(quant_intancias_tempo, quant_clientes);
 
@@ -955,7 +1022,7 @@ vvi gera_solucao(float alfa)
     //cout << "SOLUÇÃO INICIAL GERADA" << endl;
    	//cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
-   	return matriz_leasing_atual;
+   	return solucao_em_struct;
 }
 
 
@@ -969,38 +1036,7 @@ vvi gera_solucao(float alfa)
 
 // }
 
-int calcula_custo_solucao_leasing_vvF(vvF teste)
-{
-	// Nessa matriz cada linha, representa um instante de tempo
-	vvi auxiliar(quant_intancias_tempo);
 
-	for(int kk = 0;kk < K_original;kk++)
-		for(int i = 0;i < (int)teste[kk].size();i++)
-		{
-			int ini = teste[kk][i].t, fim = teste[kk][i].l;
-			for(int t = ini;t < fim;t++)
-				auxiliar[t].push_back(teste[kk][i].i);
-		}
-
-	int soma = 0;
-	for(int t = 0;t < quant_intancias_tempo;t++)
-	{
-		for(int j = 0;j < (int)Dt[t].size();j++)
-		{
-			int cliente = Dt[t][j];
-			int menor_custo = INF;
-			for(int i = 0;i < (int)auxiliar[t].size();i++)
-			{
-				int facilidade_aberta = auxiliar[t][i];
-				if(menor_custo > matriz[cliente][facilidade_aberta])
-					menor_custo = matriz[cliente][facilidade_aberta];
-			}
-			soma += menor_custo;
-		}
-	}
-
-	return soma;
-}
 
 
 int main()
@@ -1074,7 +1110,7 @@ int main()
    	float alfa = 0.72;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
-   	vvi melhor_solucao;
+   	vvF melhor_solucao;
 
    	/*/ Mecanismos para fazer o GRASP reativo
    	int m = 10;
@@ -1087,7 +1123,7 @@ int main()
 
    	int Mi = , iterator_atualizacao = 0;
    	//*/
-   	
+
    	long int tempoIni = time(NULL);
    	puts("INICIANDO GRASP");
    	while(/*cont_it < 500 && */(time(NULL) - tempoIni) < 600)
@@ -1096,20 +1132,21 @@ int main()
    		printf("------------------------------ ITERAÇÃO NÚMERO -> %d ------------------------------\n", cont_it);
 
    		// Gera uma solução para o leasing k-median
-   		vvi solucao_gerada = gera_solucao(alfa);
-
-   		return 0;
+   		vvF solucao_gerada = gera_solucao(alfa);
+   	
    		//cout << "SOLUÇÃO GERADA" << endl;
    		//imprime_vector_vector_int(solucao_gerada, "t ");
    		// Aplica a busca local na solução gerada
-   		vvF solucao_em_vvF = converte_vvi_em_vvF(solucao_gerada);
+   		//vvF solucao_em_vvF = converte_vvi_em_vvF(solucao_gerada);
    		//cout << "SOLUÇÃO CONVERTIDA EM VVF" << endl;
    		//imprime_vector_vector_facilidade_aberta(solucao_em_vvF);
    		//linha();
-   		vvi solucao_busca = busca_local_VND_leasing(solucao_gerada, solucao_em_vvF);
-   		//cout << "BUSCA LOCAL VND FINALIZADA" << endl;
+
+
+   		vvF solucao_busca = busca_local_VND_leasing(solucao_gerada);
+
    		// Calcula o custo da solução retornada pela busca
-   		int custo_solucao_gerada = calcula_custo_solucao_leasing(solucao_gerada);
+   		int custo_solucao_gerada = calcula_custo_solucao_leasing_vvF(solucao_busca);
    		if(custo_solucao_gerada < custo_melhor_solucao)
    			melhor_solucao = solucao_gerada, custo_melhor_solucao = custo_solucao_gerada;
 
@@ -1120,8 +1157,6 @@ int main()
    	}
    	
    	cout << "CUSTO DA MELHOR SOLUÇÃO: " << custo_melhor_solucao << endl;
-   	cout << "MATRIZ DA MELHOR SOLUÇÃO: " << endl;
-   	//imprime_vector_vector_int(melhor_solucao, "t ");
 
     // -----------------------------------------------------------------------------------------------
    	return 0;
