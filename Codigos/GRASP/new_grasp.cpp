@@ -1070,8 +1070,8 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
 
-		printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
-		printf("Custo melhor solução busca: %d\n", custo_solucao);
+		//printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
+		//printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
@@ -1197,7 +1197,7 @@ int main()
 
     // -------------------------------------------- GRASP --------------------------------------------
    	
-   	float alfa = 0.9;
+   	float alfa = 0.45;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
