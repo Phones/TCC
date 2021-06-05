@@ -971,10 +971,14 @@ Ideias para a busca local:
 */
 
 /* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
-vvF busca_local_VND_leasing(vvF solucao_em_struct)
+pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct)
 {
-	int limite = 5, cont = 0;
+
 	vvF solucao_vizinha;
+	int limite = 5, cont = 0;
+	pair <vvF, int> solucao_final_busca;
+	// Armazena o custo da solução que chega na função
+	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
 
 	while(cont < limite)
 	{
@@ -985,14 +989,15 @@ vvF busca_local_VND_leasing(vvF solucao_em_struct)
 		else
 			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
 		
-
-		//cout << "VIZINHO GERADO"  <<endl;
-		if(calcula_custo_solucao_leasing_vvF(solucao_vizinha) < calcula_custo_solucao_leasing_vvF(solucao_em_struct))
-			solucao_em_struct = solucao_vizinha, cont = 0;
+		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
+		if(custo_solucao_vizinha < custo_solucao)
+			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
 	}
+	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
+	solucao_final_busca = {solucao_em_struct, custo_solucao};
 	cout << "FIM VND" << endl;
-	return solucao_em_struct;
+	return solucao_final_busca;
 }
 
 vvF gera_solucao(float alfa)
@@ -1116,7 +1121,7 @@ int main()
    	float alfa = 0.8;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
-   	vvF melhor_solucao;
+   	pair <vvF, int> melhor_solucao;
    	vvi melhor_solucao_em_matriz;
 
    	/*/ Mecanismos para fazer o GRASP reativo
@@ -1136,29 +1141,28 @@ int main()
    	while((time(NULL) - tempoIni) < 600)
    	{
    		printf("------------------------------ ITERAÇÃO NÚMERO -> %d ------------------------------\n", cont_it);
-
    		// Gera uma solução para o leasing k-median
    		vvF solucao_gerada = gera_solucao(alfa);
-   		//imprime_vector_vector_int(matriz_leasing_atual, "t ");
-   		//return 0;
+
    		puts("INICIO VND");
    		// Aplica a busca local na solução gerada
-   		vvF solucao_busca = busca_local_VND_leasing(solucao_gerada);
-   		puts("CALCULANDO CUSTO");
-   		// Calcula o custo da solução retornada pela busca
-   		int custo_solucao_gerada = calcula_custo_solucao_leasing_vvF(solucao_busca);
-   		if(custo_solucao_gerada < custo_melhor_solucao)
-   			melhor_solucao = solucao_gerada, custo_melhor_solucao = custo_solucao_gerada, melhor_solucao_em_matriz = matriz_leasing_atual;
+   		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada);
 
-   		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada);
+   		int custo_solucao_gerada_com_busca = solucao_busca.second;
+   		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
+   			melhor_solucao = solucao_busca, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
+   			melhor_solucao_em_matriz = matriz_leasing_atual;
+
+   		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
 
    		cont_it ++;
    	}
    	
    	cout << "CUSTO DA MELHOR SOLUÇÃO: " << custo_melhor_solucao << endl;
-    puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
-    imprime_vector_vector_int(matriz_leasing_atual, "t");
+    //puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
+    //imprime_vector_vector_int(matriz_leasing_atual, "t");
     // -----------------------------------------------------------------------------------------------
    	return 0;
 }
