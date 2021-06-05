@@ -958,10 +958,84 @@ vvF gera_vizinhos_por_troca_de_facilidades_aleatorias(vvF solucao_em_struct)
 	return solucao_em_struct;
 }
 
+// Retorna um tipo de facilidade aleatoria, difirente da que foi passada
+int seleciona_tipo_facilidade_aleatoriamente(int l)
+{
+	int tam_ = (int)vet_tipos_facilidadesL.size();
+
+	while(1)
+	{
+		int num_random = rand() % tam_;
+		if(vet_tipos_facilidadesL[num_random] != l)
+			return vet_tipos_facilidadesL[num_random];
+	}
+}
+
+/*Essa função gera uma vizinhança, selecionando uma facilidade de cada k, então troca o tipo, dessa facilidade,
+por outro tipo de facilidade, em que esse outro tipo de facilidade tb é escolhido de forma aleatoria*/
 vvF gera_vizinho_por_troca_tipo_facilidade(vvF solucao_em_struct)
 {
+	int tam = (int)vet_tipos_facilidadesL.size();
+	// Verifica se o tamanho do vetor de facilidade tem tamanho 1, caso sim retorna o mesmo tipo de facilidade
+	if(tam == 1)
+		return solucao_em_struct;
 
+	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
+	for(int k_ = 0;k_ < K_original;k_++)
+	{
+		// Seleciona de maneira aleatoria a facilidade que vai ter seu tipo alterado
+		int num_random = rand() % (int)solucao_em_struct[k_].size();
+		int t_ = solucao_em_struct[k_][num_random].t,
+			i_ = solucao_em_struct[k_][num_random].i,
+			l_ = solucao_em_struct[k_][num_random].l;
+
+		int tipoL_facilidade_aleatoria = seleciona_tipo_facilidade_aleatoriamente(l_);
+
+		// Ajusta solução para nova facilidade
+		if(tipoL_facilidade_aleatoria > l_)
+		{
+
+		}
+	}
+
+	return solucao_em_struct;
 }
+
+int gera_facilidade_aleatorio_para_swap(int i, vvF solucao_em_struct, int tam, int k_)
+{
+	while(1)
+	{
+		int num_random = rand() % tam;
+		if(solucao_em_struct[k_][num_random].i != i)
+			return num_random;
+	}
+}
+
+
+vvF gera_vizinhos_swap(vvF solucao_em_struct)
+{
+	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
+	for(int k_ = 0;k_ < K_original;k_++)
+	{
+		int tamm = (int)solucao_em_struct[k_].size();
+		int num_random = rand() % tamm;
+
+		int posicao = gera_facilidade_aleatorio_para_swap(solucao_em_struct[k_][num_random].i, solucao_em_struct, tamm, k_);
+
+		//cout << "teste antes: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
+
+		int troca_ = solucao_em_struct[k_][posicao].i;
+
+		// Troca as facilidades
+		solucao_em_struct[k_][posicao].i = solucao_em_struct[k_][num_random].i;
+		solucao_em_struct[k_][num_random].i = troca_;
+		
+		//cout << "teste depois: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
+	}
+
+	return solucao_em_struct;
+}
+
 
 /*
 Ideias para a busca local:
@@ -971,28 +1045,33 @@ Ideias para a busca local:
 */
 
 /* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
-pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct)
+pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni)
 {
 
 	vvF solucao_vizinha;
-	int limite = 5, cont = 0;
+	int limite = 3, cont = 0;
 	pair <vvF, int> solucao_final_busca;
 	// Armazena o custo da solução que chega na função
 	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
 
-	while(cont < limite)
+	while(cont < limite && (time(NULL) - tempoIni) < 600)
 	{
 		//cout << "CONT DENTRO DO VND: " << cont << endl;
 		//Encontra o melhor vizinho
-		if(cont < 3)
+		if(cont == 0)
 			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
+		else if(cont == 1)
+			solucao_vizinha = gera_vizinhos_swap(solucao_em_struct);		
 		else
 			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
-		
+			
 		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
 		if(custo_solucao_vizinha < custo_solucao)
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
+
+		printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
+		printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
@@ -1118,7 +1197,7 @@ int main()
 
     // -------------------------------------------- GRASP --------------------------------------------
    	
-   	float alfa = 0.8;
+   	float alfa = 0.9;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
@@ -1146,7 +1225,7 @@ int main()
 
    		puts("INICIO VND");
    		// Aplica a busca local na solução gerada
-   		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada);
+   		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
 
    		int custo_solucao_gerada_com_busca = solucao_busca.second;
    		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
