@@ -291,7 +291,7 @@ void solucaoInicial()
         for(j=0; j<k; j++)
             somaPrefixos[solArya[j]][i+1]++;
     }
-    
+    /*
     for(int i = 0;i <= V;i++)
     {
         cout << "teste: ";
@@ -300,7 +300,7 @@ void solucaoInicial()
             cout << somaPrefixos[i][j] << " ";
         }
         cout << endl;
-    }
+    }*/
 
     //Pre-processa os resultados da busca local
     for(i=0; i<V; i++)
