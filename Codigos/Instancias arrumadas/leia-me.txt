@@ -1,0 +1,12 @@
+As instâncias foram adaptadas das instâncias do k-median problem do site:  http://people.brunel.ac.uk/~mastjjb/jeb/orlib/pmedinfo.html
+
+
+Formato do arquivo de instâncias adaptadas:
+
+- A primeira linha de cada arquivo contém: número de pontos V, qtd de instantes de tempo T, qtd de tipos de centro L e qtd máxima de centros abertos k;
+
+- Seguem V linhas com V inteiros cada (matriz de adjacências). A i-esima linha representa as distâncias do ponto i para o ponto j da j-esima coluna (0 <= i,j <= V).
+
+- Segue uma linha com L inteiros positivos, os tipos de centro (delta);
+
+- Seguem T linhas com os conjuntos de clientes. O primeiro número da t-esima linha possui D_t, a quantidade de clientes no instante t. Seguem D_t inteiros representando o índice i dos clientes (0 <= i < V).
