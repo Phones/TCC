@@ -46,6 +46,8 @@ todas os clientes desse instante, ordenado em ordem crescente, dessa maneira as 
 são os que possuem menor custo*/
 mat_vii matriz_canditos_por_instante;
 
+vvi new_matriz_candidatos_por_instante;
+
 vector <viii> matriz_gulosa;
 
 // Fila auxiliar, para controlar
@@ -219,6 +221,7 @@ void inicia_vetores(int quant_clientes)
 		DP.push_back(-1);
 }
 
+
 // GERA UM VETOR COM AS MELHORES FACILIDADES A SEREM ABERTAS
 vii gera_vetor_candidatos(int quant_clientes,int t)
 {
@@ -325,7 +328,8 @@ vi monta_solucao_gulosa(int t, float alfa)
 
 	vi vet_solucao;
 	// Pega o vector que possui os canditatos desse instante de tempo
-	vii candidatos = matriz_canditos_por_instante[t];
+	vi candidatos = new_matriz_candidatos_por_instante[t];
+	//cout << "DEPOIS DE COLOCAR O VECTOR DE CANDIDATOS" << endl;
 	////cout << "MONTANDO A SOLUÇÃO PARA O INSTANTE T: " << t << endl;
 	//imprime_vector_pair(candidatos);
 	// Inicia vector com zero
@@ -347,16 +351,18 @@ vi monta_solucao_gulosa(int t, float alfa)
 		for(int i = 0;i < K_original;i++)
 		{
 			float num_random  = distr(eng);
+			//cout << "NUMERO RANDOM: " << num_random << endl;
 			if(num_random < alfa)
 			{
 				int facilidade_random = gera_facilidade_aleatoria(vet_solucao);
 				vet_solucao[facilidade_random] = 1;
 			}
-			else vet_solucao[candidatos[i].second] = 1;
+			else vet_solucao[candidatos[i]] = 1;
 		}
 	}
-	////cout << "SOLUÇÃO MONTADA: " << endl;
-	//imprime_vector_int(vet_solucao);
+	//cout << "SOLUÇÃO MONTADA: " << endl;
+	//imprime_vector_int_um_linha(vet_solucao);
+	//sleep(6000);
 	return vet_solucao;
 }
 
@@ -464,10 +470,10 @@ void fragmenta_leasing_k_median(int quant_intancias_tempo, float alfa, vvi &matr
 
     for(int t = 0;t < quant_intancias_tempo;t++)
     {
-    	////cout << "----------------- INICIO DE UM LOOP NOVO, T: "<< t <<" -----------------" << endl;
-    	////cout << "CLIENTES DESSE INSTANTE DE TEMPO: " << endl;
+    	//cout << "----------------- INICIO DE UM LOOP NOVO, T: "<< t <<" -----------------" << endl;
+    	//cout << "CLIENTES DESSE INSTANTE DE TEMPO: " << endl;
     	//imprime_vector_int(Dt[t]);
-    	////cout <<"FIM LISTA DE CLIENTES"<< endl << endl;
+    	//cout <<"FIM LISTA DE CLIENTES"<< endl << endl;
     	vi solucao_Kmedian = monta_solucao_gulosa(t, alfa); // Solução para o k median do intante t
 
     	//cout << "DEPOIS DA FUNÇÃO MONTA SOLUÇÃO GULOSA: "<< endl;
@@ -1003,17 +1009,23 @@ vvF gera_vizinho_por_troca_tipo_facilidade(vvF solucao_em_struct)
 
 int gera_facilidade_aleatorio_para_swap(int i, vvF solucao_em_struct, int tam, int k_)
 {
-	while(1)
+	int num_random, c_ = 0;
+	while(c_ < 10)
 	{
-		int num_random = rand() % tam;
+		num_random = rand() % tam;
+		//cout << "num_random: " << num_random << " i: " << solucao_em_struct[k_][num_random].i << " ii: " << i << endl;
 		if(solucao_em_struct[k_][num_random].i != i)
 			return num_random;
+		
+		c_++;
 	}
+	return num_random;
 }
 
 
 vvF gera_vizinhos_swap(vvF solucao_em_struct)
 {
+
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
 	for(int k_ = 0;k_ < K_original;k_++)
 	{
@@ -1023,16 +1035,22 @@ vvF gera_vizinhos_swap(vvF solucao_em_struct)
 		int posicao = gera_facilidade_aleatorio_para_swap(solucao_em_struct[k_][num_random].i, solucao_em_struct, tamm, k_);
 
 		//cout << "teste antes: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
-
-		int troca_ = solucao_em_struct[k_][posicao].i;
+		// cout << "/////////ANTES //////////////" << endl;
+		// imprime_vector_vector_facilidade_aberta(solucao_em_struct);
+		// cout << "/////////////////////////////////" << endl;
 
 		// Troca as facilidades
+		int troca_ = solucao_em_struct[k_][posicao].i;
 		solucao_em_struct[k_][posicao].i = solucao_em_struct[k_][num_random].i;
 		solucao_em_struct[k_][num_random].i = troca_;
-		
+		// cout << "/////////DEPOIS //////////////" << endl;
+		// imprime_vector_vector_facilidade_aberta(solucao_em_struct);
+		// cout << "/////////////////////////////////" << endl;
 		//cout << "teste depois: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
+		// sleep(2);
 	}
 
+	cout << "FIM GERA VIZINHOS POR SWAP" << endl;
 	return solucao_em_struct;
 }
 
@@ -1064,7 +1082,8 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 			solucao_vizinha = gera_vizinhos_swap(solucao_em_struct);		
 		else
 			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
-			
+		
+		//cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
 		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
 		if(custo_solucao_vizinha < custo_solucao)
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
@@ -1114,18 +1133,67 @@ vvF gera_solucao(float alfa)
    	return solucao_em_struct;
 }
 
+//int c = 0;
+// Retorna um vetor de pair, com as facilidades escolhidas para aquele intante de tempo
+vi new_gera_vetor_candidatos(int t)
+{
+	// Vetor que será retornado com as facilidades que foram escolhidas
+	vi solucao_pronta;
+	// Inicia um vetor zerado para marcar que seram abertas
+	vi vetor_auxiliar_marcar_solucao = inicia_vector_int_zerado(quant_clientes);
 
-// float calcula_media(vf vet_Q)
-// {
-// 	//float media = ;    
-// }
+	if(K_original == (int)Dt[t].size())
+	{
+		// COMO A QUANTIDADE DE CLIENTES É IGUAL A QUANTIDADE DE FACILIDADES, ABRE TODAS AS FACILIDADES EM CIMA DOS CLIENTES
+		for(int j = 0;j < (int)Dt[t].size();j++)
+		{
+			int cliente = Dt[t][j];
+			solucao_pronta.push_back(cliente);
+		}
 
-// float selecionaum_alfa(vf vetor_alfas)
-// {
+		return solucao_pronta;
+	}
 
-// }
+	// Marca primeira facilidade
+	for(int k_ = 0;k_ < K_original;k_++)
+	{
+		int melhor_custo = INF;
+		vi facilidades_disponiveis;
+		int facilidade_selecionada = -1;
+
+		for(int i = 0;i < quant_clientes;i++)
+			if(!vetor_auxiliar_marcar_solucao[i])
+				facilidades_disponiveis.push_back(i);
 
 
+		int tam_facilidades_disponiveis = (int)facilidades_disponiveis.size();
+		for(int i = 0;i < tam_facilidades_disponiveis;i++)
+		{
+			// Abre a facilidade
+			int facilidade_para_abrir = facilidades_disponiveis[i];
+			
+			vetor_auxiliar_marcar_solucao[facilidade_para_abrir] = 1;
+			int custo = calcula_custo_solucao(t, vetor_auxiliar_marcar_solucao);
+			if(custo < melhor_custo)
+				melhor_custo = custo, facilidade_selecionada = facilidade_para_abrir;
+			vetor_auxiliar_marcar_solucao[facilidade_para_abrir] = 0;
+		}
+		vetor_auxiliar_marcar_solucao[facilidade_selecionada] = 1;
+		solucao_pronta.push_back(facilidade_selecionada);
+	}
+
+	return solucao_pronta;
+}
+
+// Monta matriz com os candidatos para opção de solução gulosa
+void new_gera_matriz_candidatos()
+{
+	for(int t = 0;t < quant_intancias_tempo;t++)
+	{
+		vi vetor_candidatos = new_gera_vetor_candidatos(t);
+		new_matriz_candidatos_por_instante.push_back(vetor_candidatos);
+	}
+}
 
 
 int main()
@@ -1189,15 +1257,19 @@ int main()
 
     matriz_gulosa = cria_matriz_gulosa();
 
+    new_gera_matriz_candidatos();
+   
+
     /* Nessa matriz é armazenados em ordem crescente por custo, as facilides junto com o custo de cada uma
     atender todos os clients que precisam ser atendidos naquele instante de tempo, supondo um k = 1. Cada linha
     representa um instante de tempo.*/
-    gera_matriz_candidatos(quant_intancias_tempo, quant_clientes);
+    //gera_matriz_candidatos(quant_intancias_tempo, quant_clientes);
 
 
     // -------------------------------------------- GRASP --------------------------------------------
    	
-   	float alfa = 0.45;
+   	// Qaunto maior o alfa, mais soluções aleatorias
+   	float alfa = 0.9;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
