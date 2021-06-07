@@ -926,7 +926,7 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 		matriz_leasing_atual = remove_da_solucao2(aux.t, fim_intervalo, aux.i, matriz_leasing_atual);
 
 		int _t_ = aux.t;
-		// Percorre todas as facilidades que está fechada
+		// Percorre todas as facilidades que estão fechadas
 		for(int i = 0;i < (int)facilidades_fechadas.size();i++)
 		{
 			int nova_facilidade = facilidades_fechadas[i];
@@ -949,9 +949,10 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 
 vvF gera_vizinhos_por_troca_de_facilidades_aleatorias(vvF solucao_em_struct)
 {
+	int k_ = rand() % K_original;
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
-	for(int k_ = 0;k_ < K_original;k_++)
-	{
+	//for(int k_ = 0;k_ < K_original;k_++)
+	//{
 		int num_random = rand() % (int)solucao_em_struct[k_].size();
 
 		// Faz a escolha randomica de uma facilidade, para ser alterada
@@ -959,7 +960,7 @@ vvF gera_vizinhos_por_troca_de_facilidades_aleatorias(vvF solucao_em_struct)
 		int facilidade_aleatoria = gera_facilidade_aleatoria(matriz_leasing_atual[aux.t]);
 
 		solucao_em_struct[k_][num_random].i = facilidade_aleatoria;
-	}
+	//}
 
 	return solucao_em_struct;
 }
@@ -1026,9 +1027,10 @@ int gera_facilidade_aleatorio_para_swap(int i, vvF solucao_em_struct, int tam, i
 vvF gera_vizinhos_swap(vvF solucao_em_struct)
 {
 
+	int k_ = rand() % K_original;
 	// A primeira etapa de geração de vizinhança é alterar as facilidades, sem alterar as durações
-	for(int k_ = 0;k_ < K_original;k_++)
-	{
+	//for(int k_ = 0;k_ < K_original;k_++)
+	//{
 		int tamm = (int)solucao_em_struct[k_].size();
 		int num_random = rand() % tamm;
 
@@ -1048,12 +1050,32 @@ vvF gera_vizinhos_swap(vvF solucao_em_struct)
 		// cout << "/////////////////////////////////" << endl;
 		//cout << "teste depois: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
 		// sleep(2);
-	}
+	//}
 
 	cout << "FIM GERA VIZINHOS POR SWAP" << endl;
 	return solucao_em_struct;
 }
 
+/* Seleciona uma facilidade dentre as facilidades que estão aberta de forma aleatoria, 
+e então, muda a facilidade anterior, e a proxima, para a mesma facilidade que foi selecionada,
+dessa forma, a facilidade selecionada, ocupada mais instantes de tempo, como se ela tivesse sido trocada,
+por um tipo de facilidade de tamanho maior*/
+vvF gera_vizinho_por_extencao_tempo(vvF solucao_em_struct)
+{
+	int k_ = rand() % K_original;
+	//for(int k_ = 0;k_ < K_original;k_++)
+	//{
+		int tamm = (int)solucao_em_struct[k_].size();
+		int num_random = (rand() % (tamm - 1));
+
+		int facilidade_escolhida = solucao_em_struct[k_][num_random].i;
+
+		// Altera a facilidade da frente para a mesma da faciliade que foi escolhida
+		solucao_em_struct[k_][num_random + 1].i = facilidade_escolhida;
+	//}
+
+	return solucao_em_struct;
+}
 
 /*
 Ideias para a busca local:
@@ -1067,7 +1089,7 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 {
 
 	vvF solucao_vizinha;
-	int limite = 3, cont = 0;
+	int limite = 4, cont = 0;
 	pair <vvF, int> solucao_final_busca;
 	// Armazena o custo da solução que chega na função
 	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
@@ -1080,17 +1102,20 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
 		else if(cont == 1)
 			solucao_vizinha = gera_vizinhos_swap(solucao_em_struct);		
-		else
+		else if(cont == 2)
 			solucao_vizinha = gera_vizinhos_por_troca_de_facilidades_aleatorias(solucao_em_struct);
-		
+		else
+			solucao_vizinha = gera_vizinho_por_extencao_tempo(solucao_em_struct);
+
 		//cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
 		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
 		if(custo_solucao_vizinha < custo_solucao)
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
 
-		//printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
-		//printf("Custo melhor solução busca: %d\n", custo_solucao);
+		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
+		printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
+		printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
@@ -1269,7 +1294,7 @@ int main()
     // -------------------------------------------- GRASP --------------------------------------------
    	
    	// Qaunto maior o alfa, mais soluções aleatorias
-   	float alfa = 0.9;
+   	float alfa = 0.08;
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
@@ -1305,6 +1330,7 @@ int main()
    			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
 
+   		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
    		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
 
