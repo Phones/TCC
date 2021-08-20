@@ -1220,8 +1220,8 @@ void new_gera_matriz_candidatos()
 	}
 }
 
-
-int main()
+// Recebe como parametro o valor de alfa
+int main(int argc, char **argv)
 {
 	// Inicia a seed para a função de gerar numeros aleatorios
 	srand(time(0));
@@ -1292,26 +1292,15 @@ int main()
 
 
     // -------------------------------------------- GRASP --------------------------------------------
-   	
+   	puts("!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!");
    	// Qaunto maior o alfa, mais soluções aleatorias
-   	float alfa = 0.08;
+   	float alfa = atof(argv[1]);
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
    	vvi melhor_solucao_em_matriz;
-
-   	/*/ Mecanismos para fazer o GRASP reativo
-   	int m = 10;
-   	float conjunto_alfas[] = {0.2,0.5,0.6,0.9,0.55,0.82,0.44,0.7,0.33,0.15};
-
-   	vector <float> vetor_probabilidadesP, Ms;
-   	for(int i = 0;i < m;i++)
-   		vetor_probabilidadesP.push_back((1/m)),
-   		Ms.push_back(0);
-
-   	int Mi = , iterator_atualizacao = 0;
-   	//*/
-
+   	cout << "O valor de alfa para execução é: " << alfa << endl;
+   	
    	long int tempoIni = time(NULL);
    	puts("INICIANDO GRASP");
    	while((time(NULL) - tempoIni) < 600)
