@@ -16,7 +16,7 @@ then
 	for i in $(seq 1 $quant_testes);
 	do
 		echo "Delentando pasta de número: $i";
-		rm -rf "`pwd`/teste$i"
+		rm -rf "`pwd`/new_grasp$i"
 	done
 
 else
@@ -26,7 +26,7 @@ else
 	for i in $(seq 1 $quant_testes);
 	do
 		echo "Copiando pasta de número: $i";
-		cp -r "teste" "`pwd`/teste$i"
+		cp -r "new_grasp" "`pwd`/new_grasp$i"
 	done
 
 fi
