@@ -48,9 +48,6 @@ mat_vii matriz_canditos_por_instante;
 
 vvi new_matriz_candidatos_por_instante;
 
-// Teste gerando uma nova matriz de facilidades, criando a matriz apartir de um clinte
-vvi matriz_candidatos_por_instante_a_patir_cliente;
-
 vector <viii> matriz_gulosa;
 
 // Fila auxiliar, para controlar
@@ -1189,9 +1186,6 @@ vi new_gera_vetor_candidatos(int t)
 		vi facilidades_disponiveis;
 		int facilidade_selecionada = -1;
 
-
-		/* Seleciona as facilidades que estão disponiveis. 
-		Facilidades disponiveis, possuem o valor 0 em sua posição do vetor*/
 		for(int i = 0;i < quant_clientes;i++)
 			if(!vetor_auxiliar_marcar_solucao[i])
 				facilidades_disponiveis.push_back(i);
@@ -1225,81 +1219,6 @@ void new_gera_matriz_candidatos()
 		new_matriz_candidatos_por_instante.push_back(vetor_candidatos);
 	}
 }
-
-// Gera o vetor de candidatos que serão utilizados para criar a matriz de candidatos
-vi gera_vetor_candidatos_iniciando_construcao_cliente(int t)
-{
-	// Vetor que será retornado com as facilidades que foram escolhidas
-	vi solucao_pronta;
-	// Inicia um vetor zerado para marcar que seram abertas
-	vi vetor_auxiliar_marcar_solucao = inicia_vector_int_zerado(quant_clientes);
-
-	if(K_original == (int)Dt[t].size())
-	{
-		// COMO A QUANTIDADE DE CLIENTES É IGUAL A QUANTIDADE DE FACILIDADES, ABRE TODAS AS FACILIDADES EM CIMA DOS CLIENTES
-		for(int j = 0;j < (int)Dt[t].size();j++)
-		{
-			int cliente = Dt[t][j];
-			solucao_pronta.push_back(cliente);
-		}
-
-		return solucao_pronta;
-	}
-
-	// Marca primeira facilidade
-	for(int k_ = 0;k_ < K_original;k_++)
-	{
-		int melhor_custo = INF;
-		vi facilidades_disponiveis;
-		int facilidade_selecionada = -1;
-
-		/* Seleciona as facilidades que estão disponiveis. 
-		Facilidades disponiveis, possuem o valor 0 em sua posição do vetor*/
-		for(int i = 0;i < quant_clientes;i++)
-			if(!vetor_auxiliar_marcar_solucao[i])
-				facilidades_disponiveis.push_back(i);
-		
-		// Marca um cliente, para iniciar a construção a partir dele
-		if (!k_)
-		{
-			facilidade_selecionada = Dt[t][0];
-			//puts("PRIMEIRA FACILIDADE QUE ESTÁ SENDO ABERTA!");
-			vetor_auxiliar_marcar_solucao[facilidade_selecionada] = 1;
-			solucao_pronta.push_back(facilidade_selecionada);
-			continue;
-		}
-
-
-		int tam_facilidades_disponiveis = (int)facilidades_disponiveis.size();
-		for(int i = 0;i < tam_facilidades_disponiveis;i++)
-		{
-			// Abre a facilidade
-			int facilidade_para_abrir = facilidades_disponiveis[i];
-			
-			vetor_auxiliar_marcar_solucao[facilidade_para_abrir] = 1;
-			int custo = calcula_custo_solucao(t, vetor_auxiliar_marcar_solucao);
-			if(custo < melhor_custo)
-				melhor_custo = custo, facilidade_selecionada = facilidade_para_abrir;
-			vetor_auxiliar_marcar_solucao[facilidade_para_abrir] = 0;
-		}
-		vetor_auxiliar_marcar_solucao[facilidade_selecionada] = 1;
-		solucao_pronta.push_back(facilidade_selecionada);
-	}
-
-	return solucao_pronta;
-}
-
-
-// Cria uma matriz de candidatos, mas dessa vez iniciando a construção a partir de um cliente
-void gera_matriz_candidatos_a_partir_cliente()
-{
-	for(int t = 0;t < quant_intancias_tempo;t++)
-	{
-		vi vetor_candidatos = gera_vetor_candidatos_iniciando_construcao_cliente(t);
-		matriz_candidatos_por_instante_a_patir_cliente.push_back(vetor_candidatos);
-	}
-}
-
 
 // Recebe como parametro o valor de alfa
 int main(int argc, char **argv)
@@ -1349,29 +1268,22 @@ int main(int argc, char **argv)
 	 que podem ser subistituiveis, combinando outros tipos de facilidades*/
 
     linha();
-    //puts("INICIA TRATAMENTO FACILIDADES");
+    puts("INICIA TRATAMENTO FACILIDADES");
     sort(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
   	reverse(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
-  	//puts("TIPOS DE FACILIDADES ORDENADOS");
-  	//puts("ANTES:");
-  	//imprime_vector_int(vet_tipos_facilidadesL);
+  	puts("TIPOS DE FACILIDADES ORDENADOS");
+  	puts("ANTES:");
+  	imprime_vector_int(vet_tipos_facilidadesL);
   	vet_tipos_facilidadesL = remove_facilidades_substituiveis();
   	quant_tipos_facilidades = (int)vet_tipos_facilidadesL.size();
-  	//puts("DEPOIS: ");
-  	//imprime_vector_int(vet_tipos_facilidadesL);
+  	puts("DEPOIS: ");
+  	imprime_vector_int(vet_tipos_facilidadesL);
   	linha();
 
     matriz_gulosa = cria_matriz_gulosa();
 
     new_gera_matriz_candidatos();
-    //gera_matriz_candidatos_a_partir_cliente();
-    //new_matriz_candidatos_por_instante = matriz_candidatos_por_instante_a_patir_cliente;
-    /*int a = calcula_custo_solucao_leasing(new_matriz_candidatos_por_instante);
-    int b = calcula_custo_solucao_leasing(matriz_candidatos_por_instante_a_patir_cliente);
-    if (b < a)
-    	cout << "SUCESSO" << endl, cout << "a: " << a << " b: " << b << endl;
-
-    return 0;*/
+   
 
     /* Nessa matriz é armazenados em ordem crescente por custo, as facilides junto com o custo de cada uma
     atender todos os clients que precisam ser atendidos naquele instante de tempo, supondo um k = 1. Cada linha
@@ -1401,7 +1313,6 @@ int main(int argc, char **argv)
    		// Aplica a busca local na solução gerada
    		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
 
-   		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
    		int custo_solucao_gerada_com_busca = solucao_busca.second;
    		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
    			melhor_solucao = solucao_busca, 
