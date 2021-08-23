@@ -9,3 +9,4 @@ run_mini_entrada1:
 
 run_mini_entrada2:
 	./new_grasp 0.33 < Instancias/mini_en2.txt
+

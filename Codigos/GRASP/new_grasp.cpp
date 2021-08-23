@@ -3,6 +3,7 @@
 using namespace std;
 #define TAM_MAX 510
 #define INF 123456789
+#define MAX_TAM_PATH_RELINK 10
 typedef vector <int> vi;
 typedef vector <vi> vvi;
 typedef vector <float> vf;
@@ -72,6 +73,8 @@ vi DP;
 // Matriz que ira armazenar a solucao inicial do leasing k-median
 vector <vi> matriz_leasing_atual;
 
+// Conjunto de soluções Elite que será utilizadas no path relinking
+vector <pair<int, vvF> > conjunto_elite;
 
 /*
 	GRASP APLICADO AO LEASING K-MEDIAN 
@@ -84,7 +87,10 @@ vector <vi> matriz_leasing_atual;
 
 // ----------------------------------- FUNÇÕES PARA TESTE -------------------------------------------
 
-
+void linha_asteristico()
+{
+	cout << "#################################################" << endl;
+}
 
 void imprime_vector_int(vi teste)
 {
@@ -1122,7 +1128,7 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
-	cout << "FIM VND" << endl;
+	puts("----------------- FIM DO VND -----------------");
 	return solucao_final_busca;
 }
 
@@ -1301,6 +1307,94 @@ void gera_matriz_candidatos_a_partir_cliente()
 }
 
 
+bool aux_ord(pair <int, vvF> A, pair <int, vvF> B)
+{
+	return A.first < B.first;
+}
+
+
+// Verifica se já existe uma solução com esse mesmo custo no conjunto elite
+pair <bool, int> ja_existe(int custo_solucao, int tam_conjunto_elite)
+{
+	if (!tam_conjunto_elite)
+		return {false, 0};
+
+	int posicao = -1;
+	for (int i = 0;i < tam_conjunto_elite;i++)
+	{
+		if (conjunto_elite[i].first == custo_solucao) 
+			return {true, 0};
+		else if(posicao == -1 && conjunto_elite[i].first > custo_solucao)
+			// Salva a posição em que a solução vai ser inserida no conjunto
+			posicao = i;
+	}
+	
+
+	// com esse if, evita qualquer solução que seja maior que o menor custo, que está na lista  
+	//if (posicao == -1)
+		//return {true, 0};
+
+	//Com esse if, só ignora as soluções que possuem um custo maior que a menor solução que existe no conjunto, APENAS
+	//quando o conjunto está no limite
+	
+	// Verifica se o custo dessa solução foi maior que as que estão no conjunto, então essa solução não vai ser inserida
+	if (posicao == -1 && tam_conjunto_elite == MAX_TAM_PATH_RELINK)
+		return {true, 0};
+
+	return {false, posicao};
+}
+
+//vector <pair<int, vvF> > conjunto_elite;
+void imprime_vetor_elite()
+{
+	for (int i = 0;i < (int)conjunto_elite.size();i++)
+	{
+		cout << "i: " << conjunto_elite[i].first << endl;
+	}
+}
+
+
+// Adiciona uma nova solução ao conjunto de soluções elite
+void insere_conjunto_elite(vvF solucao, int custo)
+{
+	int tam_conjunto_elite = (int)conjunto_elite.size();
+	pair <bool, int> verifica_ja_existe = ja_existe(custo, tam_conjunto_elite);
+	//cout << "Depois da função já ja_existe" << endl;
+	// Verifica se já existe um solução com esse custo no conjunto elite
+	if (!verifica_ja_existe.first)
+	{
+		//cout << "Não existe ainda"<<endl;
+		imprime_vetor_elite();
+		if(tam_conjunto_elite < MAX_TAM_PATH_RELINK)
+		{
+			//cout << "tam: " << tam_conjunto_elite << endl;
+			conjunto_elite.push_back({custo, solucao});
+			sort(conjunto_elite.begin(), conjunto_elite.end(), aux_ord);
+		}
+		else 
+		{
+			//cout << "posição: " << verifica_ja_existe.second <<endl;
+			conjunto_elite[verifica_ja_existe.second] = {custo, solucao};
+		}
+	}
+}
+
+vvF seleciona_alatoriamente_solucao_do_conjunto_elite()
+{
+	int num_random = rand() % 10;
+	return conjunto_elite[num_random];
+}
+
+/*Recebe uma solução corrente, e então seleciona de maneira aleatoria uma solução pertencente ao conjunto de elite*/
+void executa_conexao_caminhos(vvF solucao_corrente)
+{
+	// Seleciona uma solução do conjunto elite de maneira aleatoria, para ser usada como solução guia
+	//vvF solucao_elite = seleciona_alatoriamente_solucao_do_conjunto_elite();
+	
+}
+
+
+
 // Recebe como parametro o valor de alfa
 int main(int argc, char **argv)
 {
@@ -1397,6 +1491,11 @@ int main(int argc, char **argv)
    		// Gera uma solução para o leasing k-median
    		vvF solucao_gerada = gera_solucao(alfa);
 
+   		linha_asteristico();
+   		cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
+   		imprime_vetor_elite();
+   		linha_asteristico();
+
    		puts("INICIO VND");
    		// Aplica a busca local na solução gerada
    		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
@@ -1407,7 +1506,10 @@ int main(int argc, char **argv)
    			melhor_solucao = solucao_busca, 
    			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
+   		cout << "Depois do if" << endl;
 
+   		puts("Insere as soluções retornadas da busca local no vetor elite");
+   		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
    		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
    		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
