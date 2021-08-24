@@ -4,6 +4,7 @@ using namespace std;
 #define TAM_MAX 510
 #define INF 123456789
 #define MAX_TAM_PATH_RELINK 10
+typedef set <int> si;
 typedef vector <int> vi;
 typedef vector <vi> vvi;
 typedef vector <float> vf;
@@ -158,6 +159,36 @@ void imprime_matriz_leasing(vector <vi> M)
 	}
 }
 
+void imprime_set_int(si teste)
+{
+	set <int>::iterator it;
+
+	int c____ = 0;
+	for(it=teste.begin();it != teste.end();it++)
+	{
+		cout << "i: [" << c____ << "] -> " << *it << endl;
+		c____ ++;
+	}
+	cout << endl;
+}
+
+si interseccao_set(si A, si B)
+{
+	si final;
+    set_intersection(A.begin(), A.end(), B.begin(), B.end(), std::inserter(final, final.begin()));
+
+    return final;
+}
+
+si diferenca_set(si A, si B)
+{
+	si final;
+    set_difference(A.begin(), A.end(), B.begin(), B.end(), std::inserter(final, final.begin()));
+
+    return final;
+}
+
+
 vi copia_vector(vi A)
 {
 	vi B;
@@ -166,6 +197,7 @@ vi copia_vector(vi A)
 
 	return B;
 }
+
 
 // Cria uma matriz de vector de vector de int, inicializada com 0
 vector <vi> inicia_matriz_int_vector_zerada(int ini, int fim)
@@ -1379,21 +1411,136 @@ void insere_conjunto_elite(vvF solucao, int custo)
 	}
 }
 
-vvF seleciona_alatoriamente_solucao_do_conjunto_elite()
+pair <int, vvF> seleciona_alatoriamente_solucao_do_conjunto_elite(int custo)
 {
-	int num_random = rand() % 10;
+	imprime_vetor_elite();
+	int tam = (int)conjunto_elite.size();
+
+	int num_random = rand() % tam;
+
+	cout << conjunto_elite[num_random].first << " / " << custo << endl;
+	if (conjunto_elite[num_random].first == custo)
+		num_random++;
+
+	if (num_random >= tam)
+	{
+		if (num_random - 2 > 0)
+			num_random -= 2;
+		else
+			num_random --;
+	}
+	cout << "NUM_RANDOM: " << num_random << endl;
 	return conjunto_elite[num_random];
 }
 
-/*Recebe uma solução corrente, e então seleciona de maneira aleatoria uma solução pertencente ao conjunto de elite*/
-void executa_conexao_caminhos(vvF solucao_corrente)
+// Coleta apenas as facilidades de um vetor vvF, e armazena em um set si
+si coleta_facilidades_vvF(vvF aux, int t)
 {
-	// Seleciona uma solução do conjunto elite de maneira aleatoria, para ser usada como solução guia
-	//vvF solucao_elite = seleciona_alatoriamente_solucao_do_conjunto_elite();
+	si vetor_final;
+	for(int k = 0;k < (int)aux.size();k++)
+		vetor_final.insert(aux[k][t].i);
 	
+	return vetor_final;
+}
+
+// Calcula a diferença entre a solução x e a solução y, para o path relinking
+si delta_x_y(vvF solucao_X, vvF solucao_Y, int t)
+{
+	// Coleta as facilidades como um vetor de int de cada solução
+	si facilidades_solucao_X = coleta_facilidades_vvF(solucao_X, t);
+	si facilidades_solucao_Y = coleta_facilidades_vvF(solucao_Y, t);
+
+	// Retorna a diferença entre os dois conjuntos de facilidades
+	si diferenca_x_y = diferenca_set(facilidades_solucao_X, facilidades_solucao_Y);
+
+	return diferenca_x_y;
 }
 
 
+
+
+/*Recebe uma solução corrente, e então seleciona de maneira aleatoria uma solução pertencente ao conjunto de elite*/
+pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao)
+{
+	if(!conjunto_elite.size())
+		return {custo_solucao, solucao};
+
+	// Variaveis solução guia e solução corrente
+	pair <int, vvF> solucao_guia, solucao_corrente, melhor_solucao_path_relinking;
+	
+	puts("SELECIONA SOLUÇÃO CONJUNTO ELITE");
+	cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
+	// Seleciona uma solução do conjunto elite de maneira aleatoria, para ser usada como solução guia
+	
+	pair <int, vvF> solucao_elite = seleciona_alatoriamente_solucao_do_conjunto_elite(custo_solucao);
+	
+	/* Com base na solução recebida vinda da busca local, e com a solução selecionada dentre as soluções elite,
+	separa a solução que será a solução corrente, e a solução guia, e tbm armazena a melhor solução*/
+	puts("Selecionando solução guia, e solução corrente");
+	cout << "custo_solucao -> " << custo_solucao << " / " << solucao_elite.first << " <- Custo solução elite" << endl;
+	if(custo_solucao <= solucao_elite.first)
+	{
+		solucao_guia = {custo_solucao, solucao};
+		solucao_corrente = solucao_elite;
+		// Armazena a melhor solução do começo do path relinking
+		melhor_solucao_path_relinking = {custo_solucao, solucao};
+	}
+	else
+	{
+		solucao_guia = solucao_elite;
+		solucao_corrente = {custo_solucao, solucao};
+		melhor_solucao_path_relinking = solucao_elite;
+	}
+
+	for (int t = 0;t < quant_intancias_tempo;t++)
+	{
+		//cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl;
+		// Diferença de movimentos para sair de uma solução e chegar na outra, no instante t
+		si diferenca_x_y_ = delta_x_y(solucao_guia.second, solucao_corrente.second, t);
+		int delta_x_y_ = (int)diferenca_x_y_.size();
+		cout << "DELTA POR INSTANTE DE TEMPO (" << t << "): " << delta_x_y_ << endl;
+
+		si ::iterator it;
+		for(it = diferenca_x_y_.begin(); it != diferenca_x_y_.end();it++)
+		{
+			// Seleciona facilidade da solução guia, que entrará no lugar da facilidade da solução corrente
+			int facilidade_guia = *it;
+			puts("1");
+			// Testa a alteração de todas as facilidades daquele instante, alterando uma por uma
+			for(int k = 0;k < (int)solucao_corrente.second.size();k++)
+			{
+				// Armazena o custo antigo
+				puts("2");
+				int custo_antigo = solucao_corrente.first;
+				puts("3");
+				// Armazena a facilidade antiga, para que possa voltar para ela depois
+				int facilidade_antiga = solucao_corrente.second[k][t].i;
+				puts("4");
+				// Subistitui a facilidade antiga, pela facilidade da solução corrente
+				solucao_corrente.second[k][t].i = facilidade_guia;
+				puts("5");
+				// Calcula o custo da solução completa, com a alteração da facilidade
+				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente.second);
+				puts("6");
+				if (melhor_solucao_path_relinking.first > custo_solucao_corrente_alterada)
+				{
+					solucao_corrente.first = custo_solucao_corrente_alterada;
+					melhor_solucao_path_relinking = solucao_corrente;
+				}
+				puts("7");
+				// Volta a facilidade aberta, para a facilidade antiga
+				solucao_corrente.second[k][t].i = facilidade_antiga;
+				puts("8");
+				// Volta para o custo antigo
+				solucao_corrente.first = custo_antigo;
+				puts("9");
+			}
+		}
+	}
+	puts("10");
+	puts("******************************************************");
+	return melhor_solucao_path_relinking;
+}
 
 // Recebe como parametro o valor de alfa
 int main(int argc, char **argv)
@@ -1500,16 +1647,28 @@ int main(int argc, char **argv)
    		// Aplica a busca local na solução gerada
    		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
 
+   		//imprime_vector_vector_facilidade_aberta(solucao_busca.first);
+
+   		puts("Insere as soluções retornadas da busca local no vetor elite");
+   		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
+
+   		puts("INICIA EXECULÇÃO PATH RELINKING");
+   		pair <int, vvF> resultado_path_relinking = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second);
+
+   		puts("++++++++++++++++++++++++++++++++++++++++++");
+   		cout << "Custo busca: " << solucao_busca.second << endl;
+   		cout << "Custo path:  " << resultado_path_relinking.first << endl;
+   		puts("++++++++++++++++++++++++++++++++++++++++++");
+
    		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
    		int custo_solucao_gerada_com_busca = solucao_busca.second;
    		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
    			melhor_solucao = solucao_busca, 
    			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
-   		cout << "Depois do if" << endl;
 
-   		puts("Insere as soluções retornadas da busca local no vetor elite");
-   		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
+   		if(cont_it == 3) return 0;
+
    		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
    		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
