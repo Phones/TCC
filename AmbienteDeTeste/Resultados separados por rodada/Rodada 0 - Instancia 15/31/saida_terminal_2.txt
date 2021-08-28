@@ -1,0 +1,1481 @@
+./new_grasp 0.004496815510503294 < Instancias/inst15.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.00449682
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 1
+Custo vizinho solução busca: 373542
+Custo melhor solução busca: 373542
+TEMPO: 3
+Custo vizinho solução busca: 373528
+Custo melhor solução busca: 373528
+TEMPO: 5
+Custo vizinho solução busca: 373498
+Custo melhor solução busca: 373498
+TEMPO: 8
+Custo vizinho solução busca: 373482
+Custo melhor solução busca: 373482
+TEMPO: 12
+Custo vizinho solução busca: 373454
+Custo melhor solução busca: 373454
+TEMPO: 17
+Custo vizinho solução busca: 373444
+Custo melhor solução busca: 373444
+TEMPO: 21
+Custo vizinho solução busca: 373444
+Custo melhor solução busca: 373444
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 21
+Custo vizinho solução busca: 374058
+Custo melhor solução busca: 373444
+TEMPO: 21
+Custo vizinho solução busca: 373960
+Custo melhor solução busca: 373444
+TEMPO: 21
+Custo vizinho solução busca: 373734
+Custo melhor solução busca: 373444
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 373444
+
+INICIA EXECULÇÃO PATH RELINKING
+373444 / 373444
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373444
+Custo path:  373444
++++++++++++++++++++++++++++++++++++++++++
+373444 / 373444
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373444
+Custo path:  373444
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 21
+Custo da solucao atual ---> [373444]
+Custo da melhor solução --> [373444]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 373444
+#################################################
+INICIO VND
+TEMPO: 25
+Custo vizinho solução busca: 373804
+Custo melhor solução busca: 373804
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 25
+Custo vizinho solução busca: 374388
+Custo melhor solução busca: 373804
+TEMPO: 25
+Custo vizinho solução busca: 374050
+Custo melhor solução busca: 373804
+TEMPO: 25
+Custo vizinho solução busca: 374020
+Custo melhor solução busca: 373804
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 373444
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 373444
+
+INICIA EXECULÇÃO PATH RELINKING
+373444 / 373804
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373804
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+373444 / 373804
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373804
+Custo path:  373226
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 26
+Custo da solucao atual ---> [373804]
+Custo da melhor solução --> [373226]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 373444
+i: 373804
+#################################################
+INICIO VND
+TEMPO: 30
+Custo vizinho solução busca: 374086
+Custo melhor solução busca: 374086
+TEMPO: 35
+Custo vizinho solução busca: 374074
+Custo melhor solução busca: 374074
+TEMPO: 39
+Custo vizinho solução busca: 374066
+Custo melhor solução busca: 374066
+TEMPO: 43
+Custo vizinho solução busca: 374046
+Custo melhor solução busca: 374046
+TEMPO: 47
+Custo vizinho solução busca: 374046
+Custo melhor solução busca: 374046
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 47
+Custo vizinho solução busca: 374574
+Custo melhor solução busca: 374046
+TEMPO: 47
+Custo vizinho solução busca: 374252
+Custo melhor solução busca: 374046
+TEMPO: 47
+Custo vizinho solução busca: 374232
+Custo melhor solução busca: 374046
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 373444
+i: 373804
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 373226
+
+INICIA EXECULÇÃO PATH RELINKING
+374046 / 374046
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374046
+Custo path:  373578
++++++++++++++++++++++++++++++++++++++++++
+373444 / 374046
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374046
+Custo path:  373226
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 49
+Custo da solucao atual ---> [374046]
+Custo da melhor solução --> [373226]
+------------------------------ ITERAÇÃO NÚMERO -> 3 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 3
+i: 373444
+i: 373804
+i: 374046
+#################################################
+INICIO VND
+TEMPO: 53
+Custo vizinho solução busca: 373276
+Custo melhor solução busca: 373276
+TEMPO: 57
+Custo vizinho solução busca: 373212
+Custo melhor solução busca: 373212
+TEMPO: 62
+Custo vizinho solução busca: 373192
+Custo melhor solução busca: 373192
+TEMPO: 66
+Custo vizinho solução busca: 373184
+Custo melhor solução busca: 373184
+TEMPO: 70
+Custo vizinho solução busca: 373166
+Custo melhor solução busca: 373166
+TEMPO: 74
+Custo vizinho solução busca: 373164
+Custo melhor solução busca: 373164
+TEMPO: 78
+Custo vizinho solução busca: 373144
+Custo melhor solução busca: 373144
+TEMPO: 83
+Custo vizinho solução busca: 373102
+Custo melhor solução busca: 373102
+TEMPO: 87
+Custo vizinho solução busca: 373070
+Custo melhor solução busca: 373070
+TEMPO: 91
+Custo vizinho solução busca: 373054
+Custo melhor solução busca: 373054
+TEMPO: 95
+Custo vizinho solução busca: 373052
+Custo melhor solução busca: 373052
+TEMPO: 100
+Custo vizinho solução busca: 373044
+Custo melhor solução busca: 373044
+TEMPO: 104
+Custo vizinho solução busca: 373016
+Custo melhor solução busca: 373016
+TEMPO: 108
+Custo vizinho solução busca: 373012
+Custo melhor solução busca: 373012
+TEMPO: 112
+Custo vizinho solução busca: 372970
+Custo melhor solução busca: 372970
+TEMPO: 116
+Custo vizinho solução busca: 372930
+Custo melhor solução busca: 372930
+TEMPO: 121
+Custo vizinho solução busca: 372922
+Custo melhor solução busca: 372922
+TEMPO: 125
+Custo vizinho solução busca: 372842
+Custo melhor solução busca: 372842
+TEMPO: 129
+Custo vizinho solução busca: 372824
+Custo melhor solução busca: 372824
+TEMPO: 133
+Custo vizinho solução busca: 372776
+Custo melhor solução busca: 372776
+TEMPO: 138
+Custo vizinho solução busca: 372740
+Custo melhor solução busca: 372740
+TEMPO: 142
+Custo vizinho solução busca: 372714
+Custo melhor solução busca: 372714
+TEMPO: 146
+Custo vizinho solução busca: 372686
+Custo melhor solução busca: 372686
+TEMPO: 151
+Custo vizinho solução busca: 372684
+Custo melhor solução busca: 372684
+TEMPO: 155
+Custo vizinho solução busca: 372638
+Custo melhor solução busca: 372638
+TEMPO: 159
+Custo vizinho solução busca: 372618
+Custo melhor solução busca: 372618
+TEMPO: 163
+Custo vizinho solução busca: 372500
+Custo melhor solução busca: 372500
+TEMPO: 168
+Custo vizinho solução busca: 372466
+Custo melhor solução busca: 372466
+TEMPO: 172
+Custo vizinho solução busca: 372440
+Custo melhor solução busca: 372440
+TEMPO: 176
+Custo vizinho solução busca: 372440
+Custo melhor solução busca: 372440
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 176
+Custo vizinho solução busca: 372830
+Custo melhor solução busca: 372440
+TEMPO: 176
+Custo vizinho solução busca: 372488
+Custo melhor solução busca: 372440
+TEMPO: 176
+Custo vizinho solução busca: 372632
+Custo melhor solução busca: 372440
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 373444
+i: 373804
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 372440
+
+INICIA EXECULÇÃO PATH RELINKING
+374046 / 372440
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 372440
+Custo path:  372440
++++++++++++++++++++++++++++++++++++++++++
+374046 / 372440
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 372440
+Custo path:  372230
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 181
+Custo da solucao atual ---> [372440]
+Custo da melhor solução --> [372230]
+------------------------------ ITERAÇÃO NÚMERO -> 4 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 4
+i: 372440
+i: 373444
+i: 373804
+i: 374046
+#################################################
+INICIO VND
+TEMPO: 185
+Custo vizinho solução busca: 373884
+Custo melhor solução busca: 373884
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 185
+Custo vizinho solução busca: 374790
+Custo melhor solução busca: 373884
+TEMPO: 185
+Custo vizinho solução busca: 374006
+Custo melhor solução busca: 373884
+TEMPO: 185
+Custo vizinho solução busca: 373884
+Custo melhor solução busca: 373884
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 372440
+i: 373444
+i: 373804
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 372230
+
+INICIA EXECULÇÃO PATH RELINKING
+372440 / 373884
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373884
+Custo path:  372440
++++++++++++++++++++++++++++++++++++++++++
+373804 / 373884
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373884
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 187
+Custo da solucao atual ---> [373884]
+Custo da melhor solução --> [372230]
+------------------------------ ITERAÇÃO NÚMERO -> 5 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 5
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 374046
+#################################################
+INICIO VND
+TEMPO: 191
+Custo vizinho solução busca: 373680
+Custo melhor solução busca: 373680
+TEMPO: 196
+Custo vizinho solução busca: 373656
+Custo melhor solução busca: 373656
+TEMPO: 200
+Custo vizinho solução busca: 373632
+Custo melhor solução busca: 373632
+TEMPO: 204
+Custo vizinho solução busca: 373624
+Custo melhor solução busca: 373624
+TEMPO: 208
+Custo vizinho solução busca: 373614
+Custo melhor solução busca: 373614
+TEMPO: 213
+Custo vizinho solução busca: 373608
+Custo melhor solução busca: 373608
+TEMPO: 217
+Custo vizinho solução busca: 373588
+Custo melhor solução busca: 373588
+TEMPO: 221
+Custo vizinho solução busca: 373576
+Custo melhor solução busca: 373576
+TEMPO: 225
+Custo vizinho solução busca: 373530
+Custo melhor solução busca: 373530
+TEMPO: 229
+Custo vizinho solução busca: 373522
+Custo melhor solução busca: 373522
+TEMPO: 234
+Custo vizinho solução busca: 373520
+Custo melhor solução busca: 373520
+TEMPO: 238
+Custo vizinho solução busca: 373430
+Custo melhor solução busca: 373430
+TEMPO: 242
+Custo vizinho solução busca: 373408
+Custo melhor solução busca: 373408
+TEMPO: 246
+Custo vizinho solução busca: 373342
+Custo melhor solução busca: 373342
+TEMPO: 251
+Custo vizinho solução busca: 373338
+Custo melhor solução busca: 373338
+TEMPO: 255
+Custo vizinho solução busca: 373316
+Custo melhor solução busca: 373316
+TEMPO: 259
+Custo vizinho solução busca: 373308
+Custo melhor solução busca: 373308
+TEMPO: 263
+Custo vizinho solução busca: 373296
+Custo melhor solução busca: 373296
+TEMPO: 268
+Custo vizinho solução busca: 373292
+Custo melhor solução busca: 373292
+TEMPO: 272
+Custo vizinho solução busca: 373238
+Custo melhor solução busca: 373238
+TEMPO: 276
+Custo vizinho solução busca: 373236
+Custo melhor solução busca: 373236
+TEMPO: 280
+Custo vizinho solução busca: 373212
+Custo melhor solução busca: 373212
+TEMPO: 285
+Custo vizinho solução busca: 373204
+Custo melhor solução busca: 373204
+TEMPO: 289
+Custo vizinho solução busca: 373200
+Custo melhor solução busca: 373200
+TEMPO: 293
+Custo vizinho solução busca: 373182
+Custo melhor solução busca: 373182
+TEMPO: 297
+Custo vizinho solução busca: 373146
+Custo melhor solução busca: 373146
+TEMPO: 302
+Custo vizinho solução busca: 372988
+Custo melhor solução busca: 372988
+TEMPO: 306
+Custo vizinho solução busca: 372976
+Custo melhor solução busca: 372976
+TEMPO: 310
+Custo vizinho solução busca: 372954
+Custo melhor solução busca: 372954
+TEMPO: 314
+Custo vizinho solução busca: 372948
+Custo melhor solução busca: 372948
+TEMPO: 319
+Custo vizinho solução busca: 372892
+Custo melhor solução busca: 372892
+TEMPO: 323
+Custo vizinho solução busca: 372888
+Custo melhor solução busca: 372888
+TEMPO: 327
+Custo vizinho solução busca: 372838
+Custo melhor solução busca: 372838
+TEMPO: 331
+Custo vizinho solução busca: 372834
+Custo melhor solução busca: 372834
+TEMPO: 336
+Custo vizinho solução busca: 372822
+Custo melhor solução busca: 372822
+TEMPO: 340
+Custo vizinho solução busca: 372792
+Custo melhor solução busca: 372792
+TEMPO: 344
+Custo vizinho solução busca: 372736
+Custo melhor solução busca: 372736
+TEMPO: 348
+Custo vizinho solução busca: 372734
+Custo melhor solução busca: 372734
+TEMPO: 353
+Custo vizinho solução busca: 372704
+Custo melhor solução busca: 372704
+TEMPO: 357
+Custo vizinho solução busca: 372688
+Custo melhor solução busca: 372688
+TEMPO: 361
+Custo vizinho solução busca: 372656
+Custo melhor solução busca: 372656
+TEMPO: 365
+Custo vizinho solução busca: 372628
+Custo melhor solução busca: 372628
+TEMPO: 370
+Custo vizinho solução busca: 372588
+Custo melhor solução busca: 372588
+TEMPO: 374
+Custo vizinho solução busca: 372558
+Custo melhor solução busca: 372558
+TEMPO: 378
+Custo vizinho solução busca: 372538
+Custo melhor solução busca: 372538
+TEMPO: 382
+Custo vizinho solução busca: 372500
+Custo melhor solução busca: 372500
+TEMPO: 387
+Custo vizinho solução busca: 372424
+Custo melhor solução busca: 372424
+TEMPO: 391
+Custo vizinho solução busca: 372420
+Custo melhor solução busca: 372420
+TEMPO: 395
+Custo vizinho solução busca: 372392
+Custo melhor solução busca: 372392
+TEMPO: 399
+Custo vizinho solução busca: 372358
+Custo melhor solução busca: 372358
+TEMPO: 403
+Custo vizinho solução busca: 372290
+Custo melhor solução busca: 372290
+TEMPO: 408
+Custo vizinho solução busca: 372236
+Custo melhor solução busca: 372236
+TEMPO: 412
+Custo vizinho solução busca: 372198
+Custo melhor solução busca: 372198
+TEMPO: 416
+Custo vizinho solução busca: 372160
+Custo melhor solução busca: 372160
+TEMPO: 420
+Custo vizinho solução busca: 372118
+Custo melhor solução busca: 372118
+TEMPO: 425
+Custo vizinho solução busca: 372110
+Custo melhor solução busca: 372110
+TEMPO: 429
+Custo vizinho solução busca: 372106
+Custo melhor solução busca: 372106
+TEMPO: 433
+Custo vizinho solução busca: 372088
+Custo melhor solução busca: 372088
+TEMPO: 437
+Custo vizinho solução busca: 372072
+Custo melhor solução busca: 372072
+TEMPO: 442
+Custo vizinho solução busca: 372042
+Custo melhor solução busca: 372042
+TEMPO: 446
+Custo vizinho solução busca: 372028
+Custo melhor solução busca: 372028
+TEMPO: 450
+Custo vizinho solução busca: 372026
+Custo melhor solução busca: 372026
+TEMPO: 454
+Custo vizinho solução busca: 372024
+Custo melhor solução busca: 372024
+TEMPO: 459
+Custo vizinho solução busca: 371972
+Custo melhor solução busca: 371972
+TEMPO: 463
+Custo vizinho solução busca: 371964
+Custo melhor solução busca: 371964
+TEMPO: 467
+Custo vizinho solução busca: 371950
+Custo melhor solução busca: 371950
+TEMPO: 472
+Custo vizinho solução busca: 371910
+Custo melhor solução busca: 371910
+TEMPO: 476
+Custo vizinho solução busca: 371888
+Custo melhor solução busca: 371888
+TEMPO: 480
+Custo vizinho solução busca: 371808
+Custo melhor solução busca: 371808
+TEMPO: 484
+Custo vizinho solução busca: 371794
+Custo melhor solução busca: 371794
+TEMPO: 489
+Custo vizinho solução busca: 371752
+Custo melhor solução busca: 371752
+TEMPO: 493
+Custo vizinho solução busca: 371700
+Custo melhor solução busca: 371700
+TEMPO: 497
+Custo vizinho solução busca: 371698
+Custo melhor solução busca: 371698
+TEMPO: 501
+Custo vizinho solução busca: 371670
+Custo melhor solução busca: 371670
+TEMPO: 506
+Custo vizinho solução busca: 371602
+Custo melhor solução busca: 371602
+TEMPO: 510
+Custo vizinho solução busca: 371568
+Custo melhor solução busca: 371568
+TEMPO: 514
+Custo vizinho solução busca: 371490
+Custo melhor solução busca: 371490
+TEMPO: 519
+Custo vizinho solução busca: 371436
+Custo melhor solução busca: 371436
+TEMPO: 523
+Custo vizinho solução busca: 371408
+Custo melhor solução busca: 371408
+TEMPO: 527
+Custo vizinho solução busca: 371396
+Custo melhor solução busca: 371396
+TEMPO: 531
+Custo vizinho solução busca: 371382
+Custo melhor solução busca: 371382
+TEMPO: 536
+Custo vizinho solução busca: 371378
+Custo melhor solução busca: 371378
+TEMPO: 540
+Custo vizinho solução busca: 371340
+Custo melhor solução busca: 371340
+TEMPO: 544
+Custo vizinho solução busca: 371224
+Custo melhor solução busca: 371224
+TEMPO: 548
+Custo vizinho solução busca: 371220
+Custo melhor solução busca: 371220
+TEMPO: 553
+Custo vizinho solução busca: 371188
+Custo melhor solução busca: 371188
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371188
+
+INICIA EXECULÇÃO PATH RELINKING
+373884 / 371188
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 371188
+Custo path:  371188
++++++++++++++++++++++++++++++++++++++++++
+372440 / 371188
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 371188
+Custo path:  371028
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 561
+Custo da solucao atual ---> [371188]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 6 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 6
+i: 371188
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373976 / 373976
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373976
+Custo path:  373578
++++++++++++++++++++++++++++++++++++++++++
+373884 / 373976
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373976
+Custo path:  373526
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 562
+Custo da solucao atual ---> [373976]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 7 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 7
+i: 371188
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373444
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+374046 / 373674
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373674
+Custo path:  373578
++++++++++++++++++++++++++++++++++++++++++
+373674 / 373674
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373674
+Custo path:  373470
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 562
+Custo da solucao atual ---> [373674]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 8 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 8
+i: 371188
+i: 372440
+i: 373444
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373444
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373594 / 373594
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373594
+Custo path:  373470
++++++++++++++++++++++++++++++++++++++++++
+373444 / 373594
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373594
+Custo path:  373226
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 563
+Custo da solucao atual ---> [373594]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 9 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 9
+i: 371188
+i: 372440
+i: 373444
+i: 373594
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373444
+i: 373594
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373884 / 373280
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373280
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+371188 / 373280
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373280
+Custo path:  371032
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 567
+Custo da solucao atual ---> [373280]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 10 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373594
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373594
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+372440 / 373450
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373450
+Custo path:  372440
++++++++++++++++++++++++++++++++++++++++++
+373450 / 373450
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373450
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 570
+Custo da solucao atual ---> [373450]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 11 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373674
+i: 373804
+i: 373884
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373450 / 373812
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373812
+Custo path:  373450
++++++++++++++++++++++++++++++++++++++++++
+372440 / 373812
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373812
+Custo path:  372230
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 572
+Custo da solucao atual ---> [373812]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 12 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373674
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373280 / 374132
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374132
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+373812 / 374132
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374132
+Custo path:  373532
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 572
+Custo da solucao atual ---> [374132]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 13 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373674
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373674
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373280 / 373498
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373498
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+373280 / 373498
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373498
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 573
+Custo da solucao atual ---> [373498]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 14 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+372440 / 374378
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374378
+Custo path:  372440
++++++++++++++++++++++++++++++++++++++++++
+371188 / 374378
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374378
+Custo path:  371032
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 579
+Custo da solucao atual ---> [374378]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 15 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+374046 / 374612
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374612
+Custo path:  373750
++++++++++++++++++++++++++++++++++++++++++
+372440 / 374612
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374612
+Custo path:  372230
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 582
+Custo da solucao atual ---> [374612]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 16 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373976
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373812 / 373848
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373848
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+373450 / 373848
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373848
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 583
+Custo da solucao atual ---> [373848]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 17 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373804 / 374452
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374452
+Custo path:  373692
++++++++++++++++++++++++++++++++++++++++++
+373804 / 374452
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374452
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 583
+Custo da solucao atual ---> [374452]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 18 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373804
+i: 373812
+i: 373848
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+371188 / 373698
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373698
+Custo path:  371188
++++++++++++++++++++++++++++++++++++++++++
+373280 / 373698
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373698
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 587
+Custo da solucao atual ---> [373698]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 19 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+374046 / 373280
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 373280
+Custo path:  373280
++++++++++++++++++++++++++++++++++++++++++
+373812 / 373280
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 373280
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 588
+Custo da solucao atual ---> [373280]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 20 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373848 / 374248
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374248
+Custo path:  373782
++++++++++++++++++++++++++++++++++++++++++
+371188 / 374248
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374248
+Custo path:  371032
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 592
+Custo da solucao atual ---> [374248]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 21 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373444 / 374346
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374346
+Custo path:  373444
++++++++++++++++++++++++++++++++++++++++++
+374046 / 374346
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374346
+Custo path:  373578
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 593
+Custo da solucao atual ---> [374346]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 22 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+373450 / 375732
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 375732
+Custo path:  373450
++++++++++++++++++++++++++++++++++++++++++
+373498 / 375732
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 375732
+Custo path:  373280
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 594
+Custo da solucao atual ---> [375732]
+Custo da melhor solução --> [371028]
+------------------------------ ITERAÇÃO NÚMERO -> 23 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 10
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 371188
+i: 372440
+i: 373280
+i: 373444
+i: 373450
+i: 373498
+i: 373698
+i: 373812
+i: 373848
+i: 374046
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 371028
+
+INICIA EXECULÇÃO PATH RELINKING
+372440 / 374030
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 374030
+Custo path:  372440
++++++++++++++++++++++++++++++++++++++++++
+371188 / 374030
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 374030
+Custo path:  371032
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 600
+Custo da solucao atual ---> [374030]
+Custo da melhor solução --> [371028]
+CUSTO DA MELHOR SOLUÇÃO: 371028
+371028

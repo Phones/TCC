@@ -1,0 +1,136 @@
+./new_grasp 0.05012828643511025 < Instancias/inst29.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0501283
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 58
+Custo vizinho solução busca: 800351
+Custo melhor solução busca: 800351
+TEMPO: 116
+Custo vizinho solução busca: 800335
+Custo melhor solução busca: 800335
+TEMPO: 174
+Custo vizinho solução busca: 800331
+Custo melhor solução busca: 800331
+TEMPO: 233
+Custo vizinho solução busca: 800307
+Custo melhor solução busca: 800307
+TEMPO: 291
+Custo vizinho solução busca: 800305
+Custo melhor solução busca: 800305
+TEMPO: 349
+Custo vizinho solução busca: 800295
+Custo melhor solução busca: 800295
+TEMPO: 407
+Custo vizinho solução busca: 800289
+Custo melhor solução busca: 800289
+TEMPO: 466
+Custo vizinho solução busca: 800284
+Custo melhor solução busca: 800284
+TEMPO: 524
+Custo vizinho solução busca: 800281
+Custo melhor solução busca: 800281
+TEMPO: 583
+Custo vizinho solução busca: 800272
+Custo melhor solução busca: 800272
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 800272
+
+INICIA EXECULÇÃO PATH RELINKING
+800272 / 800272
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 800272
+Custo path:  800272
++++++++++++++++++++++++++++++++++++++++++
+800272 / 800272
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 800272
+Custo path:  800272
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 583
+Custo da solucao atual ---> [800272]
+Custo da melhor solução --> [800272]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 800272
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 800272
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 800272
+
+INICIA EXECULÇÃO PATH RELINKING
+802083 / 802083
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 802083
+Custo path:  802083
++++++++++++++++++++++++++++++++++++++++++
+802083 / 802083
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 802083
+Custo path:  802083
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 583
+Custo da solucao atual ---> [802083]
+Custo da melhor solução --> [800272]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 800272
+i: 802083
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 800272
+i: 802083
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 800272
+
+INICIA EXECULÇÃO PATH RELINKING
+800272 / 802598
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 802598
+Custo path:  800272
++++++++++++++++++++++++++++++++++++++++++
+802083 / 802598
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 802598
+Custo path:  801827
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 704
+Custo da solucao atual ---> [802598]
+Custo da melhor solução --> [800272]
+CUSTO DA MELHOR SOLUÇÃO: 800272
+800272

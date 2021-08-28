@@ -1,0 +1,111 @@
+./new_grasp 0.005422143983317529 < Instancias/inst29.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.00542214
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 58
+Custo vizinho solução busca: 792498
+Custo melhor solução busca: 792498
+TEMPO: 116
+Custo vizinho solução busca: 792497
+Custo melhor solução busca: 792497
+TEMPO: 175
+Custo vizinho solução busca: 792497
+Custo melhor solução busca: 792497
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 175
+Custo vizinho solução busca: 792668
+Custo melhor solução busca: 792497
+TEMPO: 175
+Custo vizinho solução busca: 792542
+Custo melhor solução busca: 792497
+TEMPO: 175
+Custo vizinho solução busca: 792628
+Custo melhor solução busca: 792497
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 792497
+
+INICIA EXECULÇÃO PATH RELINKING
+792497 / 792497
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 792497
+Custo path:  792497
++++++++++++++++++++++++++++++++++++++++++
+792497 / 792497
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 792497
+Custo path:  792497
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 175
+Custo da solucao atual ---> [792497]
+Custo da melhor solução --> [792497]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 792497
+#################################################
+INICIO VND
+TEMPO: 233
+Custo vizinho solução busca: 792549
+Custo melhor solução busca: 792549
+TEMPO: 292
+Custo vizinho solução busca: 792542
+Custo melhor solução busca: 792542
+TEMPO: 350
+Custo vizinho solução busca: 792541
+Custo melhor solução busca: 792541
+TEMPO: 409
+Custo vizinho solução busca: 792520
+Custo melhor solução busca: 792520
+TEMPO: 467
+Custo vizinho solução busca: 792519
+Custo melhor solução busca: 792519
+TEMPO: 526
+Custo vizinho solução busca: 792517
+Custo melhor solução busca: 792517
+TEMPO: 584
+Custo vizinho solução busca: 792515
+Custo melhor solução busca: 792515
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 792497
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 792497
+
+INICIA EXECULÇÃO PATH RELINKING
+792515 / 792515
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 792515
+Custo path:  792515
++++++++++++++++++++++++++++++++++++++++++
+792497 / 792515
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 792515
+Custo path:  792368
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 612
+Custo da solucao atual ---> [792515]
+Custo da melhor solução --> [792368]
+CUSTO DA MELHOR SOLUÇÃO: 792368
+792368

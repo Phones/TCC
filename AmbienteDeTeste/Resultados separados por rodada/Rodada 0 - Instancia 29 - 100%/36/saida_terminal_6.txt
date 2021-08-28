@@ -1,0 +1,136 @@
+./new_grasp 0.010849436400257817 < Instancias/inst29.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0108494
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 58
+Custo vizinho solução busca: 793993
+Custo melhor solução busca: 793993
+TEMPO: 115
+Custo vizinho solução busca: 793989
+Custo melhor solução busca: 793989
+TEMPO: 174
+Custo vizinho solução busca: 793985
+Custo melhor solução busca: 793985
+TEMPO: 233
+Custo vizinho solução busca: 793980
+Custo melhor solução busca: 793980
+TEMPO: 295
+Custo vizinho solução busca: 793974
+Custo melhor solução busca: 793974
+TEMPO: 355
+Custo vizinho solução busca: 793961
+Custo melhor solução busca: 793961
+TEMPO: 414
+Custo vizinho solução busca: 793931
+Custo melhor solução busca: 793931
+TEMPO: 473
+Custo vizinho solução busca: 793926
+Custo melhor solução busca: 793926
+TEMPO: 532
+Custo vizinho solução busca: 793901
+Custo melhor solução busca: 793901
+TEMPO: 590
+Custo vizinho solução busca: 793897
+Custo melhor solução busca: 793897
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 793897
+
+INICIA EXECULÇÃO PATH RELINKING
+793897 / 793897
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 793897
+Custo path:  793897
++++++++++++++++++++++++++++++++++++++++++
+793897 / 793897
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 793897
+Custo path:  793897
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 591
+Custo da solucao atual ---> [793897]
+Custo da melhor solução --> [793897]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 793897
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 793897
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 793897
+
+INICIA EXECULÇÃO PATH RELINKING
+794833 / 794833
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 794833
+Custo path:  794833
++++++++++++++++++++++++++++++++++++++++++
+794833 / 794833
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 794833
+Custo path:  794833
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 591
+Custo da solucao atual ---> [794833]
+Custo da melhor solução --> [793897]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 793897
+i: 794833
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 793897
+i: 794833
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 793890
+
+INICIA EXECULÇÃO PATH RELINKING
+794833 / 793890
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 793890
+Custo path:  793890
++++++++++++++++++++++++++++++++++++++++++
+793897 / 793890
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 793890
+Custo path:  793697
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 645
+Custo da solucao atual ---> [793890]
+Custo da melhor solução --> [793697]
+CUSTO DA MELHOR SOLUÇÃO: 793697
+793697

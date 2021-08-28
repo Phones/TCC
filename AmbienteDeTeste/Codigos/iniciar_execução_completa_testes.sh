@@ -45,7 +45,7 @@ echo "------------------------------------------"
 echo "Gerando novas pastas de teste!"
 ./copy_or_delete.sh
 
-declare -i quant_rodadas_teste=5
+declare -i quant_rodadas_teste=3
 
 for i in $(seq 1 $quant_rodadas_teste);
 do

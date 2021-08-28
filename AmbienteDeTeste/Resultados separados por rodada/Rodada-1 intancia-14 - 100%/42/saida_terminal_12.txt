@@ -1,0 +1,220 @@
+./new_grasp 0.06777151433926776 < Instancias/inst14.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0677715
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 14
+Custo vizinho solução busca: 242022
+Custo melhor solução busca: 242022
+TEMPO: 29
+Custo vizinho solução busca: 242008
+Custo melhor solução busca: 242008
+TEMPO: 44
+Custo vizinho solução busca: 241988
+Custo melhor solução busca: 241988
+TEMPO: 60
+Custo vizinho solução busca: 241944
+Custo melhor solução busca: 241944
+TEMPO: 74
+Custo vizinho solução busca: 241930
+Custo melhor solução busca: 241930
+TEMPO: 89
+Custo vizinho solução busca: 241910
+Custo melhor solução busca: 241910
+TEMPO: 103
+Custo vizinho solução busca: 241908
+Custo melhor solução busca: 241908
+TEMPO: 118
+Custo vizinho solução busca: 241900
+Custo melhor solução busca: 241900
+TEMPO: 133
+Custo vizinho solução busca: 241838
+Custo melhor solução busca: 241838
+TEMPO: 147
+Custo vizinho solução busca: 241832
+Custo melhor solução busca: 241832
+TEMPO: 161
+Custo vizinho solução busca: 241690
+Custo melhor solução busca: 241690
+TEMPO: 176
+Custo vizinho solução busca: 241688
+Custo melhor solução busca: 241688
+TEMPO: 190
+Custo vizinho solução busca: 241684
+Custo melhor solução busca: 241684
+TEMPO: 205
+Custo vizinho solução busca: 241624
+Custo melhor solução busca: 241624
+TEMPO: 219
+Custo vizinho solução busca: 241604
+Custo melhor solução busca: 241604
+TEMPO: 234
+Custo vizinho solução busca: 241564
+Custo melhor solução busca: 241564
+TEMPO: 248
+Custo vizinho solução busca: 241562
+Custo melhor solução busca: 241562
+TEMPO: 263
+Custo vizinho solução busca: 241534
+Custo melhor solução busca: 241534
+TEMPO: 277
+Custo vizinho solução busca: 241520
+Custo melhor solução busca: 241520
+TEMPO: 291
+Custo vizinho solução busca: 241470
+Custo melhor solução busca: 241470
+TEMPO: 306
+Custo vizinho solução busca: 241464
+Custo melhor solução busca: 241464
+TEMPO: 320
+Custo vizinho solução busca: 241436
+Custo melhor solução busca: 241436
+TEMPO: 335
+Custo vizinho solução busca: 241424
+Custo melhor solução busca: 241424
+TEMPO: 349
+Custo vizinho solução busca: 241392
+Custo melhor solução busca: 241392
+TEMPO: 363
+Custo vizinho solução busca: 241382
+Custo melhor solução busca: 241382
+TEMPO: 377
+Custo vizinho solução busca: 241378
+Custo melhor solução busca: 241378
+TEMPO: 391
+Custo vizinho solução busca: 241342
+Custo melhor solução busca: 241342
+TEMPO: 406
+Custo vizinho solução busca: 241336
+Custo melhor solução busca: 241336
+TEMPO: 421
+Custo vizinho solução busca: 241256
+Custo melhor solução busca: 241256
+TEMPO: 436
+Custo vizinho solução busca: 241222
+Custo melhor solução busca: 241222
+TEMPO: 450
+Custo vizinho solução busca: 241220
+Custo melhor solução busca: 241220
+TEMPO: 464
+Custo vizinho solução busca: 241100
+Custo melhor solução busca: 241100
+TEMPO: 479
+Custo vizinho solução busca: 240982
+Custo melhor solução busca: 240982
+TEMPO: 494
+Custo vizinho solução busca: 240980
+Custo melhor solução busca: 240980
+TEMPO: 508
+Custo vizinho solução busca: 240954
+Custo melhor solução busca: 240954
+TEMPO: 522
+Custo vizinho solução busca: 240940
+Custo melhor solução busca: 240940
+TEMPO: 537
+Custo vizinho solução busca: 240934
+Custo melhor solução busca: 240934
+TEMPO: 551
+Custo vizinho solução busca: 240862
+Custo melhor solução busca: 240862
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 240862
+
+INICIA EXECULÇÃO PATH RELINKING
+240862 / 240862
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 240862
+Custo path:  240862
++++++++++++++++++++++++++++++++++++++++++
+240862 / 240862
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 240862
+Custo path:  240862
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 551
+Custo da solucao atual ---> [240862]
+Custo da melhor solução --> [240862]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 240862
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 240862
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 240862
+
+INICIA EXECULÇÃO PATH RELINKING
+244454 / 244454
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 244454
+Custo path:  244454
++++++++++++++++++++++++++++++++++++++++++
+240862 / 244454
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 244454
+Custo path:  240596
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 588
+Custo da solucao atual ---> [244454]
+Custo da melhor solução --> [240596]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 240862
+i: 244454
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 240862
+i: 244454
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 240596
+
+INICIA EXECULÇÃO PATH RELINKING
+240862 / 242850
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 242850
+Custo path:  240862
++++++++++++++++++++++++++++++++++++++++++
+240862 / 242850
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 242850
+Custo path:  240596
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 632
+Custo da solucao atual ---> [242850]
+Custo da melhor solução --> [240596]
+CUSTO DA MELHOR SOLUÇÃO: 240596
+240596

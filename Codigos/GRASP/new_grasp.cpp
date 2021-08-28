@@ -232,15 +232,17 @@ void linha()
 	//cout << "----------------------------------------------------" << endl;
 }
 
-void imprime_vector_vector_facilidade_aberta(vvF teste)
+void imprime_vector_vector_facilidade_aberta(vvF &teste)
 {
+	cout << "teste.size() ---- " << (int)teste.size() << endl;
 	for(int k = 0;k < (int)teste.size();k++)
 	{
 		linha();
 		cout << "K -> " << k << endl;
 		for(int i = 0;i < (int)teste[k].size();i++)
-			cout << "facilidade: " << teste[k][i].i << " t: " 
-				<< teste[k][i].t << " l: " << teste[k][i].l << " ,";
+			cout << "facilidade: " << teste[k][i].i << " t: " << teste[k][i].t << " l: " << teste[k][i].l << " ,";
+
+		cout << "lkjhasbelkjfjhasdlijfhlkasjkasdasd" << endl;
 		cout << endl;
 	}
 }
@@ -319,30 +321,30 @@ int calcula_custo_solucao(int t, vi solucao)
 	vector <int> abertas;
 
 	/*
-	//cout << "AAAAAAAAAAAAAAAAAA: " << endl;
+	//// cout << "AAAAAAAAAAAAAAAAAA: " << endl;
 	for(int i = 0;i < (int)solucao.size();i++)
-		//cout << solucao[i] << " ";
-	//cout << endl;*/
+		//// cout << solucao[i] << " ";
+	//// cout << endl;*/
 
 	for(int i = 0;i < (int)solucao.size();i++)
 		if(solucao[i])
 			abertas.push_back(i);
 
-	////cout << "TAMANHO DE T: " << t << endl;
-	////cout << "Quantidade de clientes: " << (int)Dt[t].size() << endl;
+	////// cout << "TAMANHO DE T: " << t << endl;
+	////// cout << "Quantidade de clientes: " << (int)Dt[t].size() << endl;
 	for(int j = 0;j < (int)Dt[t].size();j++)
 	{
 		int facilidade_conectada = -1;
 		int cliente = Dt[t][j];
 		int menor_custo_conexao = INF;
 
-		////cout << "TAMANHO DO VETOR DE FACILIDADES ABERTAS: " << (int)abertas.size() << endl;
+		////// cout << "TAMANHO DO VETOR DE FACILIDADES ABERTAS: " << (int)abertas.size() << endl;
 		// Conecta o cliente a solução mais proxima a ele
 		for(int i = 0;i < (int)abertas.size();i++)
 		{
 
 			//linha();
-			////cout << "Comparação: " << matriz[cliente][abertas[i]] << " " << menor_custo_conexao << endl;
+			////// cout << "Comparação: " << matriz[cliente][abertas[i]] << " " << menor_custo_conexao << endl;
 			if(matriz[cliente][abertas[i]] < menor_custo_conexao)
 			{
 				menor_custo_conexao = matriz[cliente][abertas[i]],
@@ -350,7 +352,7 @@ int calcula_custo_solucao(int t, vi solucao)
 			}
 			//linha();
 		}
-		////cout << "CUSTO QUE CHEGOU DEPOIS DO FOR: " << menor_custo_conexao << endl;
+		////// cout << "CUSTO QUE CHEGOU DEPOIS DO FOR: " << menor_custo_conexao << endl;
 		//if(menor_custo == )
 		//printf("Cliente %d -> facilidade -> %d -> Custo -> %d\n", cliente, facilidade_conectada, menor_custo_conexao);
 		custo_final += menor_custo_conexao;
@@ -370,8 +372,8 @@ vi monta_solucao_gulosa(int t, float alfa)
 	vi vet_solucao;
 	// Pega o vector que possui os canditatos desse instante de tempo
 	vi candidatos = new_matriz_candidatos_por_instante[t];
-	//cout << "DEPOIS DE COLOCAR O VECTOR DE CANDIDATOS" << endl;
-	////cout << "MONTANDO A SOLUÇÃO PARA O INSTANTE T: " << t << endl;
+	//// cout << "DEPOIS DE COLOCAR O VECTOR DE CANDIDATOS" << endl;
+	////// cout << "MONTANDO A SOLUÇÃO PARA O INSTANTE T: " << t << endl;
 	//imprime_vector_pair(candidatos);
 	// Inicia vector com zero
 	for(int i = 0;i < quant_clientes;i++)
@@ -392,7 +394,7 @@ vi monta_solucao_gulosa(int t, float alfa)
 		for(int i = 0;i < K_original;i++)
 		{
 			float num_random  = distr(eng);
-			//cout << "NUMERO RANDOM: " << num_random << endl;
+			//// cout << "NUMERO RANDOM: " << num_random << endl;
 			if(num_random < alfa)
 			{
 				int facilidade_random = gera_facilidade_aleatoria(vet_solucao);
@@ -401,7 +403,7 @@ vi monta_solucao_gulosa(int t, float alfa)
 			else vet_solucao[candidatos[i]] = 1;
 		}
 	}
-	//cout << "SOLUÇÃO MONTADA: " << endl;
+	//// cout << "SOLUÇÃO MONTADA: " << endl;
 	//imprime_vector_int_um_linha(vet_solucao);
 	//sleep(6000);
 	return vet_solucao;
@@ -423,12 +425,12 @@ vector <viii> cria_matriz_gulosa()
 		
 		// Adiciona a linha da matriz
 		sort(aux.begin(), aux.end());
-		//cout << "FACILIDADE -> "<< i << ": ";
+		//// cout << "FACILIDADE -> "<< i << ": ";
 		for(int o = 0;o < (int)aux.size();o++)
 		{
-			//cout << "[" << aux[o].first << "," << aux[o].second.first << ",{"<< aux[o].second.second <<"}]";
+			//// cout << "[" << aux[o].first << "," << aux[o].second.first << ",{"<< aux[o].second.second <<"}]";
 		}
-		//cout << endl;
+		//// cout << endl;
 		final.push_back(aux);
 	}
 
@@ -440,7 +442,7 @@ vi busca_local_k_median(vi sol, int custo_solucao, int t)
 {	
 	bool melhora = false;
 	vi solucao = copia_vector(sol);
-	//cout << "SOLUÇÃO DO K-MEDIAN ANTES DA TENTATIVA DE MELHORA: " << endl;
+	//// cout << "SOLUÇÃO DO K-MEDIAN ANTES DA TENTATIVA DE MELHORA: " << endl;
 	imprime_vector_int(solucao);
 	for(int i_ = 0;i_ < (int)sol.size();i_++)
 	{
@@ -461,17 +463,17 @@ vi busca_local_k_median(vi sol, int custo_solucao, int t)
 				solucao[facilidade_random] = 1;
 				// Fecha facilidade antiga
 				solucao[posicao_alterar] = 0;
-				////cout << "VALOR DA FACILIDADE RANDOM: " << facilidade_random << endl;
+				////// cout << "VALOR DA FACILIDADE RANDOM: " << facilidade_random << endl;
 				int custo_solucao_alterada = calcula_custo_solucao(t, solucao);
 				if (custo_solucao_alterada < custo_solucao) 
 				{
-					//cout << "CUSTOS: " << custo_solucao << " - " << custo_solucao_alterada << endl;
+					//// cout << "CUSTOS: " << custo_solucao << " - " << custo_solucao_alterada << endl;
 					cont = 0, melhora = true;
 					custo_solucao = custo_solucao_alterada;
 					posicao_alterar = facilidade_random;
 					linha();
-					//cout << "AAAAAAAAAANTES: " << calcula_custo_solucao(t,sol) << endl;
-					//cout << "DDEEEEPOIS: " << calcula_custo_solucao(t,solucao) << endl;
+					//// cout << "AAAAAAAAAANTES: " << calcula_custo_solucao(t,sol) << endl;
+					//// cout << "DDEEEEPOIS: " << calcula_custo_solucao(t,solucao) << endl;
 					linha();
 				}
 				else
@@ -494,11 +496,11 @@ vi busca_local_k_median(vi sol, int custo_solucao, int t)
 
 	if(!melhora)
 	{
-		//cout << "NÃO MELHOROU" << endl;
+		//// cout << "NÃO MELHOROU" << endl;
 		return sol;
 	}
 
-	//cout << "MELHOROU" << endl;
+	//// cout << "MELHOROU" << endl;
 	return solucao;
 }
 
@@ -511,17 +513,17 @@ void fragmenta_leasing_k_median(int quant_intancias_tempo, float alfa, vvi &matr
 
     for(int t = 0;t < quant_intancias_tempo;t++)
     {
-    	//cout << "----------------- INICIO DE UM LOOP NOVO, T: "<< t <<" -----------------" << endl;
-    	//cout << "CLIENTES DESSE INSTANTE DE TEMPO: " << endl;
+    	//// cout << "----------------- INICIO DE UM LOOP NOVO, T: "<< t <<" -----------------" << endl;
+    	//// cout << "CLIENTES DESSE INSTANTE DE TEMPO: " << endl;
     	//imprime_vector_int(Dt[t]);
-    	//cout <<"FIM LISTA DE CLIENTES"<< endl << endl;
+    	//// cout <<"FIM LISTA DE CLIENTES"<< endl << endl;
     	vi solucao_Kmedian = monta_solucao_gulosa(t, alfa); // Solução para o k median do intante t
 
-    	//cout << "DEPOIS DA FUNÇÃO MONTA SOLUÇÃO GULOSA: "<< endl;
+    	//// cout << "DEPOIS DA FUNÇÃO MONTA SOLUÇÃO GULOSA: "<< endl;
     	//imprime_vector_vector_int(matriz_resultados_Kmedian,"P ");
 
     	int valor = calcula_custo_solucao(t, solucao_Kmedian); 
-    	////cout << "#### CUSTO ANTES DA BUSCA -> " << t << ": [" << valor << "]" << endl;
+    	////// cout << "#### CUSTO ANTES DA BUSCA -> " << t << ": [" << valor << "]" << endl;
     	soma_teste += valor;
     	valores_finais.push_back(valor);
 
@@ -534,7 +536,7 @@ void fragmenta_leasing_k_median(int quant_intancias_tempo, float alfa, vvi &matr
 	    	// APLICA A BUSCA LOCAL NO K-MEDIAN DESSA SOLUÇÃO
 	    	//solucao_com_busca = busca_local_k_median(solucao_Kmedian, valor, t);
 	    	//int valor2 = calcula_custo_solucao(t, solucao_com_busca);
-	    	////cout << "#### CUSTO DEPOIS DA BUSCA -> " << t << ": [" << valor2 << "]" << endl;
+	    	////// cout << "#### CUSTO DEPOIS DA BUSCA -> " << t << ": [" << valor2 << "]" << endl;
 	    	//soma_teste_com_busca += valor2;
 	    	//valores_finais2.push_back(valor2);
 	    }
@@ -550,9 +552,9 @@ void fragmenta_leasing_k_median(int quant_intancias_tempo, float alfa, vvi &matr
     	//matriz_resultados_Kmedian.push_back(solucao_com_busca);
 
     }
-    ////cout << "Valor final da soma teste: " << soma_teste << endl;
+    ////// cout << "Valor final da soma teste: " << soma_teste << endl;
     //imprime_vector_int(valores_finais);
-    ////cout << "Valor final da soma teste com busca: " << soma_teste_com_busca << endl;
+    ////// cout << "Valor final da soma teste com busca: " << soma_teste_com_busca << endl;
     //imprime_vector_int(valores_finais2);
 }
 
@@ -566,9 +568,9 @@ void prenche_quant_facilidades_abertas(vvi &matriz_resultados_Kmedian)
 
 void remove_da_solucao(int ini, int fim, int i, vvi &matriz_resultados_Kmedian)
 {
-	////cout << "ANTES DE REMOVER DO INTERVALO" << endl;
+	////// cout << "ANTES DE REMOVER DO INTERVALO" << endl;
 	//imprime_vector_vector_int(matriz_resultados_Kmedian);
-	////cout << "DEPOIS DE REMOVER DO INTERVALO" << endl;
+	////// cout << "DEPOIS DE REMOVER DO INTERVALO" << endl;
 
 	for(int t = ini; t < fim;t++)
 	//	if(matriz_resultados_Kmedian[t][i])
@@ -584,9 +586,9 @@ void recupa_para_a_solucao(int ini, int fim, int i, vvi &matriz_resultados_Kmedi
 	// Decrementa o limite do fim, para não passar do limite maximo do vetor
 	if(fim == quant_intancias_tempo) fim --;
 
-	////cout << "ANTES DE REMOVER DO INTERVALO" << endl;
+	////// cout << "ANTES DE REMOVER DO INTERVALO" << endl;
 	//imprime_vector_vector_int(matriz_resultados_Kmedian);
-	////cout << "DEPOIS DE REMOVER DO INTERVALO" << endl;
+	////// cout << "DEPOIS DE REMOVER DO INTERVALO" << endl;
 
 	for(int t = ini; t <= fim;t++)
 			matriz_resultados_Kmedian[t][i] ++;
@@ -602,30 +604,30 @@ ii retorna_quant_intervalo(int ini, int fim, vvi &matriz_resultados_Kmedian)
 	//if(fim == quant_intancias_tempo) fim --;
 
 
-	//cout << "ANTES DE VERIFICAR NA FUNÇÃO RETORNA QUANT" << endl;
+	//// cout << "ANTES DE VERIFICAR NA FUNÇÃO RETORNA QUANT" << endl;
 	//imprime_vector_vector_int(matriz_resultados_Kmedian,"t: ");
 
 
 	ii final;
-	//cout << "Valor ini e fim: " << ini << " " << fim << endl;
+	//// cout << "Valor ini e fim: " << ini << " " << fim << endl;
 	int vet_aux[quant_clientes] = {};
 	for(int t = ini;t < fim;t++)
 		for(int i = 0;i < (int)matriz_resultados_Kmedian[t].size();i++)
-			{////cout<<"t: " << t << " i: " << i << endl;
+			{////// cout<<"t: " << t << " i: " << i << endl;
 			 if(matriz_resultados_Kmedian[t][i])
 				vet_aux[i] ++;}
 
 
 	//linha();
-	//puts(" ============= VECTOR EM UMA LINHA =============");
+	//// puts(" ============= VECTOR EM UMA LINHA =============");
 	//imprime_vetor_int_uma_linha(vet_aux, quant_clientes);
 	//linha();
 
-	//cout << "ANTES DE COLETAR MAIOR" << endl;
+	//// cout << "ANTES DE COLETAR MAIOR" << endl;
 	int maior = -100000;
 	for(int i = 0;i < quant_clientes;i++)
 	{
-		//cout << "COMPARAÇÃO: " << vet_aux[i] << " > " << maior << " i: " << i << endl;
+		//// cout << "COMPARAÇÃO: " << vet_aux[i] << " > " << maior << " i: " << i << endl;
 		if(vet_aux[i] > maior)
 		{
 			maior = vet_aux[i];
@@ -634,14 +636,14 @@ ii retorna_quant_intervalo(int ini, int fim, vvi &matriz_resultados_Kmedian)
 		}
 	}
 
-	//cout << ">>>>> FUNÇÃO RETORNA QUANT: " << maior << " i: " << final.first << " " << final.second << endl;
-	//cout << "FINAL DA FUNÇÃO QUE RETORNA A QUANT INTERVALO" << endl;
+	//// cout << ">>>>> FUNÇÃO RETORNA QUANT: " << maior << " i: " << final.first << " " << final.second << endl;
+	//// cout << "FINAL DA FUNÇÃO QUE RETORNA A QUANT INTERVALO" << endl;
 	return final;
 }
 
 int pd_escolha_tempo_facilidade(int t, vvi &matriz_resultados_Kmedian)
 {
-	//cout << "t: " << t << endl;
+	//// cout << "t: " << t << endl;
 	if(t >= quant_intancias_tempo)
 		return 0;
 
@@ -653,21 +655,21 @@ int pd_escolha_tempo_facilidade(int t, vvi &matriz_resultados_Kmedian)
  	ans = 0;
 	for(int l = 0;l < quant_tipos_facilidades;l++)
 	{
-		//cout << "vet_tipos_facilidadesL[l]: " << vet_tipos_facilidadesL[l] << endl;
+		//// cout << "vet_tipos_facilidadesL[l]: " << vet_tipos_facilidadesL[l] << endl;
 		// Pega o min entra o intervalo o tempo maximo de instantes, para não ultrapassar
 		int intervalo = min(quant_intancias_tempo ,t + vet_tipos_facilidadesL[l]);
 		// Pega a facilidade que mais aparece nesse instante de tempo, retornando a facilidade, e quantidade que ela aparece
-		//cout << "ANTES DA FUNÇÃO DE RETORNA QUANT INTERVALO" << endl;
+		//// cout << "ANTES DA FUNÇÃO DE RETORNA QUANT INTERVALO" << endl;
 		ii facilidade_max = retorna_quant_intervalo(t, intervalo, matriz_resultados_Kmedian);
 		//P[t][intervalo] = facilidade_max.second;
-		//cout << "FACILIDADE: " << facilidade_max.first << " INTERVALO: " << t << " a " << intervalo << endl;
-		//cout << "VALOR DO INTERVALO: " << intervalo << endl;
+		//// cout << "FACILIDADE: " << facilidade_max.first << " INTERVALO: " << t << " a " << intervalo << endl;
+		//// cout << "VALOR DO INTERVALO: " << intervalo << endl;
 		//marca_intervalo_facilidade(matriz_leasing, t, intervalo, facilidade_max.first);
 
 		//remove_da_solucao(t, intervalo, facilidade_max.first);	
 		
 		int solucao = pd_escolha_tempo_facilidade(intervalo, matriz_resultados_Kmedian) + facilidade_max.second;
-		//cout << "YYYYYYYYYYYYYYYYYY" << endl;
+		//// cout << "YYYYYYYYYYYYYYYYYY" << endl;
 		if(solucao > ans)
 		{
 			ans = solucao;
@@ -682,23 +684,45 @@ int pd_escolha_tempo_facilidade(int t, vvi &matriz_resultados_Kmedian)
 	return ans;
 }
 
-int calcula_custo_solucao_leasing_vvF(vvF teste)
+int calcula_custo_solucao_leasing_vvF(vvF &teste)
 {
-	//puts("vvF dentro da função de calcular custo: ");
+	// puts("vvF dentro da função de calcular custo: ");
 	//imprime_vector_vector_facilidade_aberta(teste);
-	//puts("c1");
+	// puts("c1");
 	// Nessa matriz cada linha, representa um instante de tempo
-	vvi auxiliar(quant_intancias_tempo);
-	//puts("c2");
+	
+	vvi auxiliar(quant_intancias_tempo + 50);
+
+	vvi teste_calculo_custo = inicia_matriz_int_vector_zerada(K_original+5, quant_intancias_tempo+5);
+	// puts("c2");
 	for(int kk = 0;kk < K_original;kk++)
+	{
+		// cout << "----------------------------" << endl;
+		// cout << "t1("<< kk << ")" << endl;
 		for(int i = 0;i < (int)teste[kk].size();i++)
 		{
+			// cout << "TOMA NO CU " << endl;
+			// cout << "t2" << endl;
 			int ini = teste[kk][i].t, fim = teste[kk][i].l;
-			//cout << "ini: " << ini << " fim: " << fim << endl;
+			// cout << "t3" << endl;
+			// cout << "ini: " << ini << " fim: " << fim << endl;
 			for(int t = ini;t < fim;t++)
+			{
+				// cout << "TAMANHO AUXILIAR: " << auxiliar.size()<< endl;
+				// cout << "AUXILIAR T: auxiliar[t]: " << auxiliar[t].size() << endl;
+				// cout << "Dentro do for - i: " << i << " t: "<<t<<" kk: "<<kk<<" fim: " << fim << endl;
+				// Salva as facilidades que estão abertas no isntante t
 				auxiliar[t].push_back(teste[kk][i].i);
+				// cout <<"depois!!!!!!"<<endl;
+			}
+				
 		}
-	//puts("c3");
+		// cout << "DEPOIS DO SEGUNDO FOR" << endl;
+		// cout << "----------------------------" << endl;
+	}
+	//cout << "----------------- ANALISE --------------------------------" << endl;
+	//int tempo_criar = time(NULL);
+	// puts("c3");
 	int soma = 0;
 	for(int t = 0;t < quant_intancias_tempo;t++)
 	{
@@ -706,17 +730,24 @@ int calcula_custo_solucao_leasing_vvF(vvF teste)
 		{
 			int cliente = Dt[t][j];
 			int menor_custo = INF;
+			//cout << "auxiliar: " << (int)auxiliar[t].size() << endl;
+
 			for(int i = 0;i < (int)auxiliar[t].size();i++)
 			{
 				int facilidade_aberta = auxiliar[t][i];
+				//cout << matriz[cliente][facilidade_aberta]<< " ";
 				if(menor_custo > matriz[cliente][facilidade_aberta])
 					menor_custo = matriz[cliente][facilidade_aberta];
 			}
 			soma += menor_custo;
 		}
+		//sleep(5000);
 	}
-//puts("c4");
-//cout << "SOMA: " << soma << endl;
+	//cout << "Tempo for 2 -> " << time(NULL) - tempo_criar << endl;
+	//cout << "--------------------------------------------" << endl;
+	//sleep(5000);
+// puts("c4");
+// cout << "SOMA: " << soma << endl;
 	return soma;
 }
 
@@ -730,10 +761,10 @@ void marca_intervalo_facilidade(int ini, int fim, int facilidade, int l)
 	/*Marca na matriz, posição da linha representa a faciliade, e na linha 
 	vai conter um vetor, em que representa, os instantes, pelo qual essa faciliade
 	ficou aberta*/
-	////cout << "FACILIDADE: " << facilidade << " INI: " << ini << " FIM: " << fim << endl;
+	////// cout << "FACILIDADE: " << facilidade << " INI: " << ini << " FIM: " << fim << endl;
 	for(int i = ini;i < fim;i++) matriz_leasing_atual[i][facilidade] = l;
 	//{
-		////cout << "### Marcando posição: " << i << " " << facilidade << endl, 
+		////// cout << "### Marcando posição: " << i << " " << facilidade << endl, 
 		//matriz_leasing_atual[i][facilidade] = 1;
 	//}
 }
@@ -756,10 +787,10 @@ vector <facilidade_aberta> remove_cont(vvi &matriz_resultados_Kmedian)
 		// i t l
 		facilidade_aberta aux(facilidade, index, fim);
 		// Marca a solução que foi encontrada, em uma matriz de int com int, para ficar mais facil de calcular a solução
-		//puts("MARCAR NO INTERVALO");
+		//// puts("MARCAR NO INTERVALO");
 		//sleep(6000);
 		marca_intervalo_facilidade(index, fim, facilidade, armazena_facilidade_escolhida[index].second);
-		////cout << "DEPOIS DE MARCAR NO INTERVALO" << endl;
+		////// cout << "DEPOIS DE MARCAR NO INTERVALO" << endl;
 		solucao_para_k.push_back(aux);
 		index = fim;
 	}
@@ -770,13 +801,13 @@ vector <facilidade_aberta> remove_cont(vvi &matriz_resultados_Kmedian)
 vvF testa_combinacoes_tempo_facilidade(vvi &matriz_resultados_Kmedian)
 {
 	vector <vector<facilidade_aberta> > solucao_final_leasing;
-	puts("INICIO DA PD");
+	// puts("INICIO DA PD");
 	for(int k = 0;k < K_original;k++)
 	{
 		limpa_pd();
-		//cout << "ANTES DA FUNÇÃO DA PD!" << endl;
+		//// cout << "ANTES DA FUNÇÃO DA PD!" << endl;
 		int x = pd_escolha_tempo_facilidade(0, matriz_resultados_Kmedian);
-		//cout << "DEPOIS DA FUNÇÃO DE PD, PARA O K -> " << k << endl;
+		//// cout << "DEPOIS DA FUNÇÃO DE PD, PARA O K -> " << k << endl;
 		//imprime_vector_vector_int(matriz_resultados_Kmedian, "facilidade");
 		linha();
 
@@ -786,7 +817,7 @@ vvF testa_combinacoes_tempo_facilidade(vvi &matriz_resultados_Kmedian)
 		//linha();
 		//imprime_vector_vector_int(matriz_resultados_Kmedian,  "t");
 		solucao_final_leasing.push_back(remove_cont(matriz_resultados_Kmedian)); // Remove as facilidades escolhidas, e salva as mesmas
-		//puts("DEPOIS DA REMOÇÃO");
+		//// puts("DEPOIS DA REMOÇÃO");
 		//imprime_vector_vector_int(matriz_resultados_Kmedian, "t");
 		// Armazena a solução para o k atual*/
 
@@ -900,7 +931,7 @@ vi get_facilidades_fechadas_intervalo(vvi solucao, int ini, int fim)
 			facilidades_fechadas.push_back(i);
 
 	//imprime_vetor_int_uma_linha(aux, quant_clientes);
-	//cout << " FACILIDADES FECHADAS NO INTERVALO: " << ini << " " << fim << endl;
+	//// cout << " FACILIDADES FECHADAS NO INTERVALO: " << ini << " " << fim << endl;
 	//imprime_vector_int_um_linha(facilidades_fechadas);
 	return facilidades_fechadas;
 }
@@ -920,7 +951,7 @@ vvi gera_vizinho_baseado_2opt_ANTIGO(vvi solucao, vvF solucao_em_struct)
 		facilidade_aberta aux = solucao_em_struct[k_][num_random];
 
 		int fim_intervalo = min(quant_intancias_tempo, aux.l);
-		//cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
+		//// cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
 		// Coleta as opções de facilidades que podem ser abertas no intervalo, da facilidade atual que vai ser fechada
 		vi facilidades_fechadas = get_facilidades_fechadas_intervalo(solucao, aux.t, fim_intervalo);
 		
@@ -947,15 +978,23 @@ vvi gera_vizinho_baseado_2opt_ANTIGO(vvi solucao, vvF solucao_em_struct)
 	return solucao;
 }
 
+bool verifica_igual(vi vetor_1, vi vetor_2)
+{
+	return true;
+}
+
+
 //****************************************************************
 // Gera vizinho testando todas as possiveis trocas para uma facilidade
 vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 {
+	int tomaluco = time(NULL);
 	// Calcula o custo da solução que será usada para gerar os vizinhos
 	int custo_solucao_inicial = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
 
 	/* Essa função seleciona um k por vez, e testa todas as possiveis trocas trocas para esse k,
 	e então retorna a melhor encontrada*/
+	
 	for(int k_ = 0;k_ < K_original;k_++)
 	{
 		// Faz a escolha randomica de uma facilidade, para ser alterada
@@ -963,18 +1002,22 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 		facilidade_aberta aux = solucao_em_struct[k_][num_random];
 
 		int fim_intervalo = min(quant_intancias_tempo, aux.l);
-		//cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
+		//// cout << " FACILIDADE QUE FOI ESCOLHIDA: " << aux.i << " fim intervalo: " << fim_intervalo <<endl;
 		// Coleta as opções de facilidades que podem ser abertas no intervalo, da facilidade atual que vai ser fechada
 		vi facilidades_fechadas = get_facilidades_fechadas_intervalo(matriz_leasing_atual, aux.t, fim_intervalo);
 		
 		//Fecha a facilidade que foi escolhida
 		int melhor_facilidade = aux.i;
 		matriz_leasing_atual = remove_da_solucao2(aux.t, fim_intervalo, aux.i, matriz_leasing_atual);
-
+	
+		//cout << "K_original: " << K_original << endl;
+		//cout << "Numero de facilidades fechadas: " << (int)facilidades_fechadas.size() << endl;
 		int _t_ = aux.t;
+		int toloco = time(NULL);
 		// Percorre todas as facilidades que estão fechadas
 		for(int i = 0;i < (int)facilidades_fechadas.size();i++)
 		{
+			//cout << "i -----" << i << "t ---- " << time(NULL) - toloco << endl;
 			int nova_facilidade = facilidades_fechadas[i];
 			// Abre a nova facilidade que será testada
 			//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, nova_facilidade, solucao,aux.l - aux.t);
@@ -985,11 +1028,17 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 			// Fecha facilidade, para testar outras facilidades
 			//solucao = remove_da_solucao2(aux.t, fim_intervalo, nova_facilidade, solucao);
 		}
+		//cout << "Final for gasto "<< time(NULL) - toloco << endl;
+		//cout << "Fim da analise de facilidades" << endl;
+		//sleep(500);
 		// Abre a facilidade que obteve melhor desempenho
 		//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, solucao,aux.l - aux.t);
 		solucao_em_struct[k_][num_random].i = melhor_facilidade;
 		matriz_leasing_atual = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, matriz_leasing_atual,aux.l - aux.t);
 	}
+	cout << K_original << endl;
+	cout << "TEMPO TOTAL GASTO DE UMA CHAMADA DE 2OPT: "<< time(NULL) - tomaluco << endl;
+	sleep(6000);
 	return solucao_em_struct;
 }
 
@@ -1060,7 +1109,7 @@ int gera_facilidade_aleatorio_para_swap(int i, vvF solucao_em_struct, int tam, i
 	while(c_ < 10)
 	{
 		num_random = rand() % tam;
-		//cout << "num_random: " << num_random << " i: " << solucao_em_struct[k_][num_random].i << " ii: " << i << endl;
+		//// cout << "num_random: " << num_random << " i: " << solucao_em_struct[k_][num_random].i << " ii: " << i << endl;
 		if(solucao_em_struct[k_][num_random].i != i)
 			return num_random;
 		
@@ -1082,23 +1131,23 @@ vvF gera_vizinhos_swap(vvF solucao_em_struct)
 
 		int posicao = gera_facilidade_aleatorio_para_swap(solucao_em_struct[k_][num_random].i, solucao_em_struct, tamm, k_);
 
-		//cout << "teste antes: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
-		// cout << "/////////ANTES //////////////" << endl;
+		//// cout << "teste antes: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
+		// // cout << "/////////ANTES //////////////" << endl;
 		// imprime_vector_vector_facilidade_aberta(solucao_em_struct);
-		// cout << "/////////////////////////////////" << endl;
+		// // cout << "/////////////////////////////////" << endl;
 
 		// Troca as facilidades
 		int troca_ = solucao_em_struct[k_][posicao].i;
 		solucao_em_struct[k_][posicao].i = solucao_em_struct[k_][num_random].i;
 		solucao_em_struct[k_][num_random].i = troca_;
-		// cout << "/////////DEPOIS //////////////" << endl;
+		// // cout << "/////////DEPOIS //////////////" << endl;
 		// imprime_vector_vector_facilidade_aberta(solucao_em_struct);
-		// cout << "/////////////////////////////////" << endl;
-		//cout << "teste depois: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
+		// // cout << "/////////////////////////////////" << endl;
+		//// cout << "teste depois: " << solucao_em_struct[k_][posicao].i << " - " << solucao_em_struct[k_][num_random].i << endl;
 		// sleep(2);
 	//}
 
-	cout << "FIM GERA VIZINHOS POR SWAP" << endl;
+	// cout << "FIM GERA VIZINHOS POR SWAP" << endl;
 	return solucao_em_struct;
 }
 
@@ -1140,9 +1189,9 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 	// Armazena o custo da solução que chega na função
 	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
 
-	while(cont < limite && (time(NULL) - tempoIni) < 600)
+	while(cont < limite && (time(NULL) - tempoIni) < 550)
 	{
-		//cout << "CONT DENTRO DO VND: " << cont << endl;
+		cout << "-------------- VND CONT: " << cont << "-----------" << endl;
 		//Encontra o melhor vizinho
 		if(cont == 0)
 			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
@@ -1153,15 +1202,15 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 		else
 			solucao_vizinha = gera_vizinho_por_extencao_tempo(solucao_em_struct);
 
-		//cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
+		//// cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
 		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
 		if(custo_solucao_vizinha < custo_solucao)
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
 
 		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
-		printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
-		printf("Custo melhor solução busca: %d\n", custo_solucao);
+		//printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
+		//printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
@@ -1175,31 +1224,31 @@ vvF gera_solucao(float alfa)
 
 	//imprime_vector_vector_int(matriz_resultados_Kmedian,"U ");
 
-	puts("INICIALIZA A MATRIZ DE VECTOR ZERADA");
+	// puts("INICIALIZA A MATRIZ DE VECTOR ZERADA");
     matriz_leasing_atual = inicia_matriz_int_vector_zerada(quant_intancias_tempo, quant_clientes);
 
     /* Fragmenta a instancia do leasing k-median, em T k-medians, dessa forma seleciona as melhores facilidades por instante,
    	por ter transformado em um k-median, então o Delta, está sendo tratado como 1*/
-   	puts("INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN");
+   	// puts("INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN");
     fragmenta_leasing_k_median(quant_intancias_tempo, alfa, matriz_resultados_Kmedian);
 
-    //puts("MATRIZ DE RESULTADOS K-MEDIAN's");
+    //// puts("MATRIZ DE RESULTADOS K-MEDIAN's");
     // Imprimi a solução que foi encontrada para o leasing k-median fragmentado
     //imprime_vector_vector_int(matriz_resultados_Kmedian, "t");
 
-    puts("PREENCHE QUANTIDADE DE FACILIDADES ABERTAS");
+    // puts("PREENCHE QUANTIDADE DE FACILIDADES ABERTAS");
     prenche_quant_facilidades_abertas(matriz_resultados_Kmedian);
 
-    puts("TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES");
+    // puts("TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES");
     vvF solucao_em_struct = testa_combinacoes_tempo_facilidade(matriz_resultados_Kmedian);
 
-    //puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
+    //// puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
     //imprime_vector_vector_int(matriz_leasing_atual, "t");
 
     //imprime_vector_vector_facilidade_aberta(converte_vvi_em_vvF(matriz_leasing_atual));
 
-    cout << ">>>>> SOLUÇÃO GERADA <<<<<" << endl;
-   	//cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
+    // cout << ">>>>> SOLUÇÃO GERADA <<<<<" << endl;
+   	//// cout << "CUSTO TOTAL DESSE SOLUÇÃO: " << calcula_custo_solucao_leasing(matriz_leasing_atual) << endl;
 
    	return solucao_em_struct;
 }
@@ -1306,7 +1355,7 @@ vi gera_vetor_candidatos_iniciando_construcao_cliente(int t)
 		if (!k_)
 		{
 			facilidade_selecionada = Dt[t][0];
-			//puts("PRIMEIRA FACILIDADE QUE ESTÁ SENDO ABERTA!");
+			//// puts("PRIMEIRA FACILIDADE QUE ESTÁ SENDO ABERTA!");
 			vetor_auxiliar_marcar_solucao[facilidade_selecionada] = 1;
 			solucao_pronta.push_back(facilidade_selecionada);
 			continue;
@@ -1386,7 +1435,7 @@ void imprime_vetor_elite()
 {
 	for (int i = 0;i < (int)conjunto_elite.size();i++)
 	{
-		cout << "i: " << conjunto_elite[i].first << endl;
+		// cout << "i: " << conjunto_elite[i].first << endl;
 	}
 }
 
@@ -1396,21 +1445,21 @@ void insere_conjunto_elite(vvF solucao, int custo)
 {
 	int tam_conjunto_elite = (int)conjunto_elite.size();
 	pair <bool, int> verifica_ja_existe = ja_existe(custo, tam_conjunto_elite);
-	//cout << "Depois da função já ja_existe" << endl;
+	//// cout << "Depois da função já ja_existe" << endl;
 	// Verifica se já existe um solução com esse custo no conjunto elite
 	if (!verifica_ja_existe.first)
 	{
-		//cout << "Não existe ainda"<<endl;
-		imprime_vetor_elite();
+		//// cout << "Não existe ainda"<<endl;
+		//imprime_vetor_elite();
 		if(tam_conjunto_elite < MAX_TAM_PATH_RELINK)
 		{
-			//cout << "tam: " << tam_conjunto_elite << endl;
+			//// cout << "tam: " << tam_conjunto_elite << endl;
 			conjunto_elite.push_back({custo, solucao});
 			sort(conjunto_elite.begin(), conjunto_elite.end(), aux_ord);
 		}
 		else 
 		{
-			//cout << "posição: " << verifica_ja_existe.second <<endl;
+			//// cout << "posição: " << verifica_ja_existe.second <<endl;
 			conjunto_elite[verifica_ja_existe.second] = {custo, solucao};
 		}
 	}
@@ -1418,12 +1467,12 @@ void insere_conjunto_elite(vvF solucao, int custo)
 
 pair <int, vvF> seleciona_alatoriamente_solucao_do_conjunto_elite(int custo)
 {
-	imprime_vetor_elite();
+	//imprime_vetor_elite();
 	int tam = (int)conjunto_elite.size();
 
 	int num_random = rand() % tam;
 
-	cout << conjunto_elite[num_random].first << " / " << custo << endl;
+	// cout << conjunto_elite[num_random].first << " / " << custo << endl;
 	if (conjunto_elite[num_random].first == custo)
 		num_random++;
 
@@ -1434,7 +1483,7 @@ pair <int, vvF> seleciona_alatoriamente_solucao_do_conjunto_elite(int custo)
 		else
 			num_random --;
 	}
-	cout << "NUM_RANDOM: " << num_random << endl;
+	//// cout << "NUM_RANDOM: " << num_random << endl;
 	return conjunto_elite[num_random];
 }
 
@@ -1453,7 +1502,7 @@ si coleta_facilidades_vvF(vvF aux, int t)
 		}
 	}
 
-	//puts("CONVERTIDO EM VVI POR FACILIDADE IGUAL A LINHA:");
+	//// puts("CONVERTIDO EM VVI POR FACILIDADE IGUAL A LINHA:");
 	//imprime_vector_vector_int(auxiliar,"soda: ");
 	si final;
 
@@ -1466,21 +1515,21 @@ si coleta_facilidades_vvF(vvF aux, int t)
 // Calcula a diferença entre a solução x e a solução y, para o path relinking
 si delta_x_y(vvF solucao_X, vvF solucao_Y, int t)
 {
-	//cout << "=================== t(" << t << ")=======================" << endl;
-	//cout << "==== X:" << endl;
+	//// cout << "=================== t(" << t << ")=======================" << endl;
+	//// cout << "==== X:" << endl;
 	//imprime_vector_vector_facilidade_aberta(solucao_X);
-	//cout << "==== Y:" << endl;
+	//// cout << "==== Y:" << endl;
 	//imprime_vector_vector_facilidade_aberta(solucao_Y);
 	// Coleta as facilidades como um vetor de int de cada solução
 	si facilidades_solucao_X = coleta_facilidades_vvF(solucao_X, t);
 	si facilidades_solucao_Y = coleta_facilidades_vvF(solucao_Y, t);
 
 	
-	//cout << "========= Solucao X: " << endl;
+	//// cout << "========= Solucao X: " << endl;
 	//imprime_set_int(facilidades_solucao_X);
-	//cout << "========= Solucao Y: " << endl;
+	//// cout << "========= Solucao Y: " << endl;
 	//imprime_set_int(facilidades_solucao_Y);
-	//cout << "===========================================" << endl;
+	//// cout << "===========================================" << endl;
 
 	// Retorna a diferença entre os dois conjuntos de facilidades
 	si diferenca_x_y = diferenca_set(facilidades_solucao_X, facilidades_solucao_Y);
@@ -1500,22 +1549,22 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 	// Variaveis solução guia e solução corrente
 	pair <int, vvF> solucao_guia, solucao_corrente, melhor_solucao_path_relinking;
 	
-	//puts("SELECIONA SOLUÇÃO CONJUNTO ELITE");
-	//cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
+	// puts("SELECIONA SOLUÇÃO CONJUNTO ELITE");
+	// cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
 	// Seleciona uma solução do conjunto elite de maneira aleatoria, para ser usada como solução guia
 	
 	pair <int, vvF> solucao_elite = seleciona_alatoriamente_solucao_do_conjunto_elite(custo_solucao);
 	
-	//cout << "corrente: " << endl;
+	// cout << "corrente: " << endl;
 	//imprime_vector_vector_facilidade_aberta(solucao);
 
-	//cout << "elite: " << endl;
+	// cout << "elite: " << endl;
 	//imprime_vector_vector_facilidade_aberta(solucao_elite.second);
 
 	/* Com base na solução recebida vinda da busca local, e com a solução selecionada dentre as soluções elite,
 	separa a solução que será a solução corrente, e a solução guia, e tbm armazena a melhor solução*/
-	//puts("Selecionando solução guia, e solução corrente");
-	//cout << "custo_solucao -> " << custo_solucao << " / " << solucao_elite.first << " <- Custo solução elite" << endl;
+	// puts("Selecionando solução guia, e solução corrente");
+	// cout << "custo_solucao -> " << custo_solucao << " / " << solucao_elite.first << " <- Custo solução elite" << endl;
 	if(custo_solucao <= solucao_elite.first)
 	{
 		solucao_guia = {custo_solucao, solucao};
@@ -1532,7 +1581,7 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 
 	if (!padrao)
 	{
-		puts("Executando o padrão inverso!");
+		// puts("Executando o padrão inverso!");
 		pair <int, vvF> troca;
 		troca = solucao_guia;
 		solucao_guia = solucao_corrente;
@@ -1541,57 +1590,58 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 
 	for (int t = 0;t < quant_intancias_tempo;t++)
 	{
-		//cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl;
+		// cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl;
 		// Diferença de movimentos para sair de uma solução e chegar na outra, no instante t
 		si diferenca_x_y_ = delta_x_y(solucao_guia.second, solucao_corrente.second, t);
 		int delta_x_y_ = (int)diferenca_x_y_.size();
-		//cout << "DELTA POR INSTANTE DE TEMPO (" << t << "): " << delta_x_y_ << endl;
+		// cout << "DELTA POR INSTANTE DE TEMPO (" << t << "): " << delta_x_y_ << endl;
 		//imprime_set_int(diferenca_x_y_);
-		//cout << "-*/-*/-*/*-/*-/-*/-*/-/*-/-/-/-/" << endl;
-		
+		// cout << "-*/-*/-*/*-/*-/-*/-*/-/*-/-/-/-/" << endl;
+		// cout << "//////////// TAM SET DE DELTA: " << diferenca_x_y_.size() << "///////////////" << endl;
 		si ::iterator it;
 		for(it = diferenca_x_y_.begin(); it != diferenca_x_y_.end();it++)
 		{
 			// Seleciona facilidade da solução guia, que entrará no lugar da facilidade da solução corrente
 			int facilidade_guia = *it;
-			//puts("1");
+			// puts("1");
 			// Testa a alteração de todas as facilidades daquele instante, alterando uma por uma
 			for(int k = 0;k < (int)solucao_corrente.second.size();k++)
 			{
 				// Armazena o custo antigo
-				//puts("2");
+				// puts("2");
 				int custo_antigo = solucao_corrente.first;
-				//puts("3");
+				// puts("3");
 				// Armazena a facilidade antiga, para que possa voltar para ela depois
 				int facilidade_antiga = solucao_corrente.second[k][t].i;
-				//puts("4");
+				// puts("4");
 				// Subistitui a facilidade antiga, pela facilidade da solução corrente
 				solucao_corrente.second[k][t].i = facilidade_guia;
-				//cout << "facilidade GUIA: " << facilidade_guia << endl;
-				//puts("5");
+				// cout << "facilidade GUIA: " << facilidade_guia << endl;
+				// puts("5");
 				vvF solucao_corrente_gamb = solucao_corrente.second;
+				//// cout << "555555555555" << endl;
 				//imprime_vector_vector_facilidade_aberta(solucao_corrente_gamb);
-
+				// cout << "DEPOIS DE IMPRIMIR O VETOR" << endl;
 				// Calcula o custo da solução completa, com a alteração da facilidade
 				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente_gamb);
-				//puts("6");
+				// puts("6");
 				if (melhor_solucao_path_relinking.first > custo_solucao_corrente_alterada)
 				{
 					solucao_corrente.first = custo_solucao_corrente_alterada;
 					melhor_solucao_path_relinking = solucao_corrente;
 				}
-				//puts("7");
+				// puts("7");
 				// Volta a facilidade aberta, para a facilidade antiga
 				solucao_corrente.second[k][t].i = facilidade_antiga;
-				//puts("8");
+				// puts("8");
 				// Volta para o custo antigo
 				solucao_corrente.first = custo_antigo;
-				//puts("9");
+				// puts("9");
 			}
 		}
 	}
-	//puts("10");
-	//puts("******************************************************");
+	//// puts("10");
+	//// puts("******************************************************");
 	return melhor_solucao_path_relinking;
 }
 
@@ -1637,21 +1687,21 @@ int main(int argc, char **argv)
 
     }
 
-    puts("!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!");
+    // puts("!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!");
 
     /* Pré processa as informações do tipo de facilidade, para remover facilidades
 	 que podem ser subistituiveis, combinando outros tipos de facilidades*/
 
     linha();
-    //puts("INICIA TRATAMENTO FACILIDADES");
+    //// puts("INICIA TRATAMENTO FACILIDADES");
     sort(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
   	reverse(vet_tipos_facilidadesL.begin(), vet_tipos_facilidadesL.end());
-  	//puts("TIPOS DE FACILIDADES ORDENADOS");
-  	//puts("ANTES:");
+  	//// puts("TIPOS DE FACILIDADES ORDENADOS");
+  	//// puts("ANTES:");
   	//imprime_vector_int(vet_tipos_facilidadesL);
   	vet_tipos_facilidadesL = remove_facilidades_substituiveis();
   	quant_tipos_facilidades = (int)vet_tipos_facilidadesL.size();
-  	//puts("DEPOIS: ");
+  	//// puts("DEPOIS: ");
   	//imprime_vector_int(vet_tipos_facilidadesL);
   	linha();
 
@@ -1663,7 +1713,7 @@ int main(int argc, char **argv)
     /*int a = calcula_custo_solucao_leasing(new_matriz_candidatos_por_instante);
     int b = calcula_custo_solucao_leasing(matriz_candidatos_por_instante_a_patir_cliente);
     if (b < a)
-    	cout << "SUCESSO" << endl, cout << "a: " << a << " b: " << b << endl;
+    	// cout << "SUCESSO" << endl, // cout << "a: " << a << " b: " << b << endl;
 
     return 0;*/
 
@@ -1674,37 +1724,45 @@ int main(int argc, char **argv)
 
 
     // -------------------------------------------- GRASP --------------------------------------------
-   	puts("!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!");
+   	// puts("!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!");
    	// Qaunto maior o alfa, mais soluções aleatorias
    	float alfa = atof(argv[1]);
    	int cont_it = 0;
    	int custo_melhor_solucao = INF;
    	pair <vvF, int> melhor_solucao;
    	vvi melhor_solucao_em_matriz;
-   	cout << "O valor de alfa para execução é: " << alfa << endl;
+   	// cout << "O valor de alfa para execução é: " << alfa << endl;
    	
    	long int tempoIni = time(NULL);
-   	puts("INICIANDO GRASP");
+   	// puts("INICIANDO GRASP");
    	while((time(NULL) - tempoIni) < 600)
    	{
    		printf("------------------------------ ITERAÇÃO NÚMERO -> %d ------------------------------\n", cont_it);
    		// Gera uma solução para o leasing k-median
    		vvF solucao_gerada = gera_solucao(alfa);
 
-   		linha_asteristico();
-   		cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
-   		imprime_vetor_elite();
-   		linha_asteristico();
+   		//linha_asteristico();
+   		// cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
+   		//imprime_vetor_elite();
+   		//linha_asteristico();
 
-   		puts("INICIO VND");
+		puts("----------------- INICIO VND -----------------");
    		// Aplica a busca local na solução gerada
    		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
 
+   		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
+   		int custo_solucao_gerada_com_busca = solucao_busca.second;
+   		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
+   			melhor_solucao = solucao_busca, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
+   			melhor_solucao_em_matriz = matriz_leasing_atual;
    		//imprime_vector_vector_facilidade_aberta(solucao_busca.first);
 
-   		puts("Insere as soluções retornadas da busca local no vetor elite");
+   		// puts("Insere as soluções retornadas da busca local no vetor elite");
    		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
 
+   		cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<< endl;
+   		cout << "Melhor solução sem o path: " << custo_melhor_solucao << endl << endl;
    		puts("INICIA EXECULÇÃO PATH RELINKING");
    		pair <int, vvF> resultado_path_relinking = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second, true);
 
@@ -1713,17 +1771,22 @@ int main(int argc, char **argv)
    		cout << "Custo path:  " << resultado_path_relinking.first << endl;
    		puts("+++++++++++++++++++++++++++++++++++++++++");
 
+   		int custo_solucao_gerada_com_path_normal = resultado_path_relinking.first;
+   		if(custo_solucao_gerada_com_path_normal < custo_melhor_solucao)
+   			melhor_solucao = {resultado_path_relinking.second, custo_solucao_gerada_com_path_normal}, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_path_normal, 
+   			melhor_solucao_em_matriz = matriz_leasing_atual;
+
    		pair <int, vvF> resultado_path_relinking_reverso = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second, false);
    		puts("++++++++++++++++ REVERSO +++++++++++++++++");
    		cout << "Custo busca: " << solucao_busca.second << endl;
    		cout << "Custo path:  " << resultado_path_relinking_reverso.first << endl;
    		puts("++++++++++++++++++++++++++++++++++++++++++");
 
-   		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
-   		int custo_solucao_gerada_com_busca = solucao_busca.second;
-   		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
-   			melhor_solucao = solucao_busca, 
-   			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
+   		int custo_solucao_gerada_com_path_reverso = resultado_path_relinking_reverso.first;
+   		if(custo_solucao_gerada_com_path_reverso < custo_melhor_solucao)
+   			melhor_solucao = {resultado_path_relinking_reverso.second, custo_solucao_gerada_com_path_reverso}, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_path_reverso, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
 
    		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
@@ -1734,7 +1797,8 @@ int main(int argc, char **argv)
    	}
    	
    	cout << "CUSTO DA MELHOR SOLUÇÃO: " << custo_melhor_solucao << endl;
-    //puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
+   	cout << custo_melhor_solucao << endl;
+    //// puts("SOLUÇÃO LEASING EM MATRIZ DE VECTOR DE INT, INT:");
     //imprime_vector_vector_int(matriz_leasing_atual, "t");
     // -----------------------------------------------------------------------------------------------
    	return 0;

@@ -1,0 +1,107 @@
+./new_grasp 0.04752514513464123 < Instancias/inst26.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0475251
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 48
+Custo vizinho solução busca: 654820
+Custo melhor solução busca: 654820
+TEMPO: 96
+Custo vizinho solução busca: 654802
+Custo melhor solução busca: 654802
+TEMPO: 146
+Custo vizinho solução busca: 654668
+Custo melhor solução busca: 654668
+TEMPO: 196
+Custo vizinho solução busca: 654662
+Custo melhor solução busca: 654662
+TEMPO: 245
+Custo vizinho solução busca: 654655
+Custo melhor solução busca: 654655
+TEMPO: 293
+Custo vizinho solução busca: 654650
+Custo melhor solução busca: 654650
+TEMPO: 343
+Custo vizinho solução busca: 654642
+Custo melhor solução busca: 654642
+TEMPO: 392
+Custo vizinho solução busca: 654640
+Custo melhor solução busca: 654640
+TEMPO: 441
+Custo vizinho solução busca: 654634
+Custo melhor solução busca: 654634
+TEMPO: 490
+Custo vizinho solução busca: 654585
+Custo melhor solução busca: 654585
+TEMPO: 539
+Custo vizinho solução busca: 654584
+Custo melhor solução busca: 654584
+TEMPO: 589
+Custo vizinho solução busca: 654583
+Custo melhor solução busca: 654583
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 654583
+
+INICIA EXECULÇÃO PATH RELINKING
+654583 / 654583
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 654583
+Custo path:  654583
++++++++++++++++++++++++++++++++++++++++++
+654583 / 654583
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 654583
+Custo path:  654583
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 589
+Custo da solucao atual ---> [654583]
+Custo da melhor solução --> [654583]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 654583
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 654583
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 654272
+
+INICIA EXECULÇÃO PATH RELINKING
+654583 / 654272
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 654272
+Custo path:  654272
++++++++++++++++++++++++++++++++++++++++++
+654272 / 654272
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 654272
+Custo path:  653935
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 638
+Custo da solucao atual ---> [654272]
+Custo da melhor solução --> [653935]
+CUSTO DA MELHOR SOLUÇÃO: 653935
+653935

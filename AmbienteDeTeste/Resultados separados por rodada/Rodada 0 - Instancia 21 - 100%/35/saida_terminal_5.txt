@@ -1,0 +1,107 @@
+./new_grasp 0.08432192104900771 < Instancias/inst21.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0843219
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 49
+Custo vizinho solução busca: 707457
+Custo melhor solução busca: 707457
+TEMPO: 97
+Custo vizinho solução busca: 707359
+Custo melhor solução busca: 707359
+TEMPO: 145
+Custo vizinho solução busca: 707354
+Custo melhor solução busca: 707354
+TEMPO: 193
+Custo vizinho solução busca: 707300
+Custo melhor solução busca: 707300
+TEMPO: 241
+Custo vizinho solução busca: 707299
+Custo melhor solução busca: 707299
+TEMPO: 290
+Custo vizinho solução busca: 707185
+Custo melhor solução busca: 707185
+TEMPO: 338
+Custo vizinho solução busca: 707176
+Custo melhor solução busca: 707176
+TEMPO: 386
+Custo vizinho solução busca: 707174
+Custo melhor solução busca: 707174
+TEMPO: 435
+Custo vizinho solução busca: 707148
+Custo melhor solução busca: 707148
+TEMPO: 483
+Custo vizinho solução busca: 707147
+Custo melhor solução busca: 707147
+TEMPO: 531
+Custo vizinho solução busca: 707137
+Custo melhor solução busca: 707137
+TEMPO: 580
+Custo vizinho solução busca: 707117
+Custo melhor solução busca: 707117
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 707117
+
+INICIA EXECULÇÃO PATH RELINKING
+707117 / 707117
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 707117
+Custo path:  707117
++++++++++++++++++++++++++++++++++++++++++
+707117 / 707117
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 707117
+Custo path:  707117
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 580
+Custo da solucao atual ---> [707117]
+Custo da melhor solução --> [707117]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 707117
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 707117
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 707117
+
+INICIA EXECULÇÃO PATH RELINKING
+708749 / 708749
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 708749
+Custo path:  708749
++++++++++++++++++++++++++++++++++++++++++
+707117 / 708749
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 708749
+Custo path:  706835
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 680
+Custo da solucao atual ---> [708749]
+Custo da melhor solução --> [706835]
+CUSTO DA MELHOR SOLUÇÃO: 706835
+706835

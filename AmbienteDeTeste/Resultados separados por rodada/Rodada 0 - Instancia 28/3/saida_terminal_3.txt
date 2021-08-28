@@ -1,0 +1,363 @@
+./new_grasp 0.040067743563347524 < Instancias/inst28.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0400677
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 36
+Custo vizinho solução busca: 1596309
+Custo melhor solução busca: 1596309
+TEMPO: 74
+Custo vizinho solução busca: 1596283
+Custo melhor solução busca: 1596283
+TEMPO: 113
+Custo vizinho solução busca: 1596275
+Custo melhor solução busca: 1596275
+TEMPO: 150
+Custo vizinho solução busca: 1596271
+Custo melhor solução busca: 1596271
+TEMPO: 189
+Custo vizinho solução busca: 1596254
+Custo melhor solução busca: 1596254
+TEMPO: 229
+Custo vizinho solução busca: 1596235
+Custo melhor solução busca: 1596235
+TEMPO: 268
+Custo vizinho solução busca: 1596234
+Custo melhor solução busca: 1596234
+TEMPO: 307
+Custo vizinho solução busca: 1596228
+Custo melhor solução busca: 1596228
+TEMPO: 350
+Custo vizinho solução busca: 1596112
+Custo melhor solução busca: 1596112
+TEMPO: 392
+Custo vizinho solução busca: 1596112
+Custo melhor solução busca: 1596112
+FIM GERA VIZINHOS POR SWAP
+TEMPO: 392
+Custo vizinho solução busca: 1597059
+Custo melhor solução busca: 1596112
+TEMPO: 392
+Custo vizinho solução busca: 1596805
+Custo melhor solução busca: 1596112
+TEMPO: 392
+Custo vizinho solução busca: 1596354
+Custo melhor solução busca: 1596112
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1596112
+
+INICIA EXECULÇÃO PATH RELINKING
+1596112 / 1596112
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1596112
+Custo path:  1596112
++++++++++++++++++++++++++++++++++++++++++
+1596112 / 1596112
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1596112
+Custo path:  1596112
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 392
+Custo da solucao atual ---> [1596112]
+Custo da melhor solução --> [1596112]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 1596112
+#################################################
+INICIO VND
+TEMPO: 431
+Custo vizinho solução busca: 1595520
+Custo melhor solução busca: 1595520
+TEMPO: 470
+Custo vizinho solução busca: 1595388
+Custo melhor solução busca: 1595388
+TEMPO: 510
+Custo vizinho solução busca: 1595371
+Custo melhor solução busca: 1595371
+TEMPO: 550
+Custo vizinho solução busca: 1595371
+Custo melhor solução busca: 1595371
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1596112
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1595371
+
+INICIA EXECULÇÃO PATH RELINKING
+1595371 / 1595371
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1595371
+Custo path:  1594703
++++++++++++++++++++++++++++++++++++++++++
+1596112 / 1595371
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1595371
+Custo path:  1594374
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 559
+Custo da solucao atual ---> [1595371]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 1595371
+i: 1596112
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596112
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1602022 / 1602022
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1602022
+Custo path:  1596112
++++++++++++++++++++++++++++++++++++++++++
+1602022 / 1602022
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1602022
+Custo path:  1594703
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 568
+Custo da solucao atual ---> [1602022]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 3 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 3
+i: 1595371
+i: 1596112
+i: 1602022
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596112
+i: 1602022
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1602022 / 1597020
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1597020
+Custo path:  1597020
++++++++++++++++++++++++++++++++++++++++++
+1597020 / 1597020
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1597020
+Custo path:  1596012
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 574
+Custo da solucao atual ---> [1597020]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 4 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 4
+i: 1595371
+i: 1596112
+i: 1597020
+i: 1602022
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596112
+i: 1597020
+i: 1602022
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1602022 / 1603208
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1603208
+Custo path:  1602022
++++++++++++++++++++++++++++++++++++++++++
+1603208 / 1603208
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1603208
+Custo path:  1600949
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 581
+Custo da solucao atual ---> [1603208]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 5 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 5
+i: 1595371
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1603208 / 1596000
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1596000
+Custo path:  1596000
++++++++++++++++++++++++++++++++++++++++++
+1596112 / 1596000
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1596000
+Custo path:  1595080
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 588
+Custo da solucao atual ---> [1596000]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 6 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 6
+i: 1595371
+i: 1596000
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596000
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1596000 / 1603282
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1603282
+Custo path:  1596000
++++++++++++++++++++++++++++++++++++++++++
+1596112 / 1603282
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1603282
+Custo path:  1594703
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 595
+Custo da solucao atual ---> [1603282]
+Custo da melhor solução --> [1594374]
+------------------------------ ITERAÇÃO NÚMERO -> 7 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 7
+i: 1595371
+i: 1596000
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+i: 1603282
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 1595371
+i: 1596000
+i: 1596112
+i: 1597020
+i: 1602022
+i: 1603208
+i: 1603282
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 1594374
+
+INICIA EXECULÇÃO PATH RELINKING
+1602022 / 1600200
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 1600200
+Custo path:  1600200
++++++++++++++++++++++++++++++++++++++++++
+1597020 / 1600200
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 1600200
+Custo path:  1596012
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 601
+Custo da solucao atual ---> [1600200]
+Custo da melhor solução --> [1594374]
+CUSTO DA MELHOR SOLUÇÃO: 1594374
+1594374

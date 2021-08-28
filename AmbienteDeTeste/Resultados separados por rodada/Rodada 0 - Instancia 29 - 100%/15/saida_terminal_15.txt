@@ -1,0 +1,136 @@
+./new_grasp 0.05807443173745064 < Instancias/inst29.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0580744
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 58
+Custo vizinho solução busca: 801884
+Custo melhor solução busca: 801884
+TEMPO: 116
+Custo vizinho solução busca: 801883
+Custo melhor solução busca: 801883
+TEMPO: 174
+Custo vizinho solução busca: 801873
+Custo melhor solução busca: 801873
+TEMPO: 232
+Custo vizinho solução busca: 801872
+Custo melhor solução busca: 801872
+TEMPO: 290
+Custo vizinho solução busca: 801866
+Custo melhor solução busca: 801866
+TEMPO: 348
+Custo vizinho solução busca: 801830
+Custo melhor solução busca: 801830
+TEMPO: 406
+Custo vizinho solução busca: 801824
+Custo melhor solução busca: 801824
+TEMPO: 465
+Custo vizinho solução busca: 801800
+Custo melhor solução busca: 801800
+TEMPO: 523
+Custo vizinho solução busca: 801790
+Custo melhor solução busca: 801790
+TEMPO: 581
+Custo vizinho solução busca: 801784
+Custo melhor solução busca: 801784
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 801784
+
+INICIA EXECULÇÃO PATH RELINKING
+801784 / 801784
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 801784
+Custo path:  801784
++++++++++++++++++++++++++++++++++++++++++
+801784 / 801784
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 801784
+Custo path:  801784
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 582
+Custo da solucao atual ---> [801784]
+Custo da melhor solução --> [801784]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 801784
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 801784
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 801784
+
+INICIA EXECULÇÃO PATH RELINKING
+805414 / 805414
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 805414
+Custo path:  805414
++++++++++++++++++++++++++++++++++++++++++
+805414 / 805414
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 805414
+Custo path:  805414
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 582
+Custo da solucao atual ---> [805414]
+Custo da melhor solução --> [801784]
+------------------------------ ITERAÇÃO NÚMERO -> 2 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 2
+i: 801784
+i: 805414
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 801784
+i: 805414
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 801784
+
+INICIA EXECULÇÃO PATH RELINKING
+803118 / 803118
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 803118
+Custo path:  803118
++++++++++++++++++++++++++++++++++++++++++
+805414 / 803118
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 803118
+Custo path:  802825
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 693
+Custo da solucao atual ---> [803118]
+Custo da melhor solução --> [801784]
+CUSTO DA MELHOR SOLUÇÃO: 801784
+801784

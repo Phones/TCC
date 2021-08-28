@@ -1,0 +1,101 @@
+./new_grasp 0.05590957984027256 < Instancias/inst29.txt
+!!! TODOS OS DADOS DE ENTRADA LIDOS COM SUCESSO !!!
+!!!!!!!!!!!! Preparando variaveis que serão utilizadas no GRASP !!!!!!!!!!!!
+O valor de alfa para execução é: 0.0559096
+INICIANDO GRASP
+------------------------------ ITERAÇÃO NÚMERO -> 0 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 0
+#################################################
+INICIO VND
+TEMPO: 58
+Custo vizinho solução busca: 802677
+Custo melhor solução busca: 802677
+TEMPO: 116
+Custo vizinho solução busca: 802657
+Custo melhor solução busca: 802657
+TEMPO: 174
+Custo vizinho solução busca: 802648
+Custo melhor solução busca: 802648
+TEMPO: 233
+Custo vizinho solução busca: 802639
+Custo melhor solução busca: 802639
+TEMPO: 293
+Custo vizinho solução busca: 802638
+Custo melhor solução busca: 802638
+TEMPO: 353
+Custo vizinho solução busca: 802620
+Custo melhor solução busca: 802620
+TEMPO: 412
+Custo vizinho solução busca: 802597
+Custo melhor solução busca: 802597
+TEMPO: 470
+Custo vizinho solução busca: 802590
+Custo melhor solução busca: 802590
+TEMPO: 530
+Custo vizinho solução busca: 802572
+Custo melhor solução busca: 802572
+TEMPO: 589
+Custo vizinho solução busca: 802566
+Custo melhor solução busca: 802566
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 802566
+
+INICIA EXECULÇÃO PATH RELINKING
+802566 / 802566
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 802566
+Custo path:  802566
++++++++++++++++++++++++++++++++++++++++++
+802566 / 802566
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 802566
+Custo path:  802566
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 589
+Custo da solucao atual ---> [802566]
+Custo da melhor solução --> [802566]
+------------------------------ ITERAÇÃO NÚMERO -> 1 ------------------------------
+INICIALIZA A MATRIZ DE VECTOR ZERADA
+INICIANDO FRAGMENTAÇÃO DO LEASING K-MEDIAN
+PREENCHE QUANTIDADE DE FACILIDADES ABERTAS
+TESTA COMBINAÇÕES DE TEMPOS DE FACILIDADES
+INICIO DA PD
+>>>>> SOLUÇÃO GERADA <<<<<
+#################################################
+TAMANHO CONJUNTO ELITE: 1
+i: 802566
+#################################################
+INICIO VND
+----------------- FIM DO VND -----------------
+Insere as soluções retornadas da busca local no vetor elite
+i: 802566
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Melhor solução sem o path: 802566
+
+INICIA EXECULÇÃO PATH RELINKING
+802890 / 802890
+++++++++++++++++ NORMAL +++++++++++++++++
+Custo busca: 802890
+Custo path:  802890
++++++++++++++++++++++++++++++++++++++++++
+802566 / 802890
+Executando o padrão inverso!
+++++++++++++++++ REVERSO +++++++++++++++++
+Custo busca: 802890
+Custo path:  802270
+++++++++++++++++++++++++++++++++++++++++++
+TEMPO: 672
+Custo da solucao atual ---> [802890]
+Custo da melhor solução --> [802270]
+CUSTO DA MELHOR SOLUÇÃO: 802270
+802270
