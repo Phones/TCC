@@ -1708,6 +1708,7 @@ si delta_x_y(vvF solucao_X, vvF solucao_Y, int t)
 /*Recebe uma solução corrente, e então seleciona de maneira aleatoria uma solução pertencente ao conjunto de elite*/
 pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool padrao)
 {
+	//puts("t1");
 	if(!conjunto_elite.size())
 		return {custo_solucao, solucao};
 
@@ -1717,9 +1718,9 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 	// puts("SELECIONA SOLUÇÃO CONJUNTO ELITE");
 	// cout << "TAMANHO CONJUNTO ELITE: " << conjunto_elite.size() << endl;
 	// Seleciona uma solução do conjunto elite de maneira aleatoria, para ser usada como solução guia
-	
+	//puts("t2");
 	pair <int, vvF> solucao_elite = seleciona_alatoriamente_solucao_do_conjunto_elite(custo_solucao);
-	
+	//puts("t3");
 	// cout << "corrente: " << endl;
 	//imprime_vector_vector_facilidade_aberta(solucao);
 
@@ -1730,6 +1731,7 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 	separa a solução que será a solução corrente, e a solução guia, e tbm armazena a melhor solução*/
 	// puts("Selecionando solução guia, e solução corrente");
 	// cout << "custo_solucao -> " << custo_solucao << " / " << solucao_elite.first << " <- Custo solução elite" << endl;
+	//puts("t4");
 	if(custo_solucao <= solucao_elite.first)
 	{
 		solucao_guia = {custo_solucao, solucao};
@@ -1743,7 +1745,7 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 		solucao_corrente = {custo_solucao, solucao};
 		melhor_solucao_path_relinking = solucao_elite;
 	}
-
+//puts("t5");
 	if (!padrao)
 	{
 		// puts("Executando o padrão inverso!");
@@ -1752,11 +1754,12 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 		solucao_guia = solucao_corrente;
 		solucao_corrente = troca;
 	}
-
+//puts("t6");
 	for (int t = 0;t < quant_intancias_tempo;t++)
 	{
 		// cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl;
 		// Diferença de movimentos para sair de uma solução e chegar na outra, no instante t
+		//puts("t7");
 		si diferenca_x_y_ = delta_x_y(solucao_guia.second, solucao_corrente.second, t);
 		int delta_x_y_ = (int)diferenca_x_y_.size();
 		// cout << "DELTA POR INSTANTE DE TEMPO (" << t << "): " << delta_x_y_ << endl;
@@ -1764,33 +1767,37 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 		// cout << "-*/-*/-*/*-/*-/-*/-*/-/*-/-/-/-/" << endl;
 		// cout << "//////////// TAM SET DE DELTA: " << diferenca_x_y_.size() << "///////////////" << endl;
 		si ::iterator it;
+		//puts("t8");
 		for(it = diferenca_x_y_.begin(); it != diferenca_x_y_.end();it++)
 		{
 			// Seleciona facilidade da solução guia, que entrará no lugar da facilidade da solução corrente
 			int facilidade_guia = *it;
 			// puts("1");
 			// Testa a alteração de todas as facilidades daquele instante, alterando uma por uma
+			//puts("t9");
 			for(int k = 0;k < (int)solucao_corrente.second.size();k++)
 			{
 				// Armazena o custo antigo
-				// puts("2");
+				//puts("t10");
 				int custo_antigo = solucao_corrente.first;
-				// puts("3");
+				//puts("t11");
 				// Armazena a facilidade antiga, para que possa voltar para ela depois
 				int facilidade_antiga = solucao_corrente.second[k][t].i;
-				// puts("4");
+				//puts("t12");
 				// Subistitui a facilidade antiga, pela facilidade da solução corrente
 				solucao_corrente.second[k][t].i = facilidade_guia;
 				// cout << "facilidade GUIA: " << facilidade_guia << endl;
-				// puts("5");
+				//puts("t13");
 				vvF solucao_corrente_gamb = solucao_corrente.second;
 				//// cout << "555555555555" << endl;
 				//imprime_vector_vector_facilidade_aberta(solucao_corrente_gamb);
 				// cout << "DEPOIS DE IMPRIMIR O VETOR" << endl;
 				// Calcula o custo da solução completa, com a alteração da facilidade
-				vi vetor_custos_;
+				vi vetor_custos_(quant_intancias_tempo+1);
+				//puts("t14");
 				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente_gamb, vetor_custos_);
 				// puts("6");
+				//puts("t15");
 				if (melhor_solucao_path_relinking.first > custo_solucao_corrente_alterada)
 				{
 					solucao_corrente.first = custo_solucao_corrente_alterada;
@@ -1798,9 +1805,11 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 				}
 				// puts("7");
 				// Volta a facilidade aberta, para a facilidade antiga
+				//puts("t16");
 				solucao_corrente.second[k][t].i = facilidade_antiga;
 				// puts("8");
 				// Volta para o custo antigo
+				//puts("t17");
 				solucao_corrente.first = custo_antigo;
 				// puts("9");
 			}
