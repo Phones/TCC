@@ -684,7 +684,157 @@ int pd_escolha_tempo_facilidade(int t, vvi &matriz_resultados_Kmedian)
 	return ans;
 }
 
-int calcula_custo_solucao_leasing_vvF(vvF &teste)
+// ------------------------------------------- TESTE REDUÇÃO TEMPO GASTO ----------------------------------------------------
+
+int calculo_custo_vvf_para_2opt(vvF teste, vvi auxiliar)
+{
+	//cout << "----------------- ANALISE --------------------------------" << endl;
+	//int tempo_criar = time(NULL);
+	// puts("c3");
+	int soma = 0;
+	for(int t = 0;t < quant_intancias_tempo;t++)
+	{
+		for(int j = 0;j < (int)Dt[t].size();j++)
+		{
+			int cliente = Dt[t][j];
+			int menor_custo = INF;
+			//cout << "auxiliar: " << (int)auxiliar[t].size() << endl;
+
+			for(int i = 0;i < (int)auxiliar[t].size();i++)
+			{
+				int facilidade_aberta = auxiliar[t][i];
+
+				//cout << matriz[cliente][facilidade_aberta]<< " ";
+				if(menor_custo > matriz[cliente][facilidade_aberta])
+					menor_custo = matriz[cliente][facilidade_aberta];
+			}
+
+			soma += menor_custo;
+		}
+		//sleep(5000);
+	}
+	//cout << "Tempo for 2 -> " << time(NULL) - tempo_criar << endl;
+	//cout << "--------------------------------------------" << endl;
+	//sleep(5000);
+	// puts("c4");
+	//cout << "SOMA: " << soma << endl;
+	return soma;
+}
+
+vvi coleta_facilidades_abertas_por_instante_tempo(vvF teste)
+{
+	vvi auxiliar(quant_intancias_tempo + 50);
+
+	for(int kk = 0;kk < K_original;kk++)
+	{
+		// cout << "----------------------------" << endl;
+		// cout << "t1("<< kk << ")" << endl;
+		for(int i = 0;i < (int)teste[kk].size();i++)
+		{
+			// cout << "TOMA NO CU " << endl;
+			// cout << "t2" << endl;
+			int ini = teste[kk][i].t, fim = teste[kk][i].l;
+			// cout << "t3" << endl;
+			// cout << "ini: " << ini << " fim: " << fim << endl;
+			for(int t = ini;t < fim;t++)
+			{
+				// cout << "TAMANHO AUXILIAR: " << auxiliar.size()<< endl;
+				// cout << "AUXILIAR T: auxiliar[t]: " << auxiliar[t].size() << endl;
+				// cout << "Dentro do for - i: " << i << " t: "<<t<<" kk: "<<kk<<" fim: " << fim << endl;
+				// Salva as facilidades que estão abertas no isntante t
+				auxiliar[t].push_back(teste[kk][i].i);
+				// cout <<"depois!!!!!!"<<endl;
+			}
+				
+		}
+		// cout << "DEPOIS DO SEGUNDO FOR" << endl;
+		// cout << "----------------------------" << endl;
+	}
+
+	return auxiliar;
+}
+
+
+void atualiza_facilidades_abertas(vvi &facilidades_abertas_solucao, int t_ini, int t_fim, int facilade_antiga, int facilidade_nova)
+{
+
+
+	for(int t = t_ini;t < t_fim;t++)
+	{
+		for(int i = 0;i < (int)facilidades_abertas_solucao[t].size();i++)
+		{
+			if(facilidades_abertas_solucao[t][i] == facilade_antiga)
+			{
+				facilidades_abertas_solucao[t][i] = facilidade_nova;
+				break;
+			}
+		}
+	}
+	/*
+	vector <int> ::iterator it;
+
+	it = find(facilidades_abertas_solucao[t].begin(), facilidades_abertas_solucao[t].end(), facilade_antiga);
+	
+	facilidades_abertas_solucao[t].erase(it);
+
+	//puts("Facilidade antiga removida");
+
+	facilidades_abertas_solucao[t].push_back(facilidade_nova);
+
+	//puts("Facilidade nova inserida");*/
+}
+
+
+int calcula_e_atualiza_vetor_de_custo_por_instante(vvi auxiliar, vi &vetor_custos, int ini, int fim)
+{
+	//puts("ANTES DE ATUALIZAR O VETOR");
+	//imprime_vector_int(vetor_custos);
+
+
+	// Irá armazenar a soma de custo desse intervalo
+	int soma = 0;
+	int tempo_criar = time(NULL);
+	for(int t = ini;t < fim;t++)
+	{
+		int soma_por_instante = 0;
+		for(int j = 0;j < (int)Dt[t].size();j++)
+		{
+			int cliente = Dt[t][j];
+			int menor_custo = INF;
+
+			for(int i = 0;i < (int)auxiliar[t].size();i++)
+			{
+				int facilidade_aberta = auxiliar[t][i];
+
+				if(menor_custo > matriz[cliente][facilidade_aberta])
+					menor_custo = matriz[cliente][facilidade_aberta];
+			}
+			soma += menor_custo;
+			soma_por_instante += menor_custo;
+		}
+		// Remove o custo anterior do somatorio final
+		vetor_custos[quant_intancias_tempo] -= vetor_custos[t];
+
+		// Coloca novo custo
+		vetor_custos[t] = soma_por_instante;
+	}
+
+	// Atualiza a soma total na ultima posição do vetor
+	vetor_custos[quant_intancias_tempo] += soma;
+	//puts("DEPOIS DE ATUALIZAR O VETOR");
+	//imprime_vector_int(vetor_custos);
+	//cout << "TEMPO GASTO VETOR MUDAR SÓ INTERVALO -> " << time(NULL) - tempo_criar << endl;
+	//cout << "--------------------------------------------" << endl;
+	//sleep(5000);
+
+	// cout << "SOMA: " << soma << endl;
+	return vetor_custos[quant_intancias_tempo];
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+int calcula_custo_solucao_leasing_vvF(vvF &teste, vi &vetor_custos)
 {
 	// puts("vvF dentro da função de calcular custo: ");
 	//imprime_vector_vector_facilidade_aberta(teste);
@@ -693,7 +843,7 @@ int calcula_custo_solucao_leasing_vvF(vvF &teste)
 	
 	vvi auxiliar(quant_intancias_tempo + 50);
 
-	vvi teste_calculo_custo = inicia_matriz_int_vector_zerada(K_original+5, quant_intancias_tempo+5);
+	//vvi teste_calculo_custo = inicia_matriz_int_vector_zerada(K_original+5, quant_intancias_tempo+5);
 	// puts("c2");
 	for(int kk = 0;kk < K_original;kk++)
 	{
@@ -726,6 +876,7 @@ int calcula_custo_solucao_leasing_vvF(vvF &teste)
 	int soma = 0;
 	for(int t = 0;t < quant_intancias_tempo;t++)
 	{
+		int soma_por_instante = 0;
 		for(int j = 0;j < (int)Dt[t].size();j++)
 		{
 			int cliente = Dt[t][j];
@@ -740,11 +891,14 @@ int calcula_custo_solucao_leasing_vvF(vvF &teste)
 					menor_custo = matriz[cliente][facilidade_aberta];
 			}
 			soma += menor_custo;
+			soma_por_instante += menor_custo;
 		}
-		//sleep(5000);
+		vetor_custos[t] = soma_por_instante;
 	}
-	//cout << "Tempo for 2 -> " << time(NULL) - tempo_criar << endl;
-	//cout << "--------------------------------------------" << endl;
+	// Armazena a soma total na ultima posição do vetor
+	vetor_custos[quant_intancias_tempo] = soma;
+	///cout << "Tempo for 2 -> " << time(NULL) - tempo_criar << endl;
+	///cout << "--------------------------------------------" << endl;
 	//sleep(5000);
 // puts("c4");
 // cout << "SOMA: " << soma << endl;
@@ -986,11 +1140,11 @@ bool verifica_igual(vi vetor_1, vi vetor_2)
 
 //****************************************************************
 // Gera vizinho testando todas as possiveis trocas para uma facilidade
-vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
+vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct, vvi &facilidades_abertas,vi &vetor_custos)
 {
 	int tomaluco = time(NULL);
 	// Calcula o custo da solução que será usada para gerar os vizinhos
-	int custo_solucao_inicial = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
+	int custo_solucao_inicial = vetor_custos[quant_intancias_tempo];
 
 	/* Essa função seleciona um k por vez, e testa todas as possiveis trocas trocas para esse k,
 	e então retorna a melhor encontrada*/
@@ -1008,6 +1162,7 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 		
 		//Fecha a facilidade que foi escolhida
 		int melhor_facilidade = aux.i;
+		int facilidade_antiga = aux.i;
 		matriz_leasing_atual = remove_da_solucao2(aux.t, fim_intervalo, aux.i, matriz_leasing_atual);
 	
 		//cout << "K_original: " << K_original << endl;
@@ -1022,7 +1177,8 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 			// Abre a nova facilidade que será testada
 			//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, nova_facilidade, solucao,aux.l - aux.t);
 			solucao_em_struct[k_][num_random].i = nova_facilidade;
-			if(custo_solucao_inicial > calcula_custo_solucao_leasing_vvF(solucao_em_struct))
+			//cout << i << endl;
+			if(custo_solucao_inicial > calcula_e_atualiza_vetor_de_custo_por_instante(facilidades_abertas, vetor_custos, _t_, fim_intervalo))
 				melhor_facilidade = nova_facilidade;
 
 			// Fecha facilidade, para testar outras facilidades
@@ -1033,12 +1189,14 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct)
 		//sleep(500);
 		// Abre a facilidade que obteve melhor desempenho
 		//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, solucao,aux.l - aux.t);
+		atualiza_facilidades_abertas(facilidades_abertas, _t_, fim_intervalo, facilidade_antiga, melhor_facilidade);
 		solucao_em_struct[k_][num_random].i = melhor_facilidade;
 		matriz_leasing_atual = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, matriz_leasing_atual,aux.l - aux.t);
 	}
 	cout << K_original << endl;
 	cout << "TEMPO TOTAL GASTO DE UMA CHAMADA DE 2OPT: "<< time(NULL) - tomaluco << endl;
-	sleep(6000);
+	//imprime_vector_int(vetor_custos);
+	//sleep(6000);
 	return solucao_em_struct;
 }
 
@@ -1182,19 +1340,25 @@ Ideias para a busca local:
 /* Recebe uma solução corrente, e tenta melhora-lá, quando não for possivel melhora - lá mais, retorna a solução*/
 pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni)
 {
-
 	vvF solucao_vizinha;
 	int limite = 4, cont = 0;
 	pair <vvF, int> solucao_final_busca;
+
+	// Vetor que ira armazenar o custo de cada instante da solução, e na posição quant_instantes_tempo, está a somatoria total desse custo
+	vi vetor_custos(quant_intancias_tempo+1);
+
 	// Armazena o custo da solução que chega na função
-	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct);
+	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct, vetor_custos);
+
+	// Coleta as facilidades que estão abertas em cada instante de tempo nessa solução
+	vvi facilidades_abertas_por_t = coleta_facilidades_abertas_por_instante_tempo(solucao_em_struct);
 
 	while(cont < limite && (time(NULL) - tempoIni) < 550)
 	{
-		cout << "-------------- VND CONT: " << cont << "-----------" << endl;
+		//cout << "-------------- VND CONT: " << cont << "-----------" << endl;
 		//Encontra o melhor vizinho
 		if(cont == 0)
-			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct);
+			solucao_vizinha = gera_vizinho_baseado_2opt(solucao_em_struct, facilidades_abertas_por_t, vetor_custos);
 		else if(cont == 1)
 			solucao_vizinha = gera_vizinhos_swap(solucao_em_struct);		
 		else if(cont == 2)
@@ -1203,17 +1367,18 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 			solucao_vizinha = gera_vizinho_por_extencao_tempo(solucao_em_struct);
 
 		//// cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
-		int custo_solucao_vizinha = calcula_custo_solucao_leasing_vvF(solucao_vizinha);
+		int custo_solucao_vizinha = calculo_custo_vvf_para_2opt(solucao_vizinha, facilidades_abertas_por_t);
 		if(custo_solucao_vizinha < custo_solucao)
 			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
 		else cont ++;
 
-		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
+		cout << "VND TEMPO: " << (time(NULL) - tempoIni) << endl;
 		//printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
 		//printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
 	// Armazena a melhor solução e o custo da mesma, encontrado pela busca. Para retornar para o GRASP
 	solucao_final_busca = {solucao_em_struct, custo_solucao};
+
 	puts("----------------- FIM DO VND -----------------");
 	return solucao_final_busca;
 }
@@ -1623,7 +1788,8 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 				//imprime_vector_vector_facilidade_aberta(solucao_corrente_gamb);
 				// cout << "DEPOIS DE IMPRIMIR O VETOR" << endl;
 				// Calcula o custo da solução completa, com a alteração da facilidade
-				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente_gamb);
+				vi vetor_custos_;
+				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente_gamb, vetor_custos_);
 				// puts("6");
 				if (melhor_solucao_path_relinking.first > custo_solucao_corrente_alterada)
 				{
@@ -1737,7 +1903,7 @@ int main(int argc, char **argv)
    	// puts("INICIANDO GRASP");
    	while((time(NULL) - tempoIni) < 600)
    	{
-   		printf("------------------------------ ITERAÇÃO NÚMERO -> %d ------------------------------\n", cont_it);
+   		printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!! ITERAÇÃO GRASP -> %d TEMPO %d !!!!!!!!!!!!!!!!!!!!!!!!!!!!\n", cont_it, (int)(time(NULL) - tempoIni));
    		// Gera uma solução para o leasing k-median
    		vvF solucao_gerada = gera_solucao(alfa);
 
@@ -1789,11 +1955,47 @@ int main(int argc, char **argv)
    			custo_melhor_solucao = custo_solucao_gerada_com_path_reverso, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
 
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////// TESTE APLICAR BUSCA LOCAL NA SOLUÇÃO DO PATH RELINKING /////////////////////////////////////
+		solucao_busca = busca_local_VND_leasing(resultado_path_relinking.second, tempoIni);
+
+   		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
+   		custo_solucao_gerada_com_busca = solucao_busca.second;
+   		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
+   			melhor_solucao = solucao_busca, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
+   			melhor_solucao_em_matriz = matriz_leasing_atual;
+
+		puts("++++++++++++++++ NORMAL2 +++++++++++++++++");
+   		cout << "Custo path_1: " << resultado_path_relinking.first << endl;
+   		cout << "Custo path_2:  " << solucao_busca.second << endl;
+   		puts("+++++++++++++++++++++++++++++++++++++++++");
+
+
+		solucao_busca = busca_local_VND_leasing(resultado_path_relinking_reverso.second, tempoIni);
+
+   		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
+   		custo_solucao_gerada_com_busca = solucao_busca.second;
+   		if(custo_solucao_gerada_com_busca < custo_melhor_solucao)
+   			melhor_solucao = solucao_busca, 
+   			custo_melhor_solucao = custo_solucao_gerada_com_busca, 
+   			melhor_solucao_em_matriz = matriz_leasing_atual;
+
+   		puts("++++++++++++++++ REVERSO 2 +++++++++++++++++");
+   		cout << "Custo path_1: " << resultado_path_relinking_reverso.first << endl;
+   		cout << "Custo path_2:  " << solucao_busca.second << endl;
+   		puts("++++++++++++++++++++++++++++++++++++++++++++");
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
    		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
    		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
 
    		cont_it ++;
+		puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
    	}
    	
    	cout << "CUSTO DA MELHOR SOLUÇÃO: " << custo_melhor_solucao << endl;
