@@ -1347,7 +1347,7 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 	// Vetor que ira armazenar o custo de cada instante da solução, e na posição quant_instantes_tempo, está a somatoria total desse custo
 	vi vetor_custos(quant_intancias_tempo+1);
 
-	// Armazena o custo da solução que chega na função
+	// Armazena o custo da solução que chega na função, e já preenche o vetor de custos
 	int custo_solucao = calcula_custo_solucao_leasing_vvF(solucao_em_struct, vetor_custos);
 
 	// Coleta as facilidades que estão abertas em cada instante de tempo nessa solução
@@ -1776,6 +1776,15 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 
 //puts("t6");
 
+	// Vetor que armazena os custos da solução corrente
+	vi vetor_custos(quant_intancias_tempo + 1);
+
+	// Calcula custo soluçãocorrente, e já preenche vetor de custo
+	int custo_solucao_corrente = calcula_custo_solucao_leasing_vvF(solucao_corrente.second, vetor_custos);
+
+	// Coleta as facilidades que estão abertas em cada instante de tempo, e armazena em uma matriz vvi
+	vvi facilidades_abertas_por_instante = coleta_facilidades_abertas_por_instante_tempo(solucao_corrente.second);
+
 	for (int t = 0;t < quant_intancias_tempo;t++)
 	{
 		// cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl; 
@@ -1820,16 +1829,28 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 				// Altera para a facilidade da solução guia
 				solucao_corrente.second[k][t_correto].i = facilidade_solucao_guia;
 				
-				vi vetor_custos(quant_intancias_tempo + 1);
-				//puts("Calculo da solução corrente alterada!");
-				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente.second, vetor_custos);
+				// Coleta o instante em que a facilidade é aberta
+				int t_ini = solucao_corrente.second[k][t_correto].t;
 
+				// Coleta o instante final em que essa facilidade permanece aberta
+				int t_fim = min(quant_intancias_tempo, solucao_corrente.second[k][t_correto].l);
+				
+				// Substitui a facilidade antiga pela facilidade que entrou no lugar dela, para manter o vetor de facilidades atualizado
+				atualiza_facilidades_abertas(facilidades_abertas_por_instante, t_ini, t_fim, facilidade_antiga, facilidade_solucao_guia);
+
+				//puts("Calculo da solução corrente alterada!");
+				int custo_solucao_corrente_alterada = calcula_e_atualiza_vetor_de_custo_por_instante(facilidades_abertas_por_instante, vetor_custos, t_ini, t_fim);
+				
 				//cout << "Alterada: " << custo_solucao_corrente_alterada << " // Antiga: " << solucao_corrente.first << endl;
 				if(custo_solucao_corrente_alterada < solucao_corrente.first)
 					solucao_corrente.first = custo_solucao_corrente_alterada;
-				else 
+				else
+				{
 					solucao_corrente.second[k][t_correto].i = facilidade_antiga;
-
+					/*Como a nova facilidade trouxe um custo maior, remove a facilidade nova, e coloca a facilidade antiga no lugar,
+					para isso, utiliza a mesma função, mas passando as facilidades invertidas*/
+					atualiza_facilidades_abertas(facilidades_abertas_por_instante, t_ini, t_fim, facilidade_solucao_guia, facilidade_antiga);
+				}
 				//sleep(2);
 			}
 		}
@@ -1968,7 +1989,7 @@ int main(int argc, char **argv)
    		cout << "Custo busca: " << solucao_busca.second << endl;
    		cout << "Custo path:  " << resultado_path_relinking.first << endl;
    		puts("+++++++++++++++++++++++++++++++++++++++++");
-
+		if(conjunto_elite.size() == MAX_TAM_PATH_RELINK) sleep(6000);
    		int custo_solucao_gerada_com_path_normal = resultado_path_relinking.first;
    		if(custo_solucao_gerada_com_path_normal < custo_melhor_solucao)
    			melhor_solucao = {resultado_path_relinking.second, custo_solucao_gerada_com_path_normal}, 
