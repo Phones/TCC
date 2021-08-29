@@ -242,7 +242,7 @@ void imprime_vector_vector_facilidade_aberta(vvF &teste)
 		for(int i = 0;i < (int)teste[k].size();i++)
 			cout << "facilidade: " << teste[k][i].i << " t: " << teste[k][i].t << " l: " << teste[k][i].l << " ,";
 
-		cout << "lkjhasbelkjfjhasdlijfhlkasjkasdasd" << endl;
+		//cout << "lkjhasbelkjfjhasdlijfhlkasjkasdasd" << endl;
 		cout << endl;
 	}
 }
@@ -836,9 +836,9 @@ int calcula_e_atualiza_vetor_de_custo_por_instante(vvi auxiliar, vi &vetor_custo
 
 int calcula_custo_solucao_leasing_vvF(vvF &teste, vi &vetor_custos)
 {
-	// puts("vvF dentro da função de calcular custo: ");
+	//puts("vvF dentro da função de calcular custo: ");
 	//imprime_vector_vector_facilidade_aberta(teste);
-	// puts("c1");
+	//puts("c1");
 	// Nessa matriz cada linha, representa um instante de tempo
 	
 	vvi auxiliar(quant_intancias_tempo + 50);
@@ -1703,11 +1703,30 @@ si delta_x_y(vvF solucao_X, vvF solucao_Y, int t)
 }
 
 
+/* Pega uma solução vvF e converte em uma vvi, em que cada linha representa um k, e cada posição
+contem a facilidade que está aberta em [k][t]*/
+vvi converte_vvf_em_vvi_por_k(vvF aux)
+{
+	vvi auxiliar(K_original);
+
+	for(int kk = 0;kk < K_original;kk++)
+	{
+		for(int i = 0;i < (int)aux[kk].size();i++)
+		{
+			int ini = aux[kk][i].t, fim = aux[kk][i].l;
+			for(int t = ini;t < fim;t++)
+				auxiliar[kk].push_back(aux[kk][i].i);
+		}
+	}
+
+	return auxiliar;
+}
 
 
 /*Recebe uma solução corrente, e então seleciona de maneira aleatoria uma solução pertencente ao conjunto de elite*/
 pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool padrao)
 {
+
 	//puts("t1");
 	if(!conjunto_elite.size())
 		return {custo_solucao, solucao};
@@ -1754,68 +1773,68 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 		solucao_guia = solucao_corrente;
 		solucao_corrente = troca;
 	}
+
 //puts("t6");
+
 	for (int t = 0;t < quant_intancias_tempo;t++)
 	{
-		// cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl;
+		// cout << "RECONEXÃO PARA O INSTANTE t: " << t << endl; 
 		// Diferença de movimentos para sair de uma solução e chegar na outra, no instante t
 		//puts("t7");
 		si diferenca_x_y_ = delta_x_y(solucao_guia.second, solucao_corrente.second, t);
 		int delta_x_y_ = (int)diferenca_x_y_.size();
-		// cout << "DELTA POR INSTANTE DE TEMPO (" << t << "): " << delta_x_y_ << endl;
-		//imprime_set_int(diferenca_x_y_);
-		// cout << "-*/-*/-*/*-/*-/-*/-*/-/*-/-/-/-/" << endl;
-		// cout << "//////////// TAM SET DE DELTA: " << diferenca_x_y_.size() << "///////////////" << endl;
+
 		si ::iterator it;
 		//puts("t8");
-		for(it = diferenca_x_y_.begin(); it != diferenca_x_y_.end();it++)
+
+
+		for(int k = 0;k < K_original;k++)
 		{
-			// Seleciona facilidade da solução guia, que entrará no lugar da facilidade da solução corrente
-			int facilidade_guia = *it;
-			// puts("1");
-			// Testa a alteração de todas as facilidades daquele instante, alterando uma por uma
-			//puts("t9");
-			for(int k = 0;k < (int)solucao_corrente.second.size();k++)
+			// Encontra o t correto para aplicar alteração
+			int t_correto = 0;
+
+			for(;t_correto < (int)solucao_corrente.second[k].size() && t > solucao_corrente.second[k][t_correto].t && t >= solucao_corrente.second[k][t_correto].l;t_correto++);
+
+			//imprime_vector_vector_facilidade_aberta(solucao_corrente.second);
+			//cout << "-----------------------------------------------" << endl;
+			//cout << "K: " << k << "t: " << t << " t_correto: " << t_correto << endl;
+			//cout << "VVF para ser alterada:"<<endl;
+			//cout << "i: " << solucao_corrente.second[k][t_correto].i << endl;
+			//cout << "t: " << solucao_corrente.second[k][t_correto].t << endl;
+			//cout << "l: " << solucao_corrente.second[k][t_correto].l << endl;
+
+
+			//cout << "TAM VETOR ELITE: " << conjunto_elite.size() << endl;
+			//cout << solucao_corrente.first << " ----- " << solucao_guia.first << endl;
+			//cout << "DIFERENÇAS NO INSTANTE T("<<t<<"):" << delta_x_y_  << endl;
+			//cout << "quanttttt: " << quant_intancias_tempo << endl;
+
+
+			for(it = diferenca_x_y_.begin();it != diferenca_x_y_.end();it++)
 			{
-				// Armazena o custo antigo
-				//puts("t10");
-				int custo_antigo = solucao_corrente.first;
-				//puts("t11");
-				// Armazena a facilidade antiga, para que possa voltar para ela depois
-				int facilidade_antiga = solucao_corrente.second[k][t].i;
-				//puts("t12");
-				// Subistitui a facilidade antiga, pela facilidade da solução corrente
-				solucao_corrente.second[k][t].i = facilidade_guia;
-				// cout << "facilidade GUIA: " << facilidade_guia << endl;
-				//puts("t13");
-				vvF solucao_corrente_gamb = solucao_corrente.second;
-				//// cout << "555555555555" << endl;
-				//imprime_vector_vector_facilidade_aberta(solucao_corrente_gamb);
-				// cout << "DEPOIS DE IMPRIMIR O VETOR" << endl;
-				// Calcula o custo da solução completa, com a alteração da facilidade
-				vi vetor_custos_(quant_intancias_tempo+1);
-				//puts("t14");
-				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente_gamb, vetor_custos_);
-				// puts("6");
-				//puts("t15");
-				if (melhor_solucao_path_relinking.first > custo_solucao_corrente_alterada)
-				{
+				int facilidade_solucao_guia = *it;
+				// Armazena a facilidade antiga
+				int facilidade_antiga = solucao_corrente.second[k][t_correto].i;
+
+				//cout << "Facilidade corrente: " << facilidade_antiga << " facilidade_solucao_guia: " << facilidade_solucao_guia << endl;
+				// Altera para a facilidade da solução guia
+				solucao_corrente.second[k][t_correto].i = facilidade_solucao_guia;
+				
+				vi vetor_custos(quant_intancias_tempo + 1);
+				//puts("Calculo da solução corrente alterada!");
+				int custo_solucao_corrente_alterada = calcula_custo_solucao_leasing_vvF(solucao_corrente.second, vetor_custos);
+
+				//cout << "Alterada: " << custo_solucao_corrente_alterada << " // Antiga: " << solucao_corrente.first << endl;
+				if(custo_solucao_corrente_alterada < solucao_corrente.first)
 					solucao_corrente.first = custo_solucao_corrente_alterada;
-					melhor_solucao_path_relinking = solucao_corrente;
-				}
-				// puts("7");
-				// Volta a facilidade aberta, para a facilidade antiga
-				//puts("t16");
-				solucao_corrente.second[k][t].i = facilidade_antiga;
-				// puts("8");
-				// Volta para o custo antigo
-				//puts("t17");
-				solucao_corrente.first = custo_antigo;
-				// puts("9");
+				else 
+					solucao_corrente.second[k][t_correto].i = facilidade_antiga;
+
+				//sleep(2);
 			}
 		}
 	}
-	//// puts("10");
+	//puts("t18");
 	//// puts("******************************************************");
 	return melhor_solucao_path_relinking;
 }
@@ -1923,6 +1942,7 @@ int main(int argc, char **argv)
 
 		puts("----------------- INICIO VND -----------------");
    		// Aplica a busca local na solução gerada
+		int ini_time_busca = time(NULL);
    		pair <vvF, int> solucao_busca = busca_local_VND_leasing(solucao_gerada, tempoIni);
 
    		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
@@ -1933,13 +1953,16 @@ int main(int argc, char **argv)
    			melhor_solucao_em_matriz = matriz_leasing_atual;
    		//imprime_vector_vector_facilidade_aberta(solucao_busca.first);
 
+		cout << "|----------------> TEMPO GASTO COM O VND: " << (time(NULL) - ini_time_busca) << endl;
+
    		// puts("Insere as soluções retornadas da busca local no vetor elite");
    		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
-
-   		cout << "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"<< endl;
-   		cout << "Melhor solução sem o path: " << custo_melhor_solucao << endl << endl;
-   		puts("INICIA EXECULÇÃO PATH RELINKING");
+		cout << "TEMPO FIM BUSCA: " << (time(NULL) - tempoIni) << endl;
+   		cout << "Melhor solução sem o path: " << solucao_busca.second << endl << endl;
+   		puts("----- INICIA EXECULÇÃO PATH RELINKING -----");
+		int ini_time_path = time(NULL);
    		pair <int, vvF> resultado_path_relinking = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second, true);
+		cout << "|----------------> TEMPO GASTO COM PATH: " << (time(NULL) - ini_time_path) << endl;
 
    		puts("++++++++++++++++ NORMAL +++++++++++++++++");
    		cout << "Custo busca: " << solucao_busca.second << endl;
@@ -1951,7 +1974,9 @@ int main(int argc, char **argv)
    			melhor_solucao = {resultado_path_relinking.second, custo_solucao_gerada_com_path_normal}, 
    			custo_melhor_solucao = custo_solucao_gerada_com_path_normal, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
+		cout << "TEMPO FIM PATH: " << (time(NULL) - tempoIni) << endl;
 
+/*	
    		pair <int, vvF> resultado_path_relinking_reverso = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second, false);
    		puts("++++++++++++++++ REVERSO +++++++++++++++++");
    		cout << "Custo busca: " << solucao_busca.second << endl;
@@ -1963,10 +1988,10 @@ int main(int argc, char **argv)
    			melhor_solucao = {resultado_path_relinking_reverso.second, custo_solucao_gerada_com_path_reverso}, 
    			custo_melhor_solucao = custo_solucao_gerada_com_path_reverso, 
    			melhor_solucao_em_matriz = matriz_leasing_atual;
-
+*/
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		///////////////////////////////////// TESTE APLICAR BUSCA LOCAL NA SOLUÇÃO DO PATH RELINKING /////////////////////////////////////
+		/*//////////////////////////////////// TESTE APLICAR BUSCA LOCAL NA SOLUÇÃO DO PATH RELINKING /////////////////////////////////////
 		solucao_busca = busca_local_VND_leasing(resultado_path_relinking.second, tempoIni);
 
    		// Verifica se o custo da solução retornada pela busca local, é menor que o custo da melhor solução atual
@@ -1996,15 +2021,15 @@ int main(int argc, char **argv)
    		cout << "Custo path_2:  " << solucao_busca.second << endl;
    		puts("++++++++++++++++++++++++++++++++++++++++++++");
 
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   		cout << "TEMPO: " << (time(NULL) - tempoIni) << endl;
+   		cout << "TEMPO FINAL GRASP: " << (time(NULL) - tempoIni) << endl;
    		printf("Custo da solucao atual ---> [%d]\n", custo_solucao_gerada_com_busca);
    		printf("Custo da melhor solução --> [%d]\n", custo_melhor_solucao);
 
    		cont_it ++;
-		puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		puts("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
    	}
    	
    	cout << "CUSTO DA MELHOR SOLUÇÃO: " << custo_melhor_solucao << endl;
