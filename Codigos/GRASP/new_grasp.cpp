@@ -1199,7 +1199,7 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct, vvi &facilidades_abertas,vi
 		solucao_em_struct[k_][num_random].i = melhor_facilidade;
 		matriz_leasing_atual = marca_intervalo_facilidade2(aux.t, fim_intervalo, melhor_facilidade, matriz_leasing_atual,aux.l - aux.t);
 	}
-	cout << K_original << endl;
+	//cout << K_original << endl;
 	cout << "TEMPO TOTAL GASTO DE UMA CHAMADA DE 2OPT: "<< time(NULL) - tomaluco << endl;
 	//imprime_vector_int(vetor_custos);
 	//sleep(6000);
@@ -1372,13 +1372,22 @@ pair <vvF, int> busca_local_VND_leasing(vvF solucao_em_struct, long int tempoIni
 		else
 			solucao_vizinha = gera_vizinho_por_extencao_tempo(solucao_em_struct);
 
+		// Monta a matriz de facilidades abertas da solução vizinha
+		vvi facilidades_abertas_por_t_solucao_vizinha = coleta_facilidades_abertas_por_instante_tempo(solucao_em_struct);
+
 		//// cout << "CALCULA CUSTO DA SOLUÇÃO DENTRO DO VND" << endl;
-		int custo_solucao_vizinha = calculo_custo_vvf_para_2opt(solucao_vizinha, facilidades_abertas_por_t);
+		int custo_solucao_vizinha = calculo_custo_vvf_para_2opt(solucao_vizinha, facilidades_abertas_por_t_solucao_vizinha);
+	
 		if(custo_solucao_vizinha < custo_solucao)
-			solucao_em_struct = solucao_vizinha, custo_solucao = custo_solucao_vizinha, cont = 0;
+		{
+			cont = 0;
+			solucao_em_struct = solucao_vizinha;
+			custo_solucao = custo_solucao_vizinha;
+			facilidades_abertas_por_t = facilidades_abertas_por_t_solucao_vizinha;
+		}
 		else cont ++;
 
-		cout << "VND TEMPO: " << (time(NULL) - tempoIni) << endl;
+		cout << "VND TEMPO POR ITERAÇÃO: " << (time(NULL) - tempoIni) << endl;
 		//printf("Custo vizinho solução busca: %d\n", custo_solucao_vizinha);
 		//printf("Custo melhor solução busca: %d\n", custo_solucao);
 	}
@@ -1984,9 +1993,10 @@ int main(int argc, char **argv)
 
    		// puts("Insere as soluções retornadas da busca local no vetor elite");
    		insere_conjunto_elite(solucao_busca.first, solucao_busca.second);
+		cout << "Tamanho conjunto elite: " << conjunto_elite.size() << endl;
 		cout << "TEMPO FIM BUSCA: " << (time(NULL) - tempoIni) << endl;
    		cout << "Melhor solução sem o path: " << solucao_busca.second << endl << endl;
-   		puts("----- INICIA EXECULÇÃO PATH RELINKING -----");
+   		puts("----- INICIA EXECUÇÃO PATH RELINKING -----");
 		int ini_time_path = time(NULL);
    		pair <int, vvF> resultado_path_relinking = executa_conexao_caminhos(solucao_busca.first, solucao_busca.second, true);
 		cout << "|----------------> TEMPO GASTO COM PATH: " << (time(NULL) - ini_time_path) << endl;
@@ -1995,7 +2005,7 @@ int main(int argc, char **argv)
    		cout << "Custo busca: " << solucao_busca.second << endl;
    		cout << "Custo path:  " << resultado_path_relinking.first << endl;
    		puts("+++++++++++++++++++++++++++++++++++++++++");
-		if(conjunto_elite.size() == MAX_TAM_PATH_RELINK) sleep(6000);
+		
    		int custo_solucao_gerada_com_path_normal = resultado_path_relinking.first;
    		if(custo_solucao_gerada_com_path_normal < custo_melhor_solucao)
    			melhor_solucao = {resultado_path_relinking.second, custo_solucao_gerada_com_path_normal}, 
