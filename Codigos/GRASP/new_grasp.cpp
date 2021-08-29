@@ -1176,11 +1176,17 @@ vvF gera_vizinho_baseado_2opt(vvF solucao_em_struct, vvi &facilidades_abertas,vi
 			int nova_facilidade = facilidades_fechadas[i];
 			// Abre a nova facilidade que será testada
 			//solucao = marca_intervalo_facilidade2(aux.t, fim_intervalo, nova_facilidade, solucao,aux.l - aux.t);
+
 			solucao_em_struct[k_][num_random].i = nova_facilidade;
-			//cout << i << endl;
+			
+			// Atualiza com a nova facilidade que abriu
+			atualiza_facilidades_abertas(facilidades_abertas, _t_, fim_intervalo, facilidade_antiga, nova_facilidade);
+
 			if(custo_solucao_inicial > calcula_e_atualiza_vetor_de_custo_por_instante(facilidades_abertas, vetor_custos, _t_, fim_intervalo))
 				melhor_facilidade = nova_facilidade;
-
+			/* No caso da 2opt, ela irá percorrer todas as opções de troca, e ao final substituir pela melhor opção, por isso
+			é necessario voltar a para a facilidade antiga, para poder avaliar todas as possibilidades*/
+			atualiza_facilidades_abertas(facilidades_abertas, _t_, fim_intervalo, nova_facilidade, facilidade_antiga);
 			// Fecha facilidade, para testar outras facilidades
 			//solucao = remove_da_solucao2(aux.t, fim_intervalo, nova_facilidade, solucao);
 		}
@@ -1840,7 +1846,7 @@ pair <int, vvF> executa_conexao_caminhos(vvF solucao, int custo_solucao, bool pa
 
 				//puts("Calculo da solução corrente alterada!");
 				int custo_solucao_corrente_alterada = calcula_e_atualiza_vetor_de_custo_por_instante(facilidades_abertas_por_instante, vetor_custos, t_ini, t_fim);
-				
+
 				//cout << "Alterada: " << custo_solucao_corrente_alterada << " // Antiga: " << solucao_corrente.first << endl;
 				if(custo_solucao_corrente_alterada < solucao_corrente.first)
 					solucao_corrente.first = custo_solucao_corrente_alterada;
